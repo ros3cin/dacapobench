@@ -69,7 +69,12 @@ This directory includes all of the source code for the DaCapo harness, which is 
 
 Each of these directories more or less mirror the `bm` directories.
 
+### `jRAPL` (energy measurement)
 
+In order for jRAPL's energy measurement to work, the computer architeture must meet jRAPL requirements.
+Also, before running the benchmarks, run:
+sudo modprobe msr
+And when running the benchmarks, run as sudo, otherwise the measured values will be zero.
 
 ## License
 
