@@ -46,6 +46,12 @@ public class Callback {
    */
   protected long elapsed;
 
+  protected double dramEnergy;
+
+  protected double cpuEnergy;
+
+  protected double packageEnergy;
+
   boolean verbose = false;
 
   /**
@@ -167,8 +173,19 @@ public class Callback {
     stop(duration, mode == Mode.WARMUP);
   }
 
+  public void stop(long duration, double cpuEnergy, double dramEnergy, double packageEnergy) {
+    stop(duration, cpuEnergy, dramEnergy, packageEnergy, mode == Mode.WARMUP);
+  }
+
   public void stop(long duration, boolean warmup) {
     elapsed = duration;
+  }
+
+  public void stop(long duration, double cpuEnergy, double dramEnergy, double packageEnergy, boolean warmup) {
+    elapsed = duration;
+    this.cpuEnergy = cpuEnergy;
+    this.dramEnergy = dramEnergy;
+    this.packageEnergy = packageEnergy;
   }
 
   /* Announce completion of the benchmark (pass or fail) */
@@ -177,14 +194,23 @@ public class Callback {
   };
 
   protected void complete(String benchmark, boolean valid, boolean warmup) {
-    System.err.print("===== DaCapo " + TestHarness.getBuildVersion() + " " + benchmark);
+    System.err.print("========================\n DaCapo " + TestHarness.getBuildVersion() + " " + benchmark);
     if (valid) {
       System.err.print(warmup ? (" completed warmup " + (iterations + 1) + " ") : " PASSED ");
       System.err.print("in " + elapsed + " msec ");
+      if(dramEnergy > 0.0) {
+          System.err.print("\nconsuming " + dramEnergy + " joules in dram ");
+      }
+      if(cpuEnergy > 0.0) {
+          System.err.print("\nconsuming " + cpuEnergy + " joules in cpu ");
+      }
+      if(packageEnergy > 0.0) {
+          System.err.print("\nconsuming " + packageEnergy + " joules on package ");
+      }
     } else {
       System.err.print(" FAILED " + (warmup ? "warmup " : ""));
     }
-    System.err.println("=====");
+    System.err.println("\n========================");
     System.err.flush();
   }
 

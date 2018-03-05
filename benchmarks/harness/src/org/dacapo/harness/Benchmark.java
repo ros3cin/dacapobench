@@ -180,6 +180,8 @@ public abstract class Benchmark {
 
     callback.start(config.name);
 
+    EnergyCheckUtils.ProfileInit();
+    double[] energyBefore = EnergyCheckUtils.getEnergyStats();
     final long start = System.currentTimeMillis();
 
     startIteration();
@@ -190,8 +192,10 @@ public abstract class Benchmark {
     }
 
     final long duration = System.currentTimeMillis() - start;
+    double[] energyAfter = EnergyCheckUtils.getEnergyStats();
 
-    callback.stop(duration);
+    callback.stop(duration,energyAfter[1]-energyBefore[1],energyAfter[0]-energyBefore[0],energyAfter[2]-energyBefore[2]);
+    EnergyCheckUtils.ProfileDealloc();
 
     boolean valid = validate(size);
     callback.complete(config.name, valid);
