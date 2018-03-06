@@ -1,0 +1,143 @@
+Only in xalan-j_2_7_1 (copy)/: build
+diff -ur xalan-j_2_7_1/build.xml "xalan-j_2_7_1 (copy)/build.xml"
+--- xalan-j_2_7_1/build.xml	2007-11-22 16:44:00.000000000 -0300
++++ "xalan-j_2_7_1 (copy)/build.xml"	2018-03-06 02:09:31.712258851 -0300
+@@ -104,6 +104,10 @@
+   <property name="runtime.jar"            value="${lib.dir}/${runtime.jar.name}"/>
+   <property name="regexp.jar.name"        value="regexp.jar"/>
+   <property name="regexp.jar"             value="${lib.dir}/${regexp.jar.name}"/>
++  <property name="eclipse_collections_api.jar.name"        value="eclipse-collections-api-9.1.0.jar"/>
++  <property name="eclipse_collections_api.jar"             value="${lib.dir}/${eclipse_collections_api.jar.name}"/>
++  <property name="eclipse_collections_impl.jar.name"        value="eclipse-collections-9.1.0.jar"/>
++  <property name="eclipse_collections_impl.jar"             value="${lib.dir}/${eclipse_collections_impl.jar.name}"/>
+   
+   <!-- Jars need to build Xalan Java (Interpretive, Compiled, or both) or build the docs -->
+   <property name="java_cup.jar.name"      value="java_cup.jar"/>
+@@ -305,6 +309,8 @@
+     <include name="${dist.file}/tools/${jlex.jar.name}"/>
+     <include name="${dist.file}/lib/${runtime.jar.name}"/>
+     <include name="${dist.file}/lib/${regexp.jar.name}"/>
++    <include name="${dist.file}/lib/${eclipse_collections_api.jar.name}"/>
++    <include name="${dist.file}/lib/${eclipse_collections_impl.jar.name}"/>
+   </patternset>
+ 
+   <!-- =================================================================== -->
+@@ -431,6 +437,8 @@
+     <pathelement location="${jlex.jar}" />
+     <pathelement location="${java_cup.jar}" />
+     <pathelement location="${runtime.jar}" />
++    <pathelement location="${eclipse_collections_api.jar}" />
++    <pathelement location="${eclipse_collections_impl.jar}" />
+     <!-- build.classes needed for 
+          org.apache.xalan.xsltc.util.JavaCupRedirect -->
+     <pathelement location="${build.classes}" />
+Only in xalan-j_2_7_1 (copy)/lib: eclipse-collections-9.1.0.jar
+Only in xalan-j_2_7_1 (copy)/lib: eclipse-collections-api-9.1.0.jar
+diff -ur xalan-j_2_7_1/src/org/apache/xalan/xsltc/compiler/SymbolTable.java "xalan-j_2_7_1 (copy)/src/org/apache/xalan/xsltc/compiler/SymbolTable.java"
+--- xalan-j_2_7_1/src/org/apache/xalan/xsltc/compiler/SymbolTable.java	2007-11-22 16:43:52.000000000 -0300
++++ "xalan-j_2_7_1 (copy)/src/org/apache/xalan/xsltc/compiler/SymbolTable.java"	2018-03-06 02:12:41.562172259 -0300
+@@ -26,6 +26,7 @@
+ import java.util.Vector;
+ 
+ import org.apache.xalan.xsltc.compiler.util.MethodType;
++import org.eclipse.collections.impl.map.mutable.ConcurrentHashMap;
+ 
+ /**
+  * @author Jacek Ambroziak
+@@ -35,17 +36,17 @@
+ final class SymbolTable {
+ 
+     // These hashtables are used for all stylesheets
+-    private final Hashtable _stylesheets = new Hashtable();
+-    private final Hashtable _primops     = new Hashtable();
++    private final ConcurrentHashMap _stylesheets = new ConcurrentHashMap();
++    private final ConcurrentHashMap _primops     = new ConcurrentHashMap();
+ 
+     // These hashtables are used for some stylesheets
+-    private Hashtable _variables = null;
+-    private Hashtable _templates = null;
+-    private Hashtable _attributeSets = null;
+-    private Hashtable _aliases = null;
+-    private Hashtable _excludedURI = null;
+-    private Hashtable _decimalFormats = null;
+-    private Hashtable _keys = null;
++    private ConcurrentHashMap _variables = null;
++    private ConcurrentHashMap _templates = null;
++    private ConcurrentHashMap _attributeSets = null;
++    private ConcurrentHashMap _aliases = null;
++    private ConcurrentHashMap _excludedURI = null;
++    private ConcurrentHashMap _decimalFormats = null;
++    private ConcurrentHashMap _keys = null;
+ 
+     public DecimalFormatting getDecimalFormatting(QName name) {
+ 	if (_decimalFormats == null) return null;
+@@ -53,7 +54,7 @@
+     }
+ 
+     public void addDecimalFormatting(QName name, DecimalFormatting symbols) {
+-	if (_decimalFormats == null) _decimalFormats = new Hashtable();
++	if (_decimalFormats == null) _decimalFormats = new ConcurrentHashMap();
+ 	_decimalFormats.put(name, symbols);
+     }
+ 
+@@ -63,7 +64,7 @@
+     }
+ 
+     public void addKey(QName name, Key key) {
+-	if (_keys == null) _keys = new Hashtable();
++	if (_keys == null) _keys = new ConcurrentHashMap();
+ 	_keys.put(name, key);
+     }
+     
+@@ -77,7 +78,7 @@
+ 
+     public Template addTemplate(Template template) {
+ 	final QName name = template.getName();
+-	if (_templates == null) _templates = new Hashtable();
++	if (_templates == null) _templates = new ConcurrentHashMap();
+ 	return (Template)_templates.put(name, template);
+     }
+ 	
+@@ -87,13 +88,13 @@
+     }
+ 
+     public Variable addVariable(Variable variable) {
+-	if (_variables == null) _variables = new Hashtable();
++	if (_variables == null) _variables = new ConcurrentHashMap();
+ 	final String name = variable.getName().getStringRep();
+ 	return (Variable)_variables.put(name, variable);
+     }
+ 	
+     public Param addParam(Param parameter) {
+-	if (_variables == null) _variables = new Hashtable();
++	if (_variables == null) _variables = new ConcurrentHashMap();
+ 	final String name = parameter.getName().getStringRep();
+ 	return (Param)_variables.put(name, parameter);
+     }
+@@ -119,7 +120,7 @@
+     }
+ 
+     public AttributeSet addAttributeSet(AttributeSet atts) {
+-	if (_attributeSets == null) _attributeSets = new Hashtable();
++	if (_attributeSets == null) _attributeSets = new ConcurrentHashMap();
+ 	return (AttributeSet)_attributeSets.put(atts.getName(), atts);
+     }
+ 
+@@ -177,7 +178,7 @@
+      * Adds an alias for a namespace prefix
+      */ 
+     public void addPrefixAlias(String prefix, String alias) {
+-	if (_aliases == null) _aliases = new Hashtable();
++	if (_aliases == null) _aliases = new ConcurrentHashMap();
+ 	_aliases.put(prefix,alias);
+     }
+ 
+@@ -198,7 +199,7 @@
+ 	if (uri == null) return;
+ 
+ 	// Create new hashtable of exlcuded URIs if none exists
+-	if (_excludedURI == null) _excludedURI = new Hashtable();
++	if (_excludedURI == null) _excludedURI = new ConcurrentHashMap();
+ 
+ 	// Register the namespace URI
+ 	Integer refcnt = (Integer)_excludedURI.get(uri);

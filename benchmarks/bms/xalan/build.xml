@@ -20,8 +20,14 @@
             <param name="target-file" value="WD-xforms-20010608.zip"/>
         </antcall>
     </target>
+
+    <target name="copy-additional-libs">
+        <copy todir="${xalan-top}/lib">
+		<fileset dir="${bm-files}/additional-libs" includes="**" />
+	</copy>
+    </target>
     
-    <target name="unpack" depends="untar, patch"/>
+    <target name="unpack" depends="untar, patch, copy-additional-libs"/>
     
     <target name="bm-build" depends="xerces">
         <exec dir="${xalan-top}" executable="ant">

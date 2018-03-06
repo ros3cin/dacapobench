@@ -1,0 +1,32 @@
+#!/bin/bash
+sudo java -jar dacapo.jar xalan &&
+sudo java -jar dacapo.jar xalan &&
+sudo java -jar dacapo.jar xalan &&
+sudo java -jar dacapo.jar xalan &&
+sudo java -jar dacapo.jar xalan &&
+sudo java -jar dacapo.jar xalan &&
+sudo java -jar dacapo.jar xalan &&
+sudo java -jar dacapo.jar xalan &&
+sudo java -jar dacapo.jar xalan &&
+sudo java -jar dacapo.jar xalan &&
+sudo java -jar dacapo.jar xalan &&
+sudo java -jar dacapo.jar xalan &&
+sudo java -jar dacapo.jar xalan &&
+sudo java -jar dacapo.jar xalan &&
+sudo java -jar dacapo.jar xalan &&
+sudo java -jar dacapo.jar xalan &&
+sudo java -jar dacapo.jar xalan &&
+sudo java -jar dacapo.jar xalan &&
+sudo java -jar dacapo.jar xalan &&
+sudo java -jar dacapo.jar xalan &&
+sudo java -jar dacapo.jar xalan &&
+sudo java -jar dacapo.jar xalan &&
+sudo java -jar dacapo.jar xalan &&
+sudo java -jar dacapo.jar xalan &&
+sudo java -jar dacapo.jar xalan &&
+sudo java -jar dacapo.jar xalan &&
+sudo java -jar dacapo.jar xalan &&
+sudo java -jar dacapo.jar xalan &&
+sudo java -jar dacapo.jar xalan &&
+sudo java -jar dacapo.jar xalan &&
+echo "The end!"
