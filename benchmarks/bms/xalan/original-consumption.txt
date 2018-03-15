@@ -1,0 +1,269 @@
+========================
+ DaCapo head-r3d75ed1 xalan PASSED in 5276 msec 
+consuming 1.0062719999987166 joules in dram 
+consuming 66.82742300000245 joules in cpu 
+consuming 83.02983099999983 joules on package 
+========================
+Using scaled threading model. 4 processors detected, 4 threads used to drive the workload, in a possible range of [1,100]
+===== DaCapo head-r3d75ed1 xalan starting =====
+Normal completion.
+========================
+ DaCapo head-r3d75ed1 xalan PASSED in 5775 msec 
+consuming 0.616530999999668 joules in dram 
+consuming 73.34289499999795 joules in cpu 
+consuming 90.66129999999976 joules on package 
+========================
+Using scaled threading model. 4 processors detected, 4 threads used to drive the workload, in a possible range of [1,100]
+===== DaCapo head-r3d75ed1 xalan starting =====
+Normal completion.
+========================
+ DaCapo head-r3d75ed1 xalan PASSED in 5512 msec 
+consuming 1.329330000000482 joules in dram 
+consuming 70.60639900000024 joules in cpu 
+consuming 87.85823099999834 joules on package 
+========================
+Using scaled threading model. 4 processors detected, 4 threads used to drive the workload, in a possible range of [1,100]
+===== DaCapo head-r3d75ed1 xalan starting =====
+Normal completion.
+========================
+ DaCapo head-r3d75ed1 xalan PASSED in 5546 msec 
+consuming 0.957977000001847 joules in dram 
+consuming 70.50325000000157 joules in cpu 
+consuming 87.4918819999948 joules on package 
+========================
+Using scaled threading model. 4 processors detected, 4 threads used to drive the workload, in a possible range of [1,100]
+===== DaCapo head-r3d75ed1 xalan starting =====
+Normal completion.
+========================
+ DaCapo head-r3d75ed1 xalan PASSED in 5507 msec 
+consuming 0.37226899999950547 joules in dram 
+consuming 70.61102299999766 joules in cpu 
+consuming 86.77757299999939 joules on package 
+========================
+Using scaled threading model. 4 processors detected, 4 threads used to drive the workload, in a possible range of [1,100]
+===== DaCapo head-r3d75ed1 xalan starting =====
+Normal completion.
+========================
+ DaCapo head-r3d75ed1 xalan PASSED in 5313 msec 
+consuming 0.16026299999793991 joules in dram 
+consuming 67.68542499999967 joules in cpu 
+consuming 83.17073099999834 joules on package 
+========================
+Using scaled threading model. 4 processors detected, 4 threads used to drive the workload, in a possible range of [1,100]
+===== DaCapo head-r3d75ed1 xalan starting =====
+Normal completion.
+========================
+ DaCapo head-r3d75ed1 xalan PASSED in 5386 msec 
+consuming 0.9686889999975392 joules in dram 
+consuming 67.93295300000318 joules in cpu 
+consuming 84.40814200000023 joules on package 
+========================
+Using scaled threading model. 4 processors detected, 4 threads used to drive the workload, in a possible range of [1,100]
+===== DaCapo head-r3d75ed1 xalan starting =====
+Normal completion.
+========================
+ DaCapo head-r3d75ed1 xalan PASSED in 5220 msec 
+consuming 0.8217770000010205 joules in dram 
+consuming 66.19506799999726 joules in cpu 
+consuming 82.01800599999842 joules on package 
+========================
+Using scaled threading model. 4 processors detected, 4 threads used to drive the workload, in a possible range of [1,100]
+===== DaCapo head-r3d75ed1 xalan starting =====
+Normal completion.
+========================
+ DaCapo head-r3d75ed1 xalan PASSED in 5824 msec 
+consuming 0.778137000001152 joules in dram 
+consuming 73.64727800000037 joules in cpu 
+consuming 91.32194499999605 joules on package 
+========================
+Using scaled threading model. 4 processors detected, 4 threads used to drive the workload, in a possible range of [1,100]
+===== DaCapo head-r3d75ed1 xalan starting =====
+Normal completion.
+========================
+ DaCapo head-r3d75ed1 xalan PASSED in 5243 msec 
+consuming 0.6568139999981213 joules in dram 
+consuming 66.64292900000146 joules in cpu 
+consuming 82.40171800000098 joules on package 
+========================
+Using scaled threading model. 4 processors detected, 4 threads used to drive the workload, in a possible range of [1,100]
+===== DaCapo head-r3d75ed1 xalan starting =====
+Normal completion.
+========================
+ DaCapo head-r3d75ed1 xalan PASSED in 5280 msec 
+consuming 0.7478940000000875 joules in dram 
+consuming 66.88577199999781 joules in cpu 
+consuming 82.87399300000106 joules on package 
+========================
+Using scaled threading model. 4 processors detected, 4 threads used to drive the workload, in a possible range of [1,100]
+===== DaCapo head-r3d75ed1 xalan starting =====
+Normal completion.
+========================
+ DaCapo head-r3d75ed1 xalan PASSED in 5503 msec 
+consuming 0.8968200000017532 joules in dram 
+consuming 69.78547700000126 joules in cpu 
+consuming 86.5074470000036 joules on package 
+========================
+Using scaled threading model. 4 processors detected, 4 threads used to drive the workload, in a possible range of [1,100]
+===== DaCapo head-r3d75ed1 xalan starting =====
+Normal completion.
+========================
+ DaCapo head-r3d75ed1 xalan PASSED in 5449 msec 
+consuming 1.2322539999986475 joules in dram 
+consuming 69.91890000000058 joules in cpu 
+consuming 86.89530999999988 joules on package 
+========================
+Using scaled threading model. 4 processors detected, 4 threads used to drive the workload, in a possible range of [1,100]
+===== DaCapo head-r3d75ed1 xalan starting =====
+Normal completion.
+========================
+ DaCapo head-r3d75ed1 xalan PASSED in 5886 msec 
+consuming 1.640105999998923 joules in dram 
+consuming 74.4969179999971 joules in cpu 
+consuming 93.21887199999765 joules on package 
+========================
+Using scaled threading model. 4 processors detected, 4 threads used to drive the workload, in a possible range of [1,100]
+===== DaCapo head-r3d75ed1 xalan starting =====
+Normal completion.
+========================
+ DaCapo head-r3d75ed1 xalan PASSED in 5527 msec 
+consuming 0.470459000000119 joules in dram 
+consuming 71.12942499999917 joules in cpu 
+consuming 87.4907680000033 joules on package 
+========================
+Using scaled threading model. 4 processors detected, 4 threads used to drive the workload, in a possible range of [1,100]
+===== DaCapo head-r3d75ed1 xalan starting =====
+Normal completion.
+========================
+ DaCapo head-r3d75ed1 xalan PASSED in 5444 msec 
+consuming 1.1947480000017094 joules in dram 
+consuming 69.90660100000241 joules in cpu 
+consuming 86.79594400000497 joules on package 
+========================
+Using scaled threading model. 4 processors detected, 4 threads used to drive the workload, in a possible range of [1,100]
+===== DaCapo head-r3d75ed1 xalan starting =====
+Normal completion.
+========================
+ DaCapo head-r3d75ed1 xalan PASSED in 5618 msec 
+consuming 0.619369000000006 joules in dram 
+consuming 72.11465499999758 joules in cpu 
+consuming 88.9717260000034 joules on package 
+========================
+Using scaled threading model. 4 processors detected, 4 threads used to drive the workload, in a possible range of [1,100]
+===== DaCapo head-r3d75ed1 xalan starting =====
+Normal completion.
+========================
+ DaCapo head-r3d75ed1 xalan PASSED in 5608 msec 
+consuming 0.5588690000004135 joules in dram 
+consuming 72.50485300000219 joules in cpu 
+consuming 89.1644890000025 joules on package 
+========================
+Using scaled threading model. 4 processors detected, 4 threads used to drive the workload, in a possible range of [1,100]
+===== DaCapo head-r3d75ed1 xalan starting =====
+Normal completion.
+========================
+ DaCapo head-r3d75ed1 xalan PASSED in 5495 msec 
+consuming 1.0925749999987602 joules in dram 
+consuming 70.87414600000193 joules in cpu 
+consuming 87.76733400000376 joules on package 
+========================
+Using scaled threading model. 4 processors detected, 4 threads used to drive the workload, in a possible range of [1,100]
+===== DaCapo head-r3d75ed1 xalan starting =====
+Normal completion.
+========================
+ DaCapo head-r3d75ed1 xalan PASSED in 5652 msec 
+consuming 0.6712950000001001 joules in dram 
+consuming 72.54486100000213 joules in cpu 
+consuming 89.59967000000324 joules on package 
+========================
+Using scaled threading model. 4 processors detected, 4 threads used to drive the workload, in a possible range of [1,100]
+===== DaCapo head-r3d75ed1 xalan starting =====
+Normal completion.
+========================
+ DaCapo head-r3d75ed1 xalan PASSED in 5842 msec 
+consuming 0.44404600000052596 joules in dram 
+consuming 74.53237900000022 joules in cpu 
+consuming 91.88447599999927 joules on package 
+========================
+Using scaled threading model. 4 processors detected, 4 threads used to drive the workload, in a possible range of [1,100]
+===== DaCapo head-r3d75ed1 xalan starting =====
+Normal completion.
+========================
+ DaCapo head-r3d75ed1 xalan PASSED in 5201 msec 
+consuming 0.9348910000007891 joules in dram 
+consuming 65.87246700000105 joules in cpu 
+consuming 81.82643099999405 joules on package 
+========================
+Using scaled threading model. 4 processors detected, 4 threads used to drive the workload, in a possible range of [1,100]
+===== DaCapo head-r3d75ed1 xalan starting =====
+Normal completion.
+========================
+ DaCapo head-r3d75ed1 xalan PASSED in 5169 msec 
+consuming 0.7983100000019476 joules in dram 
+consuming 65.84573400000227 joules in cpu 
+consuming 81.52973899999779 joules on package 
+========================
+Using scaled threading model. 4 processors detected, 4 threads used to drive the workload, in a possible range of [1,100]
+===== DaCapo head-r3d75ed1 xalan starting =====
+Normal completion.
+========================
+ DaCapo head-r3d75ed1 xalan PASSED in 5507 msec 
+consuming 0.5810849999979837 joules in dram 
+consuming 70.04042100000152 joules in cpu 
+consuming 86.54737900000327 joules on package 
+========================
+Using scaled threading model. 4 processors detected, 4 threads used to drive the workload, in a possible range of [1,100]
+===== DaCapo head-r3d75ed1 xalan starting =====
+Normal completion.
+========================
+ DaCapo head-r3d75ed1 xalan PASSED in 5620 msec 
+consuming 0.7192990000003192 joules in dram 
+consuming 71.62312300000121 joules in cpu 
+consuming 88.50262400000065 joules on package 
+========================
+Using scaled threading model. 4 processors detected, 4 threads used to drive the workload, in a possible range of [1,100]
+===== DaCapo head-r3d75ed1 xalan starting =====
+Normal completion.
+========================
+ DaCapo head-r3d75ed1 xalan PASSED in 5680 msec 
+consuming 0.6031800000018848 joules in dram 
+consuming 72.01976099999956 joules in cpu 
+consuming 89.10182200000418 joules on package 
+========================
+Using scaled threading model. 4 processors detected, 4 threads used to drive the workload, in a possible range of [1,100]
+===== DaCapo head-r3d75ed1 xalan starting =====
+Normal completion.
+========================
+ DaCapo head-r3d75ed1 xalan PASSED in 5142 msec 
+consuming 0.4282829999974638 joules in dram 
+consuming 65.16067499999917 joules in cpu 
+consuming 80.4890130000058 joules on package 
+========================
+Using scaled threading model. 4 processors detected, 4 threads used to drive the workload, in a possible range of [1,100]
+===== DaCapo head-r3d75ed1 xalan starting =====
+Normal completion.
+========================
+ DaCapo head-r3d75ed1 xalan PASSED in 5811 msec 
+consuming 0.6843110000008892 joules in dram 
+consuming 73.5723880000005 joules in cpu 
+consuming 91.13284299999941 joules on package 
+========================
+Using scaled threading model. 4 processors detected, 4 threads used to drive the workload, in a possible range of [1,100]
+===== DaCapo head-r3d75ed1 xalan starting =====
+Normal completion.
+========================
+ DaCapo head-r3d75ed1 xalan PASSED in 5782 msec 
+consuming 1.31622299999799 joules in dram 
+consuming 73.56900099999984 joules in cpu 
+consuming 91.64147999999841 joules on package 
+========================
+Using scaled threading model. 4 processors detected, 4 threads used to drive the workload, in a possible range of [1,100]
+===== DaCapo head-r3d75ed1 xalan starting =====
+Normal completion.
+========================
+ DaCapo head-r3d75ed1 xalan PASSED in 5454 msec 
+consuming 1.0496059999968566 joules in dram 
+consuming 69.19409199999791 joules in cpu 
+consuming 86.0279240000018 joules on package 
+========================
+The end!
+

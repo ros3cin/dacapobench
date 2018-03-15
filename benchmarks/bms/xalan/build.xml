@@ -45,6 +45,11 @@
     <target name="jar">
         <copy file="${xalan-top}/build/xalan.jar" todir="${bm-jars}"/>
         <copy file="${xalan-top}/build/serializer.jar" todir="${bm-jars}"/>
+	<copy todir="${bm-jars}" >
+	    <fileset dir="${bm-files}/additional-libs">
+	        <include name="**/*.jar" />
+	    </fileset>
+	</copy>
     </target>
     
     <target name="data">

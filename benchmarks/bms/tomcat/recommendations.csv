@@ -1,0 +1,37 @@
+set,Lorg/apache/catalina/connector/MapperListener>,Method that uses the variable:registerEngine,"Changes the type to ""concurrentSkipListSet""","Not doing, the variable is of type Set, and it receives a Set instance from somewhere eles"
+locales,Lorg/apache/catalina/connector/Request>,Method that uses the variable:parseLocalesHeader,"Changes the type to ""hashMap""",OK
+notes,Lorg/apache/catalina/connector/Request>,Method that uses the variable:getNote,"Changes the type to ""weakHashMap""",OK
+parameters,Lorg/apache/catalina/core/ApplicationContext>,Method that uses the variable:getInitParameter,"Changes the type to ""synchronizedHashMap""",OK
+map,Lorg/apache/catalina/core/ApplicationFilterConfig>,Method that uses the variable:getInitParameter,"Changes the type to ""synchronizedHashMap""","Not doing, the variable is of type Map, and it receives a Map instance from somewhere eles"
+mimeMappings,Lorg/apache/catalina/core/StandardContext>,Method that uses the variable:addMimeMapping,"Changes the type to ""weakHashMap""",OK
+messageDestinations,Lorg/apache/catalina/core/StandardContext>,Method that uses the variable:addMessageDestination,"Changes the type to ""weakHashMap""",OK
+exceptionPages,Lorg/apache/catalina/core/StandardContext>,Method that uses the variable:addErrorPage,"Changes the type to ""weakHashMap""",OK
+servletMappings,Lorg/apache/catalina/core/StandardContext>,Method that uses the variable:addServletMapping,"Changes the type to ""weakHashMap""",OK
+statusPages,Lorg/apache/catalina/core/StandardContext>,Method that uses the variable:addErrorPage,"Changes the type to ""weakHashMap""",OK
+map,Lorg/apache/catalina/core/StandardContext>,Method that uses the variable:loadOnStartup,"Changes the type to ""hashMap""",OK
+taglibs,Lorg/apache/catalina/core/StandardContext>,Method that uses the variable:addTaglib,"Changes the type to ""weakHashMap""",OK
+roleMappings,Lorg/apache/catalina/core/StandardContext>,Method that uses the variable:addRoleMapping,"Changes the type to ""weakHashMap""",OK
+properties,Lorg/apache/catalina/deploy/ContextTransaction>,Method that uses the variable:getProperty,"Changes the type to ""weakHashMap""",OK
+ejbs,Lorg/apache/catalina/deploy/NamingResources>,Method that uses the variable:addEjb,"Changes the type to ""weakHashMap""",OK
+envs,Lorg/apache/catalina/deploy/NamingResources>,Method that uses the variable:findEnvironment,"Changes the type to ""weakHashMap""",OK
+resourceLinks,Lorg/apache/catalina/deploy/NamingResources>,Method that uses the variable:findResourceLink,"Changes the type to ""weakHashMap""",OK
+resourceEnvRefs,Lorg/apache/catalina/deploy/NamingResources>,Method that uses the variable:addResourceEnvRef,"Changes the type to ""weakHashMap""",OK
+services,Lorg/apache/catalina/deploy/NamingResources>,Method that uses the variable:addService,"Changes the type to ""weakHashMap""",OK
+mdrs,Lorg/apache/catalina/deploy/NamingResources>,Method that uses the variable:addMessageDestinationRef,"Changes the type to ""weakHashMap""",OK
+localEjbs,Lorg/apache/catalina/deploy/NamingResources>,Method that uses the variable:addLocalEjb,"Changes the type to ""weakHashMap""",OK
+entries,Lorg/apache/catalina/deploy/NamingResources>,Method that uses the variable:addEjb,"Changes the type to ""synchronizedWeakHashMap""",OK
+resources,Lorg/apache/catalina/deploy/NamingResources>,Method that uses the variable:addResource,"Changes the type to ""weakHashMap""",OK
+properties,Lorg/apache/catalina/deploy/ResourceBase>,Method that uses the variable:getProperty,"Changes the type to ""weakHashMap""",OK
+managersON,Lorg/apache/catalina/manager/StatusTransformer>,Method that uses the variable:writeContext,"Changes the type to ""concurrentSkipListSet""","Not doing, the variable is of type Set, and it receives a Set instance from somewhere eles"
+set,Lorg/apache/catalina/manager/StatusTransformer>,Method that uses the variable:writeContext,"Changes the type to ""concurrentSkipListSet""","Not doing, the variable is of type Set, and it receives a Set instance from somewhere eles"
+hostsON,Lorg/apache/catalina/manager/StatusTransformer>,Method that uses the variable:writeDetailedState,"Changes the type to ""concurrentSkipListSet""","Not doing, the variable is of type Set, and it receives a Set instance from somewhere eles"
+objectCache,Lorg/apache/catalina/security/SecurityUtil>,Method that uses the variable:doAsPrivilege,"Changes the type to ""weakHashMap""",OK
+envp,Lorg/apache/catalina/servlets/CGIServlet$CGIEnvironment>,Method that uses the variable:setCGIEnvironment,"Changes the type to ""concurrentHashMap""",Not a real class
+mapStatusCodes,Lorg/apache/catalina/servlets/WebdavStatus>,Method that uses the variable:getStatusText,"Changes the type to ""concurrentHashMap""",Not present on the source code
+oppStack,Lorg/apache/catalina/ssi/ExpressionParseTree>,Method that uses the variable:pushOpp,"Changes the type to ""arrayList""",OK
+homes,Lorg/apache/catalina/startup/HomesUserDatabase>,Method that uses the variable:init,"Changes the type to ""concurrentHashMap""",OK
+homes,Lorg/apache/catalina/startup/PasswdUserDatabase>,Method that uses the variable:init,"Changes the type to ""concurrentHashMap""",OK
+jarPathMap,Lorg/apache/catalina/startup/TldConfig>,Method that uses the variable:getJarPaths,"Changes the type to ""weakHashMap""",OK
+s_revhash,Lorg/apache/catalina/util/MIME2Java>,Method that uses the variable:reverse,"Changes the type to ""concurrentHashMap""",OK
+s_enchash,Lorg/apache/catalina/util/MIME2Java>,Method that uses the variable:convert,"Changes the type to ""concurrentHashMap""",OK
+managers,Lorg/apache/catalina/util/StringManager>,Method that uses the variable:getManager,"Changes the type to ""concurrentHashMap""",OK

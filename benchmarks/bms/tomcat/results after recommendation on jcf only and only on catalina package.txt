@@ -1,0 +1,422 @@
+Using scaled threading model. 4 processors detected, 4 threads used to drive the workload, in a possible range of [1,64]
+Server thread created
+===== DaCapo head-rce686c2 tomcat starting =====
+Loading web application
+Creating client threads
+Waiting for clients to complete
+Client threads complete ... unloading web application
+========================
+ DaCapo head-rce686c2 tomcat PASSED in 6648 msec 
+consuming 1.5392759999999726 joules in dram 
+consuming 85.07145599999785 joules in cpu 
+consuming 105.53423999999904 joules on package 
+========================
+Server stopped ... iteration complete
+Using scaled threading model. 4 processors detected, 4 threads used to drive the workload, in a possible range of [1,64]
+Server thread created
+===== DaCapo head-rce686c2 tomcat starting =====
+Loading web application
+Creating client threads
+Waiting for clients to complete
+Client threads complete ... unloading web application
+========================
+ DaCapo head-rce686c2 tomcat PASSED in 6755 msec 
+consuming 1.1338950000003933 joules in dram 
+consuming 85.57005299999582 joules in cpu 
+consuming 105.81334000000061 joules on package 
+========================
+Server stopped ... iteration complete
+Using scaled threading model. 4 processors detected, 4 threads used to drive the workload, in a possible range of [1,64]
+Server thread created
+===== DaCapo head-rce686c2 tomcat starting =====
+Loading web application
+Creating client threads
+Waiting for clients to complete
+Client threads complete ... unloading web application
+========================
+ DaCapo head-rce686c2 tomcat PASSED in 6695 msec 
+consuming 0.3281099999999242 joules in dram 
+consuming 85.14263900000515 joules in cpu 
+consuming 104.50247200000013 joules on package 
+========================
+Server stopped ... iteration complete
+Using scaled threading model. 4 processors detected, 4 threads used to drive the workload, in a possible range of [1,64]
+Server thread created
+===== DaCapo head-rce686c2 tomcat starting =====
+Loading web application
+Creating client threads
+Waiting for clients to complete
+Client threads complete ... unloading web application
+========================
+ DaCapo head-rce686c2 tomcat PASSED in 6841 msec 
+consuming 0.760986999999659 joules in dram 
+consuming 86.95478900000307 joules in cpu 
+consuming 107.02380400000038 joules on package 
+========================
+Server stopped ... iteration complete
+Using scaled threading model. 4 processors detected, 4 threads used to drive the workload, in a possible range of [1,64]
+Server thread created
+===== DaCapo head-rce686c2 tomcat starting =====
+Loading web application
+Creating client threads
+Waiting for clients to complete
+Client threads complete ... unloading web application
+========================
+ DaCapo head-rce686c2 tomcat PASSED in 6887 msec 
+consuming 1.6652380000000448 joules in dram 
+consuming 88.53366000000096 joules in cpu 
+consuming 109.78045600000041 joules on package 
+========================
+Server stopped ... iteration complete
+Using scaled threading model. 4 processors detected, 4 threads used to drive the workload, in a possible range of [1,64]
+Server thread created
+===== DaCapo head-rce686c2 tomcat starting =====
+Loading web application
+Creating client threads
+Waiting for clients to complete
+Client threads complete ... unloading web application
+========================
+ DaCapo head-rce686c2 tomcat PASSED in 6594 msec 
+consuming 1.132492000000184 joules in dram 
+consuming 84.3893739999985 joules in cpu 
+consuming 104.17155500000081 joules on package 
+========================
+Server stopped ... iteration complete
+Using scaled threading model. 4 processors detected, 4 threads used to drive the workload, in a possible range of [1,64]
+Server thread created
+===== DaCapo head-rce686c2 tomcat starting =====
+Loading web application
+Creating client threads
+Waiting for clients to complete
+Client threads complete ... unloading web application
+========================
+ DaCapo head-rce686c2 tomcat PASSED in 6640 msec 
+consuming 0.5049130000002151 joules in dram 
+consuming 84.94786100000056 joules in cpu 
+consuming 104.29708800000117 joules on package 
+========================
+Server stopped ... iteration complete
+Using scaled threading model. 4 processors detected, 4 threads used to drive the workload, in a possible range of [1,64]
+Server thread created
+===== DaCapo head-rce686c2 tomcat starting =====
+Loading web application
+Creating client threads
+Waiting for clients to complete
+Client threads complete ... unloading web application
+========================
+ DaCapo head-rce686c2 tomcat PASSED in 6570 msec 
+consuming 1.4615329999996902 joules in dram 
+consuming 83.9399259999991 joules in cpu 
+consuming 104.0514519999997 joules on package 
+========================
+Server stopped ... iteration complete
+Using scaled threading model. 4 processors detected, 4 threads used to drive the workload, in a possible range of [1,64]
+Server thread created
+===== DaCapo head-rce686c2 tomcat starting =====
+Loading web application
+Creating client threads
+Waiting for clients to complete
+Client threads complete ... unloading web application
+========================
+ DaCapo head-rce686c2 tomcat PASSED in 6812 msec 
+consuming 0.6911009999998896 joules in dram 
+consuming 87.14364700000442 joules in cpu 
+consuming 107.23689300000115 joules on package 
+========================
+Server stopped ... iteration complete
+Using scaled threading model. 4 processors detected, 4 threads used to drive the workload, in a possible range of [1,64]
+Server thread created
+===== DaCapo head-rce686c2 tomcat starting =====
+Loading web application
+Creating client threads
+Waiting for clients to complete
+Client threads complete ... unloading web application
+========================
+ DaCapo head-rce686c2 tomcat PASSED in 6680 msec 
+consuming 0.9422919999997248 joules in dram 
+consuming 85.48518400000466 joules in cpu 
+consuming 105.37875400000121 joules on package 
+========================
+Server stopped ... iteration complete
+Using scaled threading model. 4 processors detected, 4 threads used to drive the workload, in a possible range of [1,64]
+Server thread created
+===== DaCapo head-rce686c2 tomcat starting =====
+Loading web application
+Creating client threads
+Waiting for clients to complete
+Client threads complete ... unloading web application
+========================
+ DaCapo head-rce686c2 tomcat PASSED in 6736 msec 
+consuming 0.9168849999996382 joules in dram 
+consuming 86.2235570000048 joules in cpu 
+consuming 106.323973999999 joules on package 
+========================
+Server stopped ... iteration complete
+Using scaled threading model. 4 processors detected, 4 threads used to drive the workload, in a possible range of [1,64]
+Server thread created
+===== DaCapo head-rce686c2 tomcat starting =====
+Loading web application
+Creating client threads
+Waiting for clients to complete
+Client threads complete ... unloading web application
+========================
+ DaCapo head-rce686c2 tomcat PASSED in 6742 msec 
+consuming 1.276901999999609 joules in dram 
+consuming 86.21727000000101 joules in cpu 
+consuming 106.6326599999993 joules on package 
+========================
+Server stopped ... iteration complete
+Using scaled threading model. 4 processors detected, 4 threads used to drive the workload, in a possible range of [1,64]
+Server thread created
+===== DaCapo head-rce686c2 tomcat starting =====
+Loading web application
+Creating client threads
+Waiting for clients to complete
+Client threads complete ... unloading web application
+========================
+ DaCapo head-rce686c2 tomcat PASSED in 6665 msec 
+consuming 1.3437349999999242 joules in dram 
+consuming 85.20840500000486 joules in cpu 
+consuming 105.44886700000097 joules on package 
+========================
+Server stopped ... iteration complete
+Using scaled threading model. 4 processors detected, 4 threads used to drive the workload, in a possible range of [1,64]
+Server thread created
+===== DaCapo head-rce686c2 tomcat starting =====
+Loading web application
+Creating client threads
+Waiting for clients to complete
+Client threads complete ... unloading web application
+========================
+ DaCapo head-rce686c2 tomcat PASSED in 6651 msec 
+consuming 1.2199249999998756 joules in dram 
+consuming 84.90605099999812 joules in cpu 
+consuming 104.98095699999976 joules on package 
+========================
+Server stopped ... iteration complete
+Using scaled threading model. 4 processors detected, 4 threads used to drive the workload, in a possible range of [1,64]
+Server thread created
+===== DaCapo head-rce686c2 tomcat starting =====
+Loading web application
+Creating client threads
+Waiting for clients to complete
+Client threads complete ... unloading web application
+========================
+ DaCapo head-rce686c2 tomcat PASSED in 6676 msec 
+consuming 0.38946500000020023 joules in dram 
+consuming 85.3167420000027 joules in cpu 
+consuming 104.62864699999955 joules on package 
+========================
+Server stopped ... iteration complete
+Using scaled threading model. 4 processors detected, 4 threads used to drive the workload, in a possible range of [1,64]
+Server thread created
+===== DaCapo head-rce686c2 tomcat starting =====
+Loading web application
+Creating client threads
+Waiting for clients to complete
+Client threads complete ... unloading web application
+========================
+ DaCapo head-rce686c2 tomcat PASSED in 6543 msec 
+consuming 0.928284000000076 joules in dram 
+consuming 84.102218 joules in cpu 
+consuming 103.6315770000001 joules on package 
+========================
+Server stopped ... iteration complete
+Using scaled threading model. 4 processors detected, 4 threads used to drive the workload, in a possible range of [1,64]
+Server thread created
+===== DaCapo head-rce686c2 tomcat starting =====
+Loading web application
+Creating client threads
+Waiting for clients to complete
+Client threads complete ... unloading web application
+========================
+ DaCapo head-rce686c2 tomcat PASSED in 6519 msec 
+consuming 1.1499939999998787 joules in dram 
+consuming 83.6549989999985 joules in cpu 
+consuming 103.25439399999959 joules on package 
+========================
+Server stopped ... iteration complete
+Using scaled threading model. 4 processors detected, 4 threads used to drive the workload, in a possible range of [1,64]
+Server thread created
+===== DaCapo head-rce686c2 tomcat starting =====
+Loading web application
+Creating client threads
+Waiting for clients to complete
+Client threads complete ... unloading web application
+========================
+ DaCapo head-rce686c2 tomcat PASSED in 6815 msec 
+consuming 1.4199370000001181 joules in dram 
+consuming 87.21875 joules in cpu 
+consuming 108.04756199999974 joules on package 
+========================
+Server stopped ... iteration complete
+Using scaled threading model. 4 processors detected, 4 threads used to drive the workload, in a possible range of [1,64]
+Server thread created
+===== DaCapo head-rce686c2 tomcat starting =====
+Loading web application
+Creating client threads
+Waiting for clients to complete
+Client threads complete ... unloading web application
+========================
+ DaCapo head-rce686c2 tomcat PASSED in 6568 msec 
+consuming 0.46884099999988393 joules in dram 
+consuming 83.7529299999951 joules in cpu 
+consuming 102.82615699999951 joules on package 
+========================
+Server stopped ... iteration complete
+Using scaled threading model. 4 processors detected, 4 threads used to drive the workload, in a possible range of [1,64]
+Server thread created
+===== DaCapo head-rce686c2 tomcat starting =====
+Loading web application
+Creating client threads
+Waiting for clients to complete
+Client threads complete ... unloading web application
+========================
+ DaCapo head-rce686c2 tomcat PASSED in 6555 msec 
+consuming 1.5100859999997738 joules in dram 
+consuming 83.81059200000163 joules in cpu 
+consuming 103.82894900000065 joules on package 
+========================
+Server stopped ... iteration complete
+Using scaled threading model. 4 processors detected, 4 threads used to drive the workload, in a possible range of [1,64]
+Server thread created
+===== DaCapo head-rce686c2 tomcat starting =====
+Loading web application
+Creating client threads
+Waiting for clients to complete
+Client threads complete ... unloading web application
+========================
+ DaCapo head-rce686c2 tomcat PASSED in 6744 msec 
+consuming 0.9829709999999068 joules in dram 
+consuming 86.27949499999522 joules in cpu 
+consuming 106.39924599999904 joules on package 
+========================
+Server stopped ... iteration complete
+Using scaled threading model. 4 processors detected, 4 threads used to drive the workload, in a possible range of [1,64]
+Server thread created
+===== DaCapo head-rce686c2 tomcat starting =====
+Loading web application
+Creating client threads
+Waiting for clients to complete
+Client threads complete ... unloading web application
+========================
+ DaCapo head-rce686c2 tomcat PASSED in 6718 msec 
+consuming 1.3358620000003611 joules in dram 
+consuming 85.89138799999637 joules in cpu 
+consuming 106.32560699999885 joules on package 
+========================
+Server stopped ... iteration complete
+Using scaled threading model. 4 processors detected, 4 threads used to drive the workload, in a possible range of [1,64]
+Server thread created
+===== DaCapo head-rce686c2 tomcat starting =====
+Loading web application
+Creating client threads
+Waiting for clients to complete
+Client threads complete ... unloading web application
+========================
+ DaCapo head-rce686c2 tomcat PASSED in 6430 msec 
+consuming 0.544966999999815 joules in dram 
+consuming 82.54109199999948 joules in cpu 
+consuming 101.209350000001 joules on package 
+========================
+Server stopped ... iteration complete
+Using scaled threading model. 4 processors detected, 4 threads used to drive the workload, in a possible range of [1,64]
+Server thread created
+===== DaCapo head-rce686c2 tomcat starting =====
+Loading web application
+Creating client threads
+Waiting for clients to complete
+Client threads complete ... unloading web application
+========================
+ DaCapo head-rce686c2 tomcat PASSED in 6814 msec 
+consuming 0.8837440000002061 joules in dram 
+consuming 86.22697399999743 joules in cpu 
+consuming 106.37129199999981 joules on package 
+========================
+Server stopped ... iteration complete
+Using scaled threading model. 4 processors detected, 4 threads used to drive the workload, in a possible range of [1,64]
+Server thread created
+===== DaCapo head-rce686c2 tomcat starting =====
+Loading web application
+Creating client threads
+Waiting for clients to complete
+Client threads complete ... unloading web application
+========================
+ DaCapo head-rce686c2 tomcat PASSED in 6906 msec 
+consuming 0.9918979999997646 joules in dram 
+consuming 88.08990500000073 joules in cpu 
+consuming 108.75703499999872 joules on package 
+========================
+Server stopped ... iteration complete
+Using scaled threading model. 4 processors detected, 4 threads used to drive the workload, in a possible range of [1,64]
+Server thread created
+===== DaCapo head-rce686c2 tomcat starting =====
+Loading web application
+Creating client threads
+Waiting for clients to complete
+Client threads complete ... unloading web application
+========================
+ DaCapo head-rce686c2 tomcat PASSED in 6730 msec 
+consuming 1.0311130000000048 joules in dram 
+consuming 86.04457099999854 joules in cpu 
+consuming 106.13618499999939 joules on package 
+========================
+Server stopped ... iteration complete
+Using scaled threading model. 4 processors detected, 4 threads used to drive the workload, in a possible range of [1,64]
+Server thread created
+===== DaCapo head-rce686c2 tomcat starting =====
+Loading web application
+Creating client threads
+Waiting for clients to complete
+Client threads complete ... unloading web application
+========================
+ DaCapo head-rce686c2 tomcat PASSED in 6739 msec 
+consuming 0.47352600000021994 joules in dram 
+consuming 86.25743199999852 joules in cpu 
+consuming 105.86155700000018 joules on package 
+========================
+Server stopped ... iteration complete
+Using scaled threading model. 4 processors detected, 4 threads used to drive the workload, in a possible range of [1,64]
+Server thread created
+===== DaCapo head-rce686c2 tomcat starting =====
+Loading web application
+Creating client threads
+Waiting for clients to complete
+Client threads complete ... unloading web application
+========================
+ DaCapo head-rce686c2 tomcat PASSED in 7104 msec 
+consuming 0.9621580000002723 joules in dram 
+consuming 90.46861299999728 joules in cpu 
+consuming 111.77166800000123 joules on package 
+========================
+Server stopped ... iteration complete
+Using scaled threading model. 4 processors detected, 4 threads used to drive the workload, in a possible range of [1,64]
+Server thread created
+===== DaCapo head-rce686c2 tomcat starting =====
+Loading web application
+Creating client threads
+Waiting for clients to complete
+Client threads complete ... unloading web application
+========================
+ DaCapo head-rce686c2 tomcat PASSED in 6717 msec 
+consuming 1.5513909999999669 joules in dram 
+consuming 85.25198399999499 joules in cpu 
+consuming 105.90675399999964 joules on package 
+========================
+Server stopped ... iteration complete
+Using scaled threading model. 4 processors detected, 4 threads used to drive the workload, in a possible range of [1,64]
+Server thread created
+===== DaCapo head-rce686c2 tomcat starting =====
+Loading web application
+Creating client threads
+Waiting for clients to complete
+Client threads complete ... unloading web application
+========================
+ DaCapo head-rce686c2 tomcat PASSED in 6573 msec 
+consuming 1.1556860000000597 joules in dram 
+consuming 83.63586399999622 joules in cpu 
+consuming 103.45597799999814 joules on package 
+========================
+Server stopped ... iteration complete
+The end!
+

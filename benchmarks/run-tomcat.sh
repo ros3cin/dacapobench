@@ -1,0 +1,32 @@
+#!/bin/bash
+sudo /usr/lib/jvm/jdk1.6.0_45/bin/java -jar dacapo.jar tomcat &&
+sudo /usr/lib/jvm/jdk1.6.0_45/bin/java -jar dacapo.jar tomcat &&
+sudo /usr/lib/jvm/jdk1.6.0_45/bin/java -jar dacapo.jar tomcat &&
+sudo /usr/lib/jvm/jdk1.6.0_45/bin/java -jar dacapo.jar tomcat &&
+sudo /usr/lib/jvm/jdk1.6.0_45/bin/java -jar dacapo.jar tomcat &&
+sudo /usr/lib/jvm/jdk1.6.0_45/bin/java -jar dacapo.jar tomcat &&
+sudo /usr/lib/jvm/jdk1.6.0_45/bin/java -jar dacapo.jar tomcat &&
+sudo /usr/lib/jvm/jdk1.6.0_45/bin/java -jar dacapo.jar tomcat &&
+sudo /usr/lib/jvm/jdk1.6.0_45/bin/java -jar dacapo.jar tomcat &&
+sudo /usr/lib/jvm/jdk1.6.0_45/bin/java -jar dacapo.jar tomcat &&
+sudo /usr/lib/jvm/jdk1.6.0_45/bin/java -jar dacapo.jar tomcat &&
+sudo /usr/lib/jvm/jdk1.6.0_45/bin/java -jar dacapo.jar tomcat &&
+sudo /usr/lib/jvm/jdk1.6.0_45/bin/java -jar dacapo.jar tomcat &&
+sudo /usr/lib/jvm/jdk1.6.0_45/bin/java -jar dacapo.jar tomcat &&
+sudo /usr/lib/jvm/jdk1.6.0_45/bin/java -jar dacapo.jar tomcat &&
+sudo /usr/lib/jvm/jdk1.6.0_45/bin/java -jar dacapo.jar tomcat &&
+sudo /usr/lib/jvm/jdk1.6.0_45/bin/java -jar dacapo.jar tomcat &&
+sudo /usr/lib/jvm/jdk1.6.0_45/bin/java -jar dacapo.jar tomcat &&
+sudo /usr/lib/jvm/jdk1.6.0_45/bin/java -jar dacapo.jar tomcat &&
+sudo /usr/lib/jvm/jdk1.6.0_45/bin/java -jar dacapo.jar tomcat &&
+sudo /usr/lib/jvm/jdk1.6.0_45/bin/java -jar dacapo.jar tomcat &&
+sudo /usr/lib/jvm/jdk1.6.0_45/bin/java -jar dacapo.jar tomcat &&
+sudo /usr/lib/jvm/jdk1.6.0_45/bin/java -jar dacapo.jar tomcat &&
+sudo /usr/lib/jvm/jdk1.6.0_45/bin/java -jar dacapo.jar tomcat &&
+sudo /usr/lib/jvm/jdk1.6.0_45/bin/java -jar dacapo.jar tomcat &&
+sudo /usr/lib/jvm/jdk1.6.0_45/bin/java -jar dacapo.jar tomcat &&
+sudo /usr/lib/jvm/jdk1.6.0_45/bin/java -jar dacapo.jar tomcat &&
+sudo /usr/lib/jvm/jdk1.6.0_45/bin/java -jar dacapo.jar tomcat &&
+sudo /usr/lib/jvm/jdk1.6.0_45/bin/java -jar dacapo.jar tomcat &&
+sudo /usr/lib/jvm/jdk1.6.0_45/bin/java -jar dacapo.jar tomcat &&
+echo "The end!"

@@ -1,8 +1,8 @@
 Only in xalan-j_2_7_1 (copy)/: build
 diff -ur xalan-j_2_7_1/build.xml "xalan-j_2_7_1 (copy)/build.xml"
 --- xalan-j_2_7_1/build.xml	2007-11-22 16:44:00.000000000 -0300
-+++ "xalan-j_2_7_1 (copy)/build.xml"	2018-03-08 04:07:20.247166939 -0300
-@@ -104,6 +104,10 @@
++++ "xalan-j_2_7_1 (copy)/build.xml"	2018-03-15 01:30:16.519076149 -0300
+@@ -104,6 +104,12 @@
    <property name="runtime.jar"            value="${lib.dir}/${runtime.jar.name}"/>
    <property name="regexp.jar.name"        value="regexp.jar"/>
    <property name="regexp.jar"             value="${lib.dir}/${regexp.jar.name}"/>
@@ -10,42 +10,48 @@ diff -ur xalan-j_2_7_1/build.xml "xalan-j_2_7_1 (copy)/build.xml"
 +  <property name="eclipse_collections_api.jar"             value="${lib.dir}/${eclipse_collections_api.jar.name}"/>
 +  <property name="eclipse_collections_impl.jar.name"        value="eclipse-collections-9.1.0.jar"/>
 +  <property name="eclipse_collections_impl.jar"             value="${lib.dir}/${eclipse_collections_impl.jar.name}"/>
++  <property name="jsr166e.jar.name"        value="jsr166e-1.0.jar"/>
++  <property name="jsr166e.jar"             value="${lib.dir}/${eclipse_collections_impl.jar.name}"/>
    
    <!-- Jars need to build Xalan Java (Interpretive, Compiled, or both) or build the docs -->
    <property name="java_cup.jar.name"      value="java_cup.jar"/>
-@@ -205,6 +209,8 @@
+@@ -205,6 +211,9 @@
      <pathelement location="${taglet.jar}" />
      <pathelement location="${build.serializer.jar}" />
      <pathelement location="${build.xalan.jar}" />
 +    <pathelement location="${eclipse_collections_api.jar}" />
 +    <pathelement location="${eclipse_collections_impl.jar}" />
++    <pathelement location="${jsr166e.jar}" />
      <pathelement path="${java.class.path}" />
    </path>
    <path id="samples.class.path">
-@@ -212,6 +218,8 @@
+@@ -212,6 +221,9 @@
      <pathelement location="${build.serializer.jar}" />    
      <pathelement location="${parser.jar}" />  
      <pathelement location="${build.xalan.jar}" />
 +    <pathelement location="${eclipse_collections_api.jar}" />
 +    <pathelement location="${eclipse_collections_impl.jar}" />
++    <pathelement location="${jsr166e.jar}" />
      <pathelement path="${java.class.path}" />
    </path>
    <path id="compile.class.path">
-@@ -221,6 +229,8 @@
+@@ -221,6 +233,9 @@
      <pathelement location="${xmlapis.jar}" />
      <pathelement location="${build.serializer.jar}" />
      <pathelement location="${parser.jar}" />
 +    <pathelement location="${eclipse_collections_api.jar}" />
 +    <pathelement location="${eclipse_collections_impl.jar}" />
++    <pathelement location="${jsr166e.jar}" />
      <pathelement path="${java.class.path}" />
    </path>
    <path id="xslt.boot.class.path">
-@@ -233,11 +243,15 @@
+@@ -233,11 +248,17 @@
      <pathelement location="${xmlapis.jar}" />
      <pathelement location="${build.serializer.jar}" />    
      <pathelement location="${parser.jar}" />   
 +    <pathelement location="${eclipse_collections_api.jar}" />
 +    <pathelement location="${eclipse_collections_impl.jar}" />
++    <pathelement location="${jsr166e.jar}" />
      <pathelement path="${build.boot.class.path}" />
      <pathelement path="${sun.boot.class.path}" />
    </path>
@@ -53,124 +59,106 @@ diff -ur xalan-j_2_7_1/build.xml "xalan-j_2_7_1 (copy)/build.xml"
      <dirset dir="${src.dir}" includes="/org/apache/**" />
 +    <pathelement location="${eclipse_collections_api.jar}" />
 +    <pathelement location="${eclipse_collections_impl.jar}" />
++    <pathelement location="${jsr166e.jar}" />
    </path>
  
    <!-- patternsets for source and binary distribution packages -->
-@@ -251,6 +265,8 @@
+@@ -251,6 +272,9 @@
      <include name="${dist.file}/${xmlapis.jar.name}"/>
      <include name="${dist.file}/${parser.jar.name}"/>
      <include name="${dist.file}/${serializer.jar.name}"/>
 +    <include name="${dist.file}/${eclipse_collections_api.jar.name}"/>
 +    <include name="${dist.file}/${eclipse_collections_impl.jar.name}"/>
++    <include name="${dist.file}/${jsr166e.jar.name}"/>
      <include name="${dist.file}/samples/"/>    
      <include name="${dist.file}/samples/xalansamples.jar"/>
      <include name="${dist.file}/samples/xalanservlet.war"/>
-@@ -270,6 +286,8 @@
+@@ -270,6 +294,9 @@
      <include name="${dist.file}/${xmlapis.jar.name}"/>
      <include name="${dist.file}/${parser.jar.name}"/>
      <include name="${dist.file}/${serializer.jar.name}"/>
 +    <include name="${dist.file}/${eclipse_collections_api.jar.name}"/>
 +    <include name="${dist.file}/${eclipse_collections_impl.jar.name}"/>
++    <include name="${dist.file}/${jsr166e.jar.name}"/>
      <include name="${dist.file}/samples/"/>        
      <include name="${dist.file}/samples/xalansamples.jar"/>
      <include name="${dist.file}/samples/xalanservlet.war"/>
-@@ -305,6 +323,8 @@
+@@ -305,6 +332,9 @@
      <include name="${dist.file}/tools/${jlex.jar.name}"/>
      <include name="${dist.file}/lib/${runtime.jar.name}"/>
      <include name="${dist.file}/lib/${regexp.jar.name}"/>
 +    <include name="${dist.file}/lib/${eclipse_collections_api.jar.name}"/>
 +    <include name="${dist.file}/lib/${eclipse_collections_impl.jar.name}"/>
++    <include name="${dist.file}/${jsr166e.jar.name}"/>
    </patternset>
  
    <!-- =================================================================== -->
-@@ -431,6 +451,8 @@
+@@ -431,6 +461,9 @@
      <pathelement location="${jlex.jar}" />
      <pathelement location="${java_cup.jar}" />
      <pathelement location="${runtime.jar}" />
 +    <pathelement location="${eclipse_collections_api.jar}" />
 +    <pathelement location="${eclipse_collections_impl.jar}" />
++    <pathelement location="${jsr166e.jar}"/>
      <!-- build.classes needed for 
           org.apache.xalan.xsltc.util.JavaCupRedirect -->
      <pathelement location="${build.classes}" />
-@@ -592,6 +614,16 @@
+@@ -559,6 +592,12 @@
+     <!-- remove the jar file -->
+     <delete file="${build.classes}/${param_jar_name}" />
+   </target>
++
++  <!-- A parametrized target which is used to copy and expand a XSLTC support jar -->
++  <target name="xsltc.copy-deps-jar-not-unjared" unless="${param_unless}">
++    <!-- copy the jar file to the build/classes directory -->
++    <copy todir="${build.dir}" file="${lib.dir}/${param_jar_name}"/>
++  </target>
+   
+   <!-- Copy and expand the XSLTC support jars if needed -->
+   <target name="xsltc.copy-deps-jars" depends="xsltc.copy-licenses">
+@@ -592,6 +631,21 @@
        <param name="param_unless" value="xsltc.regexp_jar.not_needed" />
        <param name="param_jar_name" value="${regexp.jar.name}" />
      </antcall>
 +
-+    <!--antcall target="xsltc.copy-deps-jar">
++    <antcall target="xsltc.copy-deps-jar-not-unjared">
 +      <param name="param_unless" value="" />
 +      <param name="param_jar_name" value="${eclipse_collections_api.jar.name}" />
 +    </antcall>
 +
-+    <antcall target="xsltc.copy-deps-jar">
++    <antcall target="xsltc.copy-deps-jar-not-unjared">
 +      <param name="param_unless" value="" />
 +      <param name="param_jar_name" value="${eclipse_collections_impl.jar.name}" />
-+    </antcall-->
++    </antcall>
++
++    <antcall target="xsltc.copy-deps-jar-not-unjared">
++      <param name="param_unless" value="" />
++      <param name="param_jar_name" value="${jsr166e.jar.name}" />
++    </antcall>
      
      <!-- remove the old META-INF/MANIFEST.MF file -->
      <delete file="${build.classes}/META-INF/MANIFEST.MF" quiet="true"/>  
-@@ -695,6 +727,7 @@
-     <!-- make bundled jar named xalan.jar -->
-     <jar jarfile="${build.xalan.jar}" manifest="${build.dir}/MANIFEST.MF"
-          basedir="${build.classes}" >
-+	<fileset dir="${lib.dir}" includes="${eclipse_collections_api.jar.name},${eclipse_collections_impl.jar.name}" />
-        <patternset>
-          <exclude name="${xsltc.reldir}/util/JavaCupRedirect*" />
-          <exclude name="${serializer.reldir}/**/*" />
 Only in xalan-j_2_7_1 (copy)/lib: eclipse-collections-9.1.0.jar
 Only in xalan-j_2_7_1 (copy)/lib: eclipse-collections-api-9.1.0.jar
+Only in xalan-j_2_7_1 (copy)/lib: jsr166e-1.0.jar
 Only in xalan-j_2_7_1 (copy)/lib: LICENSE-EDL-1.0.txt
 Only in xalan-j_2_7_1 (copy)/lib: LICENSE-EPL-1.0.txt
 diff -ur xalan-j_2_7_1/src/MANIFEST.MF "xalan-j_2_7_1 (copy)/src/MANIFEST.MF"
 --- xalan-j_2_7_1/src/MANIFEST.MF	2007-11-22 16:43:54.000000000 -0300
-+++ "xalan-j_2_7_1 (copy)/src/MANIFEST.MF"	2018-03-08 04:14:52.352194563 -0300
-@@ -1,7 +1,7 @@
++++ "xalan-j_2_7_1 (copy)/src/MANIFEST.MF"	2018-03-15 01:32:16.084124238 -0300
+@@ -1,8 +1,7 @@
  Manifest-Version: 1.0
  Created-By: @java.version@ (@java.vendor@)
  Main-Class: org.apache.xalan.xslt.Process
 -Class-Path: xercesImpl.jar xml-apis.jar serializer.jar
-+Class-Path: xercesImpl.jar xml-apis.jar serializer.jar eclipse-collections-9.1.0.jar eclipse-collections-api-9.1.0.jar
- 
- 
- Name: org/apache/xalan/
-diff -ur xalan-j_2_7_1/src/MANIFEST.SERIALIZER "xalan-j_2_7_1 (copy)/src/MANIFEST.SERIALIZER"
---- xalan-j_2_7_1/src/MANIFEST.SERIALIZER	2007-11-22 16:43:54.000000000 -0300
-+++ "xalan-j_2_7_1 (copy)/src/MANIFEST.SERIALIZER"	2018-03-08 04:15:35.428953510 -0300
-@@ -1,7 +1,7 @@
- Manifest-Version: 1.0
- Created-By: @java.version@ (@java.vendor@)
- Main-Class: org.apache.xml.serializer.Version
--Class-Path: xml-apis.jar
-+Class-Path: xml-apis.jar eclipse-collections-9.1.0.jar eclipse-collections-api-9.1.0.jar
- 
- Name: org/apache/xml/serializer/
- Comment: Serializer to write out XML, HTML etc. as a stream of characters from an input DOM or from input SAX events.
-diff -ur xalan-j_2_7_1/src/manifest.xalan-interpretive "xalan-j_2_7_1 (copy)/src/manifest.xalan-interpretive"
---- xalan-j_2_7_1/src/manifest.xalan-interpretive	2007-11-22 16:43:52.000000000 -0300
-+++ "xalan-j_2_7_1 (copy)/src/manifest.xalan-interpretive"	2018-03-08 04:15:39.865030323 -0300
-@@ -1,7 +1,7 @@
- Manifest-Version: 1.0
- Created-By: @java.version@ (@java.vendor@)
- Main-Class: org.apache.xalan.xslt.Process
--Class-Path: xercesImpl.jar xml-apis.jar serializer.jar
-+Class-Path: xercesImpl.jar xml-apis.jar serializer.jar eclipse-collections-9.1.0.jar eclipse-collections-api-9.1.0.jar
+-
++Class-Path: xercesImpl.jar xml-apis.jar serializer.jar eclipse-collections-api-9.1.0.jar eclipse-collections-9.1.0.jar jsr166e-1.0.jar
  
  Name: org/apache/xalan/
  Comment: Main Xalan engine implementing TrAX/JAXP
-diff -ur xalan-j_2_7_1/src/manifest.xsltc "xalan-j_2_7_1 (copy)/src/manifest.xsltc"
---- xalan-j_2_7_1/src/manifest.xsltc	2007-11-22 16:43:54.000000000 -0300
-+++ "xalan-j_2_7_1 (copy)/src/manifest.xsltc"	2018-03-08 02:06:22.140185799 -0300
-@@ -1,6 +1,6 @@
- Manifest-Version: 1.0
- Created-By: @java.version@ (@java.vendor@)
--Class-Path: xercesImpl.jar xml-apis.jar serializer.jar
-+Class-Path: xercesImpl.jar xml-apis.jar serializer.jar eclipse-collections-9.1.0.jar eclipse-collections-api-9.1.0.jar
- 
- Name: org/apache/xalan/xsltc/
- Comment: Main XSLTC engine implementing TrAX/JAXP
 diff -ur xalan-j_2_7_1/src/org/apache/xalan/processor/XSLTElementDef.java "xalan-j_2_7_1 (copy)/src/org/apache/xalan/processor/XSLTElementDef.java"
 --- xalan-j_2_7_1/src/org/apache/xalan/processor/XSLTElementDef.java	2007-11-22 16:43:52.000000000 -0300
-+++ "xalan-j_2_7_1 (copy)/src/org/apache/xalan/processor/XSLTElementDef.java"	2018-03-08 04:31:11.125958547 -0300
++++ "xalan-j_2_7_1 (copy)/src/org/apache/xalan/processor/XSLTElementDef.java"	2018-03-15 00:11:18.072817089 -0300
 @@ -26,6 +26,8 @@
  import org.apache.xalan.templates.Constants;
  import org.apache.xml.utils.QName;
@@ -185,7 +173,7 @@ diff -ur xalan-j_2_7_1/src/org/apache/xalan/processor/XSLTElementDef.java "xalan
  				{
  					if (m_requiredFound == null)			
 -						m_requiredFound = new Hashtable();
-+						m_requiredFound = new ConcurrentHashMap();
++						m_requiredFound = new org.eclipse.collections.impl.map.mutable.ConcurrentHashMap();
  					m_requiredFound.put(def.getName(), "xsl:" +def.getName()); 
  				}
  			}
@@ -194,10 +182,19 @@ diff -ur xalan-j_2_7_1/src/org/apache/xalan/processor/XSLTElementDef.java "xalan
    }
  	
 -	Hashtable m_requiredFound;
-+	ConcurrentHashMap m_requiredFound;
++	org.eclipse.collections.impl.map.mutable.ConcurrentHashMap m_requiredFound;
  	
  	/**
     * Set this required element found.
+@@ -729,7 +731,7 @@
+   {
+ 		if (m_requiredFound == null)
+ 			return null;
+-		Enumeration elems = m_requiredFound.elements();
++		Enumeration elems = java.util.Collections.enumeration(m_requiredFound.values());
+ 		String s = "";
+ 		boolean first = true;
+ 		while (elems.hasMoreElements())
 diff -ur xalan-j_2_7_1/src/org/apache/xalan/transformer/TransformerIdentityImpl.java "xalan-j_2_7_1 (copy)/src/org/apache/xalan/transformer/TransformerIdentityImpl.java"
 --- xalan-j_2_7_1/src/org/apache/xalan/transformer/TransformerIdentityImpl.java	2007-11-22 16:43:52.000000000 -0300
 +++ "xalan-j_2_7_1 (copy)/src/org/apache/xalan/transformer/TransformerIdentityImpl.java"	2018-03-07 02:06:27.244849626 -0300
@@ -228,6 +225,54 @@ diff -ur xalan-j_2_7_1/src/org/apache/xalan/transformer/TransformerIdentityImpl.
  
    /** The error listener for TrAX errors and warnings. */
    private ErrorListener m_errorListener =
+diff -ur xalan-j_2_7_1/src/org/apache/xalan/xsltc/compiler/Parser.java "xalan-j_2_7_1 (copy)/src/org/apache/xalan/xsltc/compiler/Parser.java"
+--- xalan-j_2_7_1/src/org/apache/xalan/xsltc/compiler/Parser.java	2007-11-22 16:43:54.000000000 -0300
++++ "xalan-j_2_7_1 (copy)/src/org/apache/xalan/xsltc/compiler/Parser.java"	2018-03-09 03:08:13.123800291 -0300
+@@ -31,6 +31,7 @@
+ import java.util.Stack;
+ import java.util.StringTokenizer;
+ import java.util.Vector;
++import java.util.concurrent.ConcurrentHashMap;
+ 
+ import java_cup.runtime.Symbol;
+ import javax.xml.XMLConstants;
+@@ -70,14 +71,14 @@
+     private Vector _errors;           // Contains all compilation errors
+     private Vector _warnings;         // Contains all compilation errors
+ 
+-    private Hashtable   _instructionClasses; // Maps instructions to classes
+-    private Hashtable   _instructionAttrs;;  // reqd and opt attrs 
+-    private Hashtable   _qNames;
+-    private Hashtable   _namespaces;
++    private ConcurrentHashMap   _instructionClasses; // Maps instructions to classes
++    private ConcurrentHashMap   _instructionAttrs;;  // reqd and opt attrs 
++    private ConcurrentHashMap   _qNames;
++    private ConcurrentHashMap   _namespaces;
+     private QName       _useAttributeSets;
+     private QName       _excludeResultPrefixes;
+     private QName       _extensionElementPrefixes;
+-    private Hashtable   _variableScope;
++    private ConcurrentHashMap   _variableScope;
+     private Stylesheet  _currentStylesheet;
+     private SymbolTable _symbolTable; // Maps QNames to syntax-tree nodes
+     private Output      _output;
+@@ -96,11 +97,11 @@
+     }
+ 
+     public void init() {
+-	_qNames              = new Hashtable(512);
+-	_namespaces          = new Hashtable();
+-	_instructionClasses  = new Hashtable();
+-	_instructionAttrs    = new Hashtable();
+-	_variableScope       = new Hashtable();
++	_qNames              = new ConcurrentHashMap(512);
++	_namespaces          = new ConcurrentHashMap();
++	_instructionClasses  = new ConcurrentHashMap();
++	_instructionAttrs    = new ConcurrentHashMap();
++	_variableScope       = new ConcurrentHashMap();
+ 	_template            = null;
+ 	_errors              = new Vector();
+ 	_warnings            = new Vector();
 diff -ur xalan-j_2_7_1/src/org/apache/xalan/xsltc/compiler/SymbolTable.java "xalan-j_2_7_1 (copy)/src/org/apache/xalan/xsltc/compiler/SymbolTable.java"
 --- xalan-j_2_7_1/src/org/apache/xalan/xsltc/compiler/SymbolTable.java	2007-11-22 16:43:52.000000000 -0300
 +++ "xalan-j_2_7_1 (copy)/src/org/apache/xalan/xsltc/compiler/SymbolTable.java"	2018-03-06 02:12:41.562172259 -0300
@@ -338,7 +383,7 @@ diff -ur xalan-j_2_7_1/src/org/apache/xalan/xsltc/compiler/SymbolTable.java "xal
  	Integer refcnt = (Integer)_excludedURI.get(uri);
 diff -ur xalan-j_2_7_1/src/org/apache/xalan/xsltc/compiler/sym.java "xalan-j_2_7_1 (copy)/src/org/apache/xalan/xsltc/compiler/sym.java"
 --- xalan-j_2_7_1/src/org/apache/xalan/xsltc/compiler/sym.java	2007-11-22 16:43:54.000000000 -0300
-+++ "xalan-j_2_7_1 (copy)/src/org/apache/xalan/xsltc/compiler/sym.java"	2018-03-08 04:16:06.957494245 -0300
++++ "xalan-j_2_7_1 (copy)/src/org/apache/xalan/xsltc/compiler/sym.java"	2018-03-15 00:03:29.256133509 -0300
 @@ -1,68 +1,68 @@
 -
 -//----------------------------------------------------
@@ -411,7 +456,7 @@ diff -ur xalan-j_2_7_1/src/org/apache/xalan/xsltc/compiler/sym.java "xalan-j_2_7
 +
 +//----------------------------------------------------
 +// The following code was generated by CUP v0.10k
-+// Thu Mar 08 04:16:06 BRT 2018
++// Thu Mar 15 00:03:29 BRT 2018
 +//----------------------------------------------------
 +
 +package org.apache.xalan.xsltc.compiler;
@@ -478,7 +523,7 @@ diff -ur xalan-j_2_7_1/src/org/apache/xalan/xsltc/compiler/sym.java "xalan-j_2_7
 +
 diff -ur xalan-j_2_7_1/src/org/apache/xalan/xsltc/compiler/XPathLexer.java "xalan-j_2_7_1 (copy)/src/org/apache/xalan/xsltc/compiler/XPathLexer.java"
 --- xalan-j_2_7_1/src/org/apache/xalan/xsltc/compiler/XPathLexer.java	2007-11-22 16:43:52.000000000 -0300
-+++ "xalan-j_2_7_1 (copy)/src/org/apache/xalan/xsltc/compiler/XPathLexer.java"	2018-03-08 04:16:09.777542033 -0300
++++ "xalan-j_2_7_1 (copy)/src/org/apache/xalan/xsltc/compiler/XPathLexer.java"	2018-03-15 00:03:31.788158946 -0300
 @@ -24,19 +24,19 @@
   */
  package org.apache.xalan.xsltc.compiler;
@@ -3496,7 +3541,7 @@ diff -ur xalan-j_2_7_1/src/org/apache/xalan/xsltc/compiler/XPathLexer.java "xala
 +}
 diff -ur xalan-j_2_7_1/src/org/apache/xalan/xsltc/compiler/XPathParser.java "xalan-j_2_7_1 (copy)/src/org/apache/xalan/xsltc/compiler/XPathParser.java"
 --- xalan-j_2_7_1/src/org/apache/xalan/xsltc/compiler/XPathParser.java	2007-11-22 16:43:54.000000000 -0300
-+++ "xalan-j_2_7_1 (copy)/src/org/apache/xalan/xsltc/compiler/XPathParser.java"	2018-03-08 04:16:06.957494245 -0300
++++ "xalan-j_2_7_1 (copy)/src/org/apache/xalan/xsltc/compiler/XPathParser.java"	2018-03-15 00:03:29.256133509 -0300
 @@ -1,860 +1,860 @@
 -
 -//----------------------------------------------------
@@ -4358,7 +4403,7 @@ diff -ur xalan-j_2_7_1/src/org/apache/xalan/xsltc/compiler/XPathParser.java "xal
 +
 +//----------------------------------------------------
 +// The following code was generated by CUP v0.10k
-+// Thu Mar 08 04:16:06 BRT 2018
++// Thu Mar 15 00:03:29 BRT 2018
 +//----------------------------------------------------
 +
 +package org.apache.xalan.xsltc.compiler;
@@ -4374,7 +4419,7 @@ diff -ur xalan-j_2_7_1/src/org/apache/xalan/xsltc/compiler/XPathParser.java "xal
 +import org.apache.xalan.xsltc.compiler.util.ErrorMsg;
 +
 +/** CUP v0.10k generated parser.
-+  * @version Thu Mar 08 04:16:06 BRT 2018
++  * @version Thu Mar 15 00:03:29 BRT 2018
 +  */
 +public class XPathParser extends java_cup.runtime.lr_parser {
 +

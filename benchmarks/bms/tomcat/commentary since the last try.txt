@@ -1,0 +1,2 @@
+The energy consumption seemed to not get better, check why.
+Also try to include the non standard JCF implementations (eclipse collections, apache commons collections)
