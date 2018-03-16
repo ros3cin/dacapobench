@@ -1,0 +1,40 @@
+m_elements,Lorg/apache/xalan/extensions/ExtensionHandlerGeneral>,Method that uses the variable:<init>,"Changes the type to ""concurrentHashMap(EclipseCollections)""",OK
+m_functions,Lorg/apache/xalan/extensions/ExtensionHandlerGeneral>,Method that uses the variable:<init>,"Changes the type to ""concurrentHashMap(EclipseCollections)""",OK
+m_cachedMethods,Lorg/apache/xalan/extensions/ExtensionHandlerJava>,Method that uses the variable:getFromCache,"Changes the type to ""concurrentHashMap(EclipseCollections)""",OK
+extensions,Lorg/apache/xalan/extensions/ExtensionsTable>,Method that uses the variable:<init>,"Changes the type to ""copyOnWriteArrayList""","Not doing, the collection comes from somewhere eles"
+stringTable,Lorg/apache/xalan/lib/ExsltSets>,Method that uses the variable:distinct,"Changes the type to ""weakHashMap""",OK
+m_poolTable,Lorg/apache/xalan/lib/sql/ConnectionPoolManager>,Method that uses the variable:registerPool,"Changes the type to ""concurrentHashMap(EclipseCollections)""",OK
+m_Typetable,Lorg/apache/xalan/lib/sql/QueryParameter>,Method that uses the variable:map_type,"Changes the type to ""concurrentHashMap(EclipseCollections)""",OK
+declaredPrefixes,Lorg/apache/xalan/processor/ProcessorLRE>,Method that uses the variable:declaredXSLNS,"Changes the type to ""arrayList""","Not doing, the collection comes from somewhere eles"
+m_xslAttr,Lorg/apache/xalan/templates/ElemLiteralResult>,Method that uses the variable:addLiteralResultAttribute,"Changes the type to ""arrayList""",It is already array list. But this happened because its type is the interface List
+m_NonXslTopLevel,Lorg/apache/xalan/templates/Stylesheet>,Method that uses the variable:setNonXslTopLevel,"Changes the type to ""concurrentHashMap(EclipseCollections)""",OK
+m_decimalFormatSymbols,Lorg/apache/xalan/templates/StylesheetRoot>,Method that uses the variable:recomposeDecimalFormats,"Changes the type to ""concurrentHashMap(EclipseCollections)""",OK
+m_namespaceAliasComposed,Lorg/apache/xalan/templates/StylesheetRoot>,Method that uses the variable:getNamespaceAliasComposed,"Changes the type to ""concurrentHashMapV8""",OK
+m_compilerCache,Lorg/apache/xalan/templates/TemplateList$TemplateWalker>,Method that uses the variable:next,"Changes the type to ""concurrentHashMap(EclipseCollections)""",OK
+h,Lorg/apache/xalan/xslt/EnvironmentCheck>,Method that uses the variable:checkJAXPVersion,"Changes the type to ""concurrentHashMap(EclipseCollections)""","It’s received as parameter, check why this case was not excluded"
+jarVersions,Lorg/apache/xalan/xslt/EnvironmentCheck>,Method that uses the variable:getApparentVersion,"Changes the type to ""concurrentHashMap(EclipseCollections)""",OK
+subhash,Lorg/apache/xalan/xslt/EnvironmentCheck>,Method that uses the variable:appendFoundJars,"Changes the type to ""concurrentHashMapV8""","Too risky, it receives a collection by casting a Object"
+theCmdArgs,Lorg/apache/xalan/xsltc/cmdline/getopt/GetOpt>,Method that uses the variable:<init>,"Changes the type to ""arrayList""",Already array list. The reason for the recommendation is because the variable type is List
+theOptions,Lorg/apache/xalan/xsltc/cmdline/getopt/GetOpt>,Method that uses the variable:<init>,"Changes the type to ""arrayList""",Already array list. The reason for the recommendation is because the variable type is List
+_extensionNamespaceTable,Lorg/apache/xalan/xsltc/compiler/FunctionCall>,Method that uses the variable:getClassNameFromUri,"Changes the type to ""concurrentHashMap(EclipseCollections)""",OK
+_extensionFunctionTable,Lorg/apache/xalan/xsltc/compiler/FunctionCall>,Method that uses the variable:typeCheck,"Changes the type to ""concurrentHashMap(EclipseCollections)""",OK
+_java2Internal,Lorg/apache/xalan/xsltc/compiler/FunctionCall>,Method that uses the variable:typeCheckExternal,"Changes the type to ""concurrentHashMap(EclipseCollections)""",OK
+_accessedPrefixes,Lorg/apache/xalan/xsltc/compiler/LiteralElement>,Method that uses the variable:accessedNamespace,"Changes the type to ""concurrentHashMap(EclipseCollections)""",OK
+all,Lorg/apache/xalan/xsltc/compiler/LiteralElement>,Method that uses the variable:getNamespaceScope,"Changes the type to ""concurrentHashMap(EclipseCollections)""",OK
+attrsTable,Lorg/apache/xalan/xsltc/compiler/LiteralElement>,Method that uses the variable:checkAttributesUnique,"Changes the type to ""concurrentHashMap(EclipseCollections)""",OK
+mapping,Lorg/apache/xalan/xsltc/compiler/LiteralElement>,Method that uses the variable:getNamespaceScope,"Changes the type to ""concurrentHashMapV8""","Not doing, the collection comes from somewhere eles"
+_attributeElements,Lorg/apache/xalan/xsltc/compiler/LiteralElement>,Method that uses the variable:addAttribute,"Changes the type to ""synchronizedFastList(EclipseCollections)""",OK
+_importLevels,Lorg/apache/xalan/xsltc/compiler/Mode>,Method that uses the variable:functionName,"Changes the type to ""concurrentHashMap(EclipseCollections)""",OK
+_templateILs,Lorg/apache/xalan/xsltc/compiler/Mode>,Method that uses the variable:compileTemplates,"Changes the type to ""concurrentHashMap(EclipseCollections)""",OK
+_namedTemplates,Lorg/apache/xalan/xsltc/compiler/Mode>,Method that uses the variable:processPatterns,"Changes the type to ""concurrentHashMap(EclipseCollections)""",OK
+_templateIHs,Lorg/apache/xalan/xsltc/compiler/Mode>,Method that uses the variable:compileTemplates,"Changes the type to ""concurrentHashMap(EclipseCollections)""",OK
+prefixURIPairs,Lorg/apache/xalan/xsltc/compiler/Stylesheet>,Method that uses the variable:compileStaticInitializer,"Changes the type to ""copyOnWriteArrayList""","Not doing, the collection comes from somewhere eles"
+_extensions,Lorg/apache/xalan/xsltc/compiler/Stylesheet>,Method that uses the variable:extensionURI,"Changes the type to ""concurrentHashMap(EclipseCollections)""",OK
+namespaceAncestors,Lorg/apache/xalan/xsltc/compiler/Stylesheet>,Method that uses the variable:compileStaticInitializer,"Changes the type to ""copyOnWriteArrayList""","Not doing, the collection comes from somewhere eles"
+_modes,Lorg/apache/xalan/xsltc/compiler/Stylesheet>,Method that uses the variable:getMode,"Changes the type to ""concurrentHashMap(EclipseCollections)""",OK
+prefixURIPairsIdx,Lorg/apache/xalan/xsltc/compiler/Stylesheet>,Method that uses the variable:compileStaticInitializer,"Changes the type to ""copyOnWriteArrayList""","Not doing, the collection comes from somewhere eles"
+_sets,Lorg/apache/xalan/xsltc/compiler/UseAttributeSets>,Method that uses the variable:addAttributeSets,"Changes the type to ""synchronizedFastList(EclipseCollections)""",OK
+map,Lorg/apache/xalan/xsltc/compiler/XSLTC>,Method that uses the variable:outputToJar,"Changes the type to ""weakHashMap""","Not doing, the collection comes from somewhere eles"
+_references,Lorg/apache/xalan/xsltc/dom/DocumentCache>,Method that uses the variable:lookupDocument,"Changes the type to ""concurrentHashMap(EclipseCollections)""",OK
+_nsPrefixes,Lorg/apache/xalan/xsltc/trax/DOM2SAX>,Method that uses the variable:startPrefixMapping,"Changes the type to ""concurrentHashMap(EclipseCollections)""",OK
+_piParams,Lorg/apache/xalan/xsltc/trax/TransformerFactoryImpl>,Method that uses the variable:newTemplates,"Changes the type to ""concurrentHashMapV8""",OK

@@ -1,0 +1,272 @@
+Using scaled threading model. 4 processors detected, 4 threads used to drive the workload, in a possible range of [1,100]
+===== DaCapo head-r65addc8 xalan starting =====
+Normal completion.
+========================
+ DaCapo head-r65addc8 xalan PASSED in 4270 msec 
+consuming 0.41775500000039756 joules in dram 
+consuming 53.36495999999897 joules in cpu 
+consuming 66.57382200000029 joules on package 
+========================
+Using scaled threading model. 4 processors detected, 4 threads used to drive the workload, in a possible range of [1,100]
+===== DaCapo head-r65addc8 xalan starting =====
+Normal completion.
+========================
+ DaCapo head-r65addc8 xalan PASSED in 5054 msec 
+consuming 0.5213929999990796 joules in dram 
+consuming 63.62005700000009 joules in cpu 
+consuming 79.11610399999881 joules on package 
+========================
+Using scaled threading model. 4 processors detected, 4 threads used to drive the workload, in a possible range of [1,100]
+===== DaCapo head-r65addc8 xalan starting =====
+Normal completion.
+========================
+ DaCapo head-r65addc8 xalan PASSED in 4311 msec 
+consuming 0.16844200000014098 joules in dram 
+consuming 54.265778000000864 joules in cpu 
+consuming 67.3681489999999 joules on package 
+========================
+Using scaled threading model. 4 processors detected, 4 threads used to drive the workload, in a possible range of [1,100]
+===== DaCapo head-r65addc8 xalan starting =====
+Normal completion.
+========================
+ DaCapo head-r65addc8 xalan PASSED in 4230 msec 
+consuming 1.237396999998964 joules in dram 
+consuming 52.97947700000077 joules in cpu 
+consuming 66.96362299999964 joules on package 
+========================
+Using scaled threading model. 4 processors detected, 4 threads used to drive the workload, in a possible range of [1,100]
+===== DaCapo head-r65addc8 xalan starting =====
+Normal completion.
+========================
+ DaCapo head-r65addc8 xalan PASSED in 5077 msec 
+consuming 0.143554000000222 joules in dram 
+consuming 64.0949099999998 joules in cpu 
+consuming 79.31484999999884 joules on package 
+========================
+Using scaled threading model. 4 processors detected, 4 threads used to drive the workload, in a possible range of [1,100]
+===== DaCapo head-r65addc8 xalan starting =====
+Normal completion.
+========================
+ DaCapo head-r65addc8 xalan PASSED in 4173 msec 
+consuming 0.14361599999938335 joules in dram 
+consuming 52.467666999997164 joules in cpu 
+consuming 65.15884400000141 joules on package 
+========================
+Using scaled threading model. 4 processors detected, 4 threads used to drive the workload, in a possible range of [1,100]
+===== DaCapo head-r65addc8 xalan starting =====
+Normal completion.
+========================
+ DaCapo head-r65addc8 xalan PASSED in 3914 msec 
+consuming 0.7555389999997715 joules in dram 
+consuming 49.234833000002254 joules in cpu 
+consuming 61.825668999999834 joules on package 
+========================
+Using scaled threading model. 4 processors detected, 4 threads used to drive the workload, in a possible range of [1,100]
+===== DaCapo head-r65addc8 xalan starting =====
+Normal completion.
+========================
+ DaCapo head-r65addc8 xalan PASSED in 4337 msec 
+consuming 0.545165999999881 joules in dram 
+consuming 54.62556499999482 joules in cpu 
+consuming 68.33091700000114 joules on package 
+========================
+Using scaled threading model. 4 processors detected, 4 threads used to drive the workload, in a possible range of [1,100]
+===== DaCapo head-r65addc8 xalan starting =====
+Normal completion.
+========================
+ DaCapo head-r65addc8 xalan PASSED in 4297 msec 
+consuming 0.6228490000012243 joules in dram 
+consuming 53.79234300000098 joules in cpu 
+consuming 67.41268899999886 joules on package 
+========================
+Using scaled threading model. 4 processors detected, 4 threads used to drive the workload, in a possible range of [1,100]
+===== DaCapo head-r65addc8 xalan starting =====
+Normal completion.
+========================
+ DaCapo head-r65addc8 xalan PASSED in 4051 msec 
+consuming 0.6581879999994271 joules in dram 
+consuming 50.66571000000113 joules in cpu 
+consuming 63.582642000001215 joules on package 
+========================
+Using scaled threading model. 4 processors detected, 4 threads used to drive the workload, in a possible range of [1,100]
+===== DaCapo head-r65addc8 xalan starting =====
+Normal completion.
+========================
+ DaCapo head-r65addc8 xalan PASSED in 4211 msec 
+consuming 0.12498500000037893 joules in dram 
+consuming 52.59117100000003 joules in cpu 
+consuming 65.41038500000104 joules on package 
+========================
+Using scaled threading model. 4 processors detected, 4 threads used to drive the workload, in a possible range of [1,100]
+===== DaCapo head-r65addc8 xalan starting =====
+Normal completion.
+========================
+ DaCapo head-r65addc8 xalan PASSED in 3887 msec 
+consuming 0.43376200000056997 joules in dram 
+consuming 48.979155999993964 joules in cpu 
+consuming 61.17440799999895 joules on package 
+========================
+Using scaled threading model. 4 processors detected, 4 threads used to drive the workload, in a possible range of [1,100]
+===== DaCapo head-r65addc8 xalan starting =====
+Normal completion.
+========================
+ DaCapo head-r65addc8 xalan PASSED in 4145 msec 
+consuming 0.5406949999996868 joules in dram 
+consuming 52.005950999999186 joules in cpu 
+consuming 65.12136900000041 joules on package 
+========================
+Using scaled threading model. 4 processors detected, 4 threads used to drive the workload, in a possible range of [1,100]
+===== DaCapo head-r65addc8 xalan starting =====
+Normal completion.
+========================
+ DaCapo head-r65addc8 xalan PASSED in 4399 msec 
+consuming 0.6411590000006981 joules in dram 
+consuming 55.18667600000481 joules in cpu 
+consuming 69.13610799999879 joules on package 
+========================
+Using scaled threading model. 4 processors detected, 4 threads used to drive the workload, in a possible range of [1,100]
+===== DaCapo head-r65addc8 xalan starting =====
+Normal completion.
+========================
+ DaCapo head-r65addc8 xalan PASSED in 4006 msec 
+consuming 0.6925659999997151 joules in dram 
+consuming 50.233901999999944 joules in cpu 
+consuming 63.073974999999336 joules on package 
+========================
+Using scaled threading model. 4 processors detected, 4 threads used to drive the workload, in a possible range of [1,100]
+===== DaCapo head-r65addc8 xalan starting =====
+Normal completion.
+========================
+ DaCapo head-r65addc8 xalan PASSED in 4516 msec 
+consuming 0.7112280000001192 joules in dram 
+consuming 56.67958099999669 joules in cpu 
+consuming 71.07907100000011 joules on package 
+========================
+Using scaled threading model. 4 processors detected, 4 threads used to drive the workload, in a possible range of [1,100]
+===== DaCapo head-r65addc8 xalan starting =====
+Normal completion.
+========================
+ DaCapo head-r65addc8 xalan PASSED in 4230 msec 
+consuming 0.3364099999998871 joules in dram 
+consuming 53.14553799999703 joules in cpu 
+consuming 66.3622290000003 joules on package 
+========================
+Using scaled threading model. 4 processors detected, 4 threads used to drive the workload, in a possible range of [1,100]
+===== DaCapo head-r65addc8 xalan starting =====
+Normal completion.
+========================
+ DaCapo head-r65addc8 xalan PASSED in 4116 msec 
+consuming 0.8556069999995088 joules in dram 
+consuming 51.658218000004126 joules in cpu 
+consuming 65.06996199999958 joules on package 
+========================
+Using scaled threading model. 4 processors detected, 4 threads used to drive the workload, in a possible range of [1,100]
+===== DaCapo head-r65addc8 xalan starting =====
+Normal completion.
+========================
+ DaCapo head-r65addc8 xalan PASSED in 4579 msec 
+consuming 0.4513549999992392 joules in dram 
+consuming 57.82720900000277 joules in cpu 
+consuming 71.95562699999937 joules on package 
+========================
+Using scaled threading model. 4 processors detected, 4 threads used to drive the workload, in a possible range of [1,100]
+===== DaCapo head-r65addc8 xalan starting =====
+Normal completion.
+========================
+ DaCapo head-r65addc8 xalan PASSED in 4166 msec 
+consuming 0.4407660000015312 joules in dram 
+consuming 52.50160199999664 joules in cpu 
+consuming 65.52450599999975 joules on package 
+========================
+Using scaled threading model. 4 processors detected, 4 threads used to drive the workload, in a possible range of [1,100]
+===== DaCapo head-r65addc8 xalan starting =====
+Normal completion.
+========================
+ DaCapo head-r65addc8 xalan PASSED in 4421 msec 
+consuming 0.8126979999997275 joules in dram 
+consuming 55.402405000000726 joules in cpu 
+consuming 69.62925699999869 joules on package 
+========================
+Using scaled threading model. 4 processors detected, 4 threads used to drive the workload, in a possible range of [1,100]
+===== DaCapo head-r65addc8 xalan starting =====
+Normal completion.
+========================
+ DaCapo head-r65addc8 xalan PASSED in 4222 msec 
+consuming 0.405639999999039 joules in dram 
+consuming 52.911606000001484 joules in cpu 
+consuming 66.06498699999975 joules on package 
+========================
+Using scaled threading model. 4 processors detected, 4 threads used to drive the workload, in a possible range of [1,100]
+===== DaCapo head-r65addc8 xalan starting =====
+Normal completion.
+========================
+ DaCapo head-r65addc8 xalan PASSED in 4423 msec 
+consuming 0.11875900000086403 joules in dram 
+consuming 55.659499999994296 joules in cpu 
+consuming 69.05870000000141 joules on package 
+========================
+Using scaled threading model. 4 processors detected, 4 threads used to drive the workload, in a possible range of [1,100]
+===== DaCapo head-r65addc8 xalan starting =====
+Normal completion.
+========================
+ DaCapo head-r65addc8 xalan PASSED in 4551 msec 
+consuming 0.6372369999990042 joules in dram 
+consuming 56.790588999996544 joules in cpu 
+consuming 71.3198850000008 joules on package 
+========================
+Using scaled threading model. 4 processors detected, 4 threads used to drive the workload, in a possible range of [1,100]
+===== DaCapo head-r65addc8 xalan starting =====
+Normal completion.
+========================
+ DaCapo head-r65addc8 xalan PASSED in 4067 msec 
+consuming 1.095688000001246 joules in dram 
+consuming 50.94038400000136 joules in cpu 
+consuming 64.44505299999946 joules on package 
+========================
+Using scaled threading model. 4 processors detected, 4 threads used to drive the workload, in a possible range of [1,100]
+===== DaCapo head-r65addc8 xalan starting =====
+Normal completion.
+========================
+ DaCapo head-r65addc8 xalan PASSED in 4426 msec 
+consuming 0.1393129999996745 joules in dram 
+consuming 55.19537400000263 joules in cpu 
+consuming 68.81918299999961 joules on package 
+========================
+Using scaled threading model. 4 processors detected, 4 threads used to drive the workload, in a possible range of [1,100]
+===== DaCapo head-r65addc8 xalan starting =====
+Normal completion.
+========================
+ DaCapo head-r65addc8 xalan PASSED in 4453 msec 
+consuming 0.5256049999989045 joules in dram 
+consuming 56.06071499999962 joules in cpu 
+consuming 70.10473600000114 joules on package 
+========================
+Using scaled threading model. 4 processors detected, 4 threads used to drive the workload, in a possible range of [1,100]
+===== DaCapo head-r65addc8 xalan starting =====
+Normal completion.
+========================
+ DaCapo head-r65addc8 xalan PASSED in 4171 msec 
+consuming 0.8217930000009801 joules in dram 
+consuming 52.195678999996744 joules in cpu 
+consuming 65.76695299999847 joules on package 
+========================
+Using scaled threading model. 4 processors detected, 4 threads used to drive the workload, in a possible range of [1,100]
+===== DaCapo head-r65addc8 xalan starting =====
+Normal completion.
+========================
+ DaCapo head-r65addc8 xalan PASSED in 4377 msec 
+consuming 0.13200299999880372 joules in dram 
+consuming 54.72100800000044 joules in cpu 
+consuming 68.22042800000054 joules on package 
+========================
+Using scaled threading model. 4 processors detected, 4 threads used to drive the workload, in a possible range of [1,100]
+===== DaCapo head-r65addc8 xalan starting =====
+Normal completion.
+========================
+ DaCapo head-r65addc8 xalan PASSED in 3790 msec 
+consuming 1.1136470000001282 joules in dram 
+consuming 47.504469999999856 joules in cpu 
+consuming 60.128066999999646 joules on package 
+========================
+The end!
+60+68+65+70+68+64+71+69+66+69+65+71+65+66+71+63+69+65+61+65+63+67+68+61+65+79+66+67+79+66
