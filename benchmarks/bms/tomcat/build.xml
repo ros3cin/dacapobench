@@ -25,7 +25,19 @@
 
     <target name="unpack" depends="untar,patch"/>
 
-    <target name="bm-build" depends="build-properties,commons-httpclient,dacapo-digest">
+    <target name="copy-additional-libs">
+        <copy todir="${bm-build-top}/external-libs">
+		<fileset dir="${bm-files}/additional-libs" includes="**" />
+	</copy>
+    </target>
+
+    <target name="copy-additional-resources">
+        <copy todir="${bm-build-top}/res">
+		<fileset dir="${bm-files}/additional-resources" includes="**" />
+	</copy>
+    </target>
+
+    <target name="bm-build" depends="build-properties,commons-httpclient,dacapo-digest,copy-additional-libs,copy-additional-resources">
         <exec executable="${ant.home}/bin/ant" dir="${bm-build-top}" failonerror="yes">
             <env key="JAVA_HOME" value="${jdk16home}"/>
             <arg line="download"/>
@@ -77,6 +89,9 @@
             <fileset file="${commons-httpclient-jar}"/>
             <fileset file="${commons-logging-jar}"/>
             <fileset file="${commons-codec-jar}"/>
+	    <fileset dir="${bm-files}/additional-libs">
+	        <include name="**/*.jar" />
+	    </fileset>
         </copy>
 
         <jar destfile="${bm-jars}/dacapo-tomcat.jar">
