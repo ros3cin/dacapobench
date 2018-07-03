@@ -1,7 +1,7 @@
 benchmark xalan
   class org.dacapo.harness.Xalan
   thread-model per_cpu
-  jars "dacapo-xalan.jar", "xalan.jar", "xercesImpl.jar", "xml-apis.jar", "serializer.jar", "eclipse-collections-9.1.0.jar" , "eclipse-collections-api-9.1.0.jar", "jsr166e-1.0.jar";
+  jars "dacapo-xalan.jar", "xalan.jar", "xercesImpl.jar", "xml-apis.jar", "serializer.jar", "eclipse-collections-9.1.0.jar" , "eclipse-collections-api-9.1.0.jar", "jsr166e-1.0.jar", "commons-collections4-4.1.jar";
 
 size small args "10"
   threads 1

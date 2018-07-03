@@ -1,4 +1,4 @@
 Manifest-Version: 1.0
 Ant-Version: Apache Ant 1.9.6
 Created-By: 1.6.0_45-b06 (Sun Microsystems Inc.)
-Class-Path: eclipse-collections-9.1.0.jar eclipse-collections-api-9.1.0.jar jsr166e-1.0.jar
+Class-Path: commons-collections4-4.1.jar

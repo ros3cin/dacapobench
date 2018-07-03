@@ -1,0 +1,1350 @@
+diff -ur xalan-j_2_7_1/build.xml xalan-j_2_7_1-modified/build.xml
+--- xalan-j_2_7_1/build.xml	2007-11-22 18:44:01.000000000 -0300
++++ xalan-j_2_7_1-modified/build.xml	2018-06-22 00:36:11.064907889 -0300
+@@ -104,6 +104,14 @@
+   <property name="runtime.jar"            value="${lib.dir}/${runtime.jar.name}"/>
+   <property name="regexp.jar.name"        value="regexp.jar"/>
+   <property name="regexp.jar"             value="${lib.dir}/${regexp.jar.name}"/>
++  <property name="apache_commons_collections.jar.name"        value="commons-collections4-4.1.jar"/>
++  <property name="apache_commons_collections.jar"        value="${lib.dir}/${apache_commons_collections.jar.name}"/>
++  <property name="eclipse_collections_api.jar.name"        value="eclipse-collections-api-9.1.0.jar"/>
++  <property name="eclipse_collections_api.jar"             value="${lib.dir}/${eclipse_collections_api.jar.name}"/>
++  <property name="eclipse_collections_impl.jar.name"        value="eclipse-collections-9.1.0.jar"/>
++  <property name="eclipse_collections_impl.jar"             value="${lib.dir}/${eclipse_collections_impl.jar.name}"/>
++  <property name="jsr166e.jar.name"        value="jsr166e-1.0.jar"/>
++  <property name="jsr166e.jar"             value="${lib.dir}/${jsr166e.jar.name}"/>
+   
+   <!-- Jars need to build Xalan Java (Interpretive, Compiled, or both) or build the docs -->
+   <property name="java_cup.jar.name"      value="java_cup.jar"/>
+@@ -205,6 +213,10 @@
+     <pathelement location="${taglet.jar}" />
+     <pathelement location="${build.serializer.jar}" />
+     <pathelement location="${build.xalan.jar}" />
++    <pathelement location="${apache_commons_collections.jar}" />
++    <pathelement location="${eclipse_collections_api.jar}" />
++    <pathelement location="${eclipse_collections_impl.jar}" />
++    <pathelement location="${jsr166e.jar}" />
+     <pathelement path="${java.class.path}" />
+   </path>
+   <path id="samples.class.path">
+@@ -212,6 +224,10 @@
+     <pathelement location="${build.serializer.jar}" />    
+     <pathelement location="${parser.jar}" />  
+     <pathelement location="${build.xalan.jar}" />
++    <pathelement location="${apache_commons_collections.jar}" />
++    <pathelement location="${eclipse_collections_api.jar}" />
++    <pathelement location="${eclipse_collections_impl.jar}" />
++    <pathelement location="${jsr166e.jar}" />
+     <pathelement path="${java.class.path}" />
+   </path>
+   <path id="compile.class.path">
+@@ -221,6 +237,10 @@
+     <pathelement location="${xmlapis.jar}" />
+     <pathelement location="${build.serializer.jar}" />
+     <pathelement location="${parser.jar}" />
++    <pathelement location="${apache_commons_collections.jar}" />
++    <pathelement location="${eclipse_collections_api.jar}" />
++    <pathelement location="${eclipse_collections_impl.jar}" />
++    <pathelement location="${jsr166e.jar}" />
+     <pathelement path="${java.class.path}" />
+   </path>
+   <path id="xslt.boot.class.path">
+@@ -233,11 +253,19 @@
+     <pathelement location="${xmlapis.jar}" />
+     <pathelement location="${build.serializer.jar}" />    
+     <pathelement location="${parser.jar}" />   
++    <pathelement location="${apache_commons_collections.jar}" />
++    <pathelement location="${eclipse_collections_api.jar}" />
++    <pathelement location="${eclipse_collections_impl.jar}" />
++    <pathelement location="${jsr166e.jar}" />
+     <pathelement path="${build.boot.class.path}" />
+     <pathelement path="${sun.boot.class.path}" />
+   </path>
+   <path id="compile.source.path">
+     <dirset dir="${src.dir}" includes="/org/apache/**" />
++    <pathelement location="${apache_commons_collections.jar}" />
++    <pathelement location="${eclipse_collections_api.jar}" />
++    <pathelement location="${eclipse_collections_impl.jar}" />
++    <pathelement location="${jsr166e.jar}" />
+   </path>
+ 
+   <!-- patternsets for source and binary distribution packages -->
+@@ -251,6 +279,10 @@
+     <include name="${dist.file}/${xmlapis.jar.name}"/>
+     <include name="${dist.file}/${parser.jar.name}"/>
+     <include name="${dist.file}/${serializer.jar.name}"/>
++    <include name="${dist.file}/${apache_commons_collections.jar.name}"/>
++    <include name="${dist.file}/${eclipse_collections_api.jar.name}"/>
++    <include name="${dist.file}/${eclipse_collections_impl.jar.name}"/>
++    <include name="${dist.file}/${jsr166e.jar.name}"/>
+     <include name="${dist.file}/samples/"/>    
+     <include name="${dist.file}/samples/xalansamples.jar"/>
+     <include name="${dist.file}/samples/xalanservlet.war"/>
+@@ -270,6 +302,10 @@
+     <include name="${dist.file}/${xmlapis.jar.name}"/>
+     <include name="${dist.file}/${parser.jar.name}"/>
+     <include name="${dist.file}/${serializer.jar.name}"/>
++    <include name="${dist.file}/${apache_commons_collections.jar.name}"/>
++    <include name="${dist.file}/${eclipse_collections_api.jar.name}"/>
++    <include name="${dist.file}/${eclipse_collections_impl.jar.name}"/>
++    <include name="${dist.file}/${jsr166e.jar.name}"/>
+     <include name="${dist.file}/samples/"/>        
+     <include name="${dist.file}/samples/xalansamples.jar"/>
+     <include name="${dist.file}/samples/xalanservlet.war"/>
+@@ -305,6 +341,10 @@
+     <include name="${dist.file}/tools/${jlex.jar.name}"/>
+     <include name="${dist.file}/lib/${runtime.jar.name}"/>
+     <include name="${dist.file}/lib/${regexp.jar.name}"/>
++    <include name="${dist.file}/lib/${apache_commons_collections.jar.name}"/>
++    <include name="${dist.file}/lib/${eclipse_collections_api.jar.name}"/>
++    <include name="${dist.file}/lib/${eclipse_collections_impl.jar.name}"/>
++    <include name="${dist.file}/${jsr166e.jar.name}"/>
+   </patternset>
+ 
+   <!-- =================================================================== -->
+@@ -431,6 +471,10 @@
+     <pathelement location="${jlex.jar}" />
+     <pathelement location="${java_cup.jar}" />
+     <pathelement location="${runtime.jar}" />
++    <pathelement location="${apache_commons_collections.jar}" />
++    <pathelement location="${eclipse_collections_api.jar}" />
++    <pathelement location="${eclipse_collections_impl.jar}" />
++    <pathelement location="${jsr166e.jar}"/>
+     <!-- build.classes needed for 
+          org.apache.xalan.xsltc.util.JavaCupRedirect -->
+     <pathelement location="${build.classes}" />
+@@ -559,6 +603,12 @@
+     <!-- remove the jar file -->
+     <delete file="${build.classes}/${param_jar_name}" />
+   </target>
++
++  <!-- A parametrized target which is used to copy and expand a XSLTC support jar -->
++  <target name="xsltc.copy-deps-jar-not-unjared" unless="${param_unless}">
++    <!-- copy the jar file to the build/classes directory -->
++    <copy todir="${build.dir}" file="${lib.dir}/${param_jar_name}"/>
++  </target>
+   
+   <!-- Copy and expand the XSLTC support jars if needed -->
+   <target name="xsltc.copy-deps-jars" depends="xsltc.copy-licenses">
+@@ -592,6 +642,26 @@
+       <param name="param_unless" value="xsltc.regexp_jar.not_needed" />
+       <param name="param_jar_name" value="${regexp.jar.name}" />
+     </antcall>
++
++    <antcall target="xsltc.copy-deps-jar-not-unjared">
++      <param name="param_unless" value="" />
++      <param name="param_jar_name" value="${apache_commons_collections.jar.name}" />
++    </antcall>
++
++    <antcall target="xsltc.copy-deps-jar-not-unjared">
++      <param name="param_unless" value="" />
++      <param name="param_jar_name" value="${eclipse_collections_api.jar.name}" />
++    </antcall>
++
++    <antcall target="xsltc.copy-deps-jar-not-unjared">
++      <param name="param_unless" value="" />
++      <param name="param_jar_name" value="${eclipse_collections_impl.jar.name}" />
++    </antcall>
++
++    <antcall target="xsltc.copy-deps-jar-not-unjared">
++      <param name="param_unless" value="" />
++      <param name="param_jar_name" value="${jsr166e.jar.name}" />
++    </antcall>
+     
+     <!-- remove the old META-INF/MANIFEST.MF file -->
+     <delete file="${build.classes}/META-INF/MANIFEST.MF" quiet="true"/>  
+diff -ur xalan-j_2_7_1/src/MANIFEST.MF xalan-j_2_7_1-modified/src/MANIFEST.MF
+--- xalan-j_2_7_1/src/MANIFEST.MF	2007-11-22 18:43:54.000000000 -0300
++++ xalan-j_2_7_1-modified/src/MANIFEST.MF	2018-06-21 22:58:22.142008560 -0300
+@@ -1,8 +1,7 @@
+ Manifest-Version: 1.0
+ Created-By: @java.version@ (@java.vendor@)
+ Main-Class: org.apache.xalan.xslt.Process
+-Class-Path: xercesImpl.jar xml-apis.jar serializer.jar
+-
++Class-Path: xercesImpl.jar xml-apis.jar serializer.jar eclipse-collections-api-9.1.0.jar eclipse-collections-9.1.0.jar jsr166e-1.0.jar
+ 
+ Name: org/apache/xalan/
+ Comment: Main Xalan engine implementing TrAX/JAXP
+diff -ur xalan-j_2_7_1/src/org/apache/xalan/extensions/ExtensionHandlerGeneral.java xalan-j_2_7_1-modified/src/org/apache/xalan/extensions/ExtensionHandlerGeneral.java
+--- xalan-j_2_7_1/src/org/apache/xalan/extensions/ExtensionHandlerGeneral.java	2007-11-22 18:43:54.000000000 -0300
++++ xalan-j_2_7_1-modified/src/org/apache/xalan/extensions/ExtensionHandlerGeneral.java	2018-06-21 23:02:49.983936599 -0300
+@@ -45,6 +45,7 @@
+ import org.apache.xpath.XPathProcessorException;
+ import org.apache.xpath.functions.FuncExtFunction;
+ import org.apache.xpath.objects.XObject;
++import org.eclipse.collections.impl.map.mutable.ConcurrentHashMap;
+ 
+ /**
+  * Class handling an extension namespace for XPath. Provides functions
+@@ -63,10 +64,10 @@
+   private String m_scriptSrcURL;  
+ 
+   /** functions of namespace        */
+-  private Hashtable m_functions = new Hashtable();  
++  private ConcurrentHashMap m_functions = new ConcurrentHashMap();  
+ 
+   /** elements of namespace         */
+-  private Hashtable m_elements = new Hashtable();   
++  private ConcurrentHashMap m_elements = new ConcurrentHashMap();   
+ 
+   // BSF objects used to invoke BSF by reflection.  Do not import the BSF classes
+   // since we don't want a compile dependency on BSF.
+diff -ur xalan-j_2_7_1/src/org/apache/xalan/extensions/ExtensionHandlerJava.java xalan-j_2_7_1-modified/src/org/apache/xalan/extensions/ExtensionHandlerJava.java
+--- xalan-j_2_7_1/src/org/apache/xalan/extensions/ExtensionHandlerJava.java	2007-11-22 18:43:52.000000000 -0300
++++ xalan-j_2_7_1-modified/src/org/apache/xalan/extensions/ExtensionHandlerJava.java	2018-06-21 23:03:33.392271542 -0300
+@@ -21,6 +21,7 @@
+ package org.apache.xalan.extensions;
+ 
+ import java.util.Hashtable;
++import org.eclipse.collections.impl.map.mutable.ConcurrentHashMap;
+ 
+ /**
+  * Abstract base class handling the java language extensions for XPath.
+@@ -36,7 +37,7 @@
+   protected String m_className = "";
+ 
+   /** Table of cached methods          */
+-  private Hashtable m_cachedMethods = new Hashtable();
++  private ConcurrentHashMap m_cachedMethods = new ConcurrentHashMap();
+ 
+   /**
+    * Construct a new extension handler given all the information
+diff -ur xalan-j_2_7_1/src/org/apache/xalan/extensions/ExtensionNamespacesManager.java xalan-j_2_7_1-modified/src/org/apache/xalan/extensions/ExtensionNamespacesManager.java
+--- xalan-j_2_7_1/src/org/apache/xalan/extensions/ExtensionNamespacesManager.java	2007-11-22 18:43:55.000000000 -0300
++++ xalan-j_2_7_1-modified/src/org/apache/xalan/extensions/ExtensionNamespacesManager.java	2018-06-22 00:22:10.368471842 -0300
+@@ -20,9 +20,11 @@
+  */
+ package org.apache.xalan.extensions;
+ 
++import java.util.List;
+ import java.util.Vector;
+ 
+ import org.apache.xalan.templates.Constants;
++import org.eclipse.collections.impl.list.mutable.FastList;
+ 
+ /**
+  * Used during assembly of a stylesheet to collect the information for each 
+@@ -40,7 +42,7 @@
+    * Vector of ExtensionNamespaceSupport objects for predefined ExtensionNamespaces. Elements
+    * from this vector are added to the m_extensions vector when encountered in the stylesheet.
+    */
+-  private Vector m_predefExtensions = new Vector(7);
++  private List m_predefExtensions = (new FastList(7)).asSynchronized();
+   /**
+    * Vector of extension namespaces for which sufficient information is not yet available to
+    * complete the registration process.
+@@ -100,7 +102,7 @@
+    * Get the index for a namespace entry in the extension namespace Vector, -1 if
+    * no such entry yet exists.
+    */
+-  public int namespaceIndex(String namespace, Vector extensions)
++  public int namespaceIndex(String namespace, List extensions)
+   {
+     for (int i = 0; i < extensions.size(); i++)
+     {
+diff -ur xalan-j_2_7_1/src/org/apache/xalan/lib/ExsltSets.java xalan-j_2_7_1-modified/src/org/apache/xalan/lib/ExsltSets.java
+--- xalan-j_2_7_1/src/org/apache/xalan/lib/ExsltSets.java	2007-11-22 18:43:55.000000000 -0300
++++ xalan-j_2_7_1-modified/src/org/apache/xalan/lib/ExsltSets.java	2018-06-21 23:15:21.818213936 -0300
+@@ -22,6 +22,7 @@
+ 
+ import java.util.HashMap;
+ import java.util.Map;
++import org.apache.commons.collections4.map.HashedMap;
+ 
+ import org.apache.xml.utils.DOMHelper;
+ import org.apache.xpath.NodeSet;
+@@ -191,7 +192,7 @@
+     NodeSet dist = new NodeSet();
+     dist.setShouldCacheNodes(true);
+ 
+-    Map stringTable = new HashMap();
++    Map stringTable = new HashedMap();
+     
+     for (int i = 0; i < nl.getLength(); i++)
+     {
+diff -ur xalan-j_2_7_1/src/org/apache/xalan/lib/Redirect.java xalan-j_2_7_1-modified/src/org/apache/xalan/lib/Redirect.java
+--- xalan-j_2_7_1/src/org/apache/xalan/lib/Redirect.java	2007-11-22 18:43:53.000000000 -0300
++++ xalan-j_2_7_1-modified/src/org/apache/xalan/lib/Redirect.java	2018-06-22 00:11:14.046385594 -0300
+@@ -24,6 +24,7 @@
+ import java.io.FileOutputStream;
+ import java.io.OutputStream;
+ import java.util.Hashtable;
++import org.eclipse.collections.impl.map.mutable.ConcurrentHashMap;
+ 
+ import javax.xml.transform.Result;
+ import javax.xml.transform.TransformerException;
+@@ -126,12 +127,12 @@
+   /**
+    * List of formatter listeners indexed by filename.
+    */
+-  protected Hashtable m_formatterListeners = new Hashtable ();
++  protected ConcurrentHashMap m_formatterListeners = new ConcurrentHashMap ();
+ 
+   /**
+    * List of output streams indexed by filename.
+    */
+-  protected Hashtable m_outputStreams = new Hashtable ();
++  protected ConcurrentHashMap m_outputStreams = new ConcurrentHashMap ();
+ 
+   /** 
+    * Default append mode for bare open calls.  
+diff -ur xalan-j_2_7_1/src/org/apache/xalan/lib/sql/ConnectionPoolManager.java xalan-j_2_7_1-modified/src/org/apache/xalan/lib/sql/ConnectionPoolManager.java
+--- xalan-j_2_7_1/src/org/apache/xalan/lib/sql/ConnectionPoolManager.java	2007-11-22 18:43:54.000000000 -0300
++++ xalan-j_2_7_1-modified/src/org/apache/xalan/lib/sql/ConnectionPoolManager.java	2018-06-22 00:11:14.046385594 -0300
+@@ -23,6 +23,7 @@
+  package org.apache.xalan.lib.sql;
+ 
+ import java.util.Hashtable;
++import org.eclipse.collections.impl.map.mutable.ConcurrentHashMap;
+ 
+ import org.apache.xalan.res.XSLMessages;
+ import org.apache.xalan.res.XSLTErrorResources;
+@@ -33,7 +34,7 @@
+ {
+   /**
+    */
+-  private static Hashtable m_poolTable = null;
++  private static ConcurrentHashMap m_poolTable = null;
+ 
+   /**
+    */
+@@ -53,7 +54,7 @@
+      * Initialize the pool table
+      */   
+     if (m_poolTable == null)
+-            m_poolTable = new Hashtable();
++            m_poolTable = new ConcurrentHashMap();
+   }
+ 
+   /**
+diff -ur xalan-j_2_7_1/src/org/apache/xalan/lib/sql/QueryParameter.java xalan-j_2_7_1-modified/src/org/apache/xalan/lib/sql/QueryParameter.java
+--- xalan-j_2_7_1/src/org/apache/xalan/lib/sql/QueryParameter.java	2007-11-22 18:43:54.000000000 -0300
++++ xalan-j_2_7_1-modified/src/org/apache/xalan/lib/sql/QueryParameter.java	2018-06-22 00:11:14.046385594 -0300
+@@ -24,6 +24,7 @@
+ package org.apache.xalan.lib.sql;
+ 
+ import java.util.Hashtable;
++import org.eclipse.collections.impl.map.mutable.ConcurrentHashMap;
+ import java.sql.PreparedStatement;
+ import java.sql.CallableStatement;
+ import java.sql.Statement;
+@@ -35,7 +36,7 @@
+   private String  m_value;
+   private boolean m_output;
+   private String  m_typeName;
+-  private static  Hashtable m_Typetable = null;
++  private static  ConcurrentHashMap m_Typetable = null;
+ 
+   public QueryParameter()
+   {
+@@ -148,7 +149,7 @@
+     if ( m_Typetable == null )
+     {
+       // Load up the type mapping table.
+-      m_Typetable = new Hashtable();
++      m_Typetable = new ConcurrentHashMap();
+       m_Typetable.put("BIGINT", new Integer(java.sql.Types.BIGINT));
+       m_Typetable.put("BINARY", new Integer(java.sql.Types.BINARY));
+       m_Typetable.put("BIT", new Integer(java.sql.Types.BIT));
+diff -ur xalan-j_2_7_1/src/org/apache/xalan/processor/XSLTElementDef.java xalan-j_2_7_1-modified/src/org/apache/xalan/processor/XSLTElementDef.java
+--- xalan-j_2_7_1/src/org/apache/xalan/processor/XSLTElementDef.java	2007-11-22 18:43:53.000000000 -0300
++++ xalan-j_2_7_1-modified/src/org/apache/xalan/processor/XSLTElementDef.java	2018-06-22 00:17:54.362116404 -0300
+@@ -20,8 +20,10 @@
+  */
+ package org.apache.xalan.processor;
+ 
++import java.util.Collections;
+ import java.util.Enumeration;
+ import java.util.Hashtable;
++import org.eclipse.collections.impl.map.mutable.ConcurrentHashMap;
+ 
+ import org.apache.xalan.templates.Constants;
+ import org.apache.xml.utils.QName;
+@@ -285,7 +287,7 @@
+ 				if (def != null && def.getRequired())
+ 				{
+ 					if (m_requiredFound == null)			
+-						m_requiredFound = new Hashtable();
++						m_requiredFound = new ConcurrentHashMap();
+ 					m_requiredFound.put(def.getName(), "xsl:" +def.getName()); 
+ 				}
+ 			}
+@@ -696,7 +698,7 @@
+     return m_required;
+   }
+ 	
+-	Hashtable m_requiredFound;
++	ConcurrentHashMap m_requiredFound;
+ 	
+ 	/**
+    * Set this required element found.
+@@ -729,7 +731,7 @@
+   {
+ 		if (m_requiredFound == null)
+ 			return null;
+-		Enumeration elems = m_requiredFound.elements();
++		Enumeration elems = Collections.enumeration(m_requiredFound.values());
+ 		String s = "";
+ 		boolean first = true;
+ 		while (elems.hasMoreElements())
+diff -ur xalan-j_2_7_1/src/org/apache/xalan/templates/ElemLiteralResult.java xalan-j_2_7_1-modified/src/org/apache/xalan/templates/ElemLiteralResult.java
+--- xalan-j_2_7_1/src/org/apache/xalan/templates/ElemLiteralResult.java	2007-11-22 18:43:55.000000000 -0300
++++ xalan-j_2_7_1-modified/src/org/apache/xalan/templates/ElemLiteralResult.java	2018-06-21 23:31:44.488774610 -0300
+@@ -23,6 +23,7 @@
+ import java.util.ArrayList;
+ import java.util.Iterator;
+ import java.util.List;
++import org.eclipse.collections.impl.list.mutable.FastList;
+ 
+ import javax.xml.transform.TransformerException;
+ 
+@@ -133,7 +134,7 @@
+   {
+ 
+     if (null == m_avts)
+-      m_avts = new ArrayList();
++      m_avts = new FastList();
+ 
+     m_avts.add(avt);
+   }
+diff -ur xalan-j_2_7_1/src/org/apache/xalan/templates/ElemTemplateElement.java xalan-j_2_7_1-modified/src/org/apache/xalan/templates/ElemTemplateElement.java
+--- xalan-j_2_7_1/src/org/apache/xalan/templates/ElemTemplateElement.java	2007-11-22 18:43:54.000000000 -0300
++++ xalan-j_2_7_1-modified/src/org/apache/xalan/templates/ElemTemplateElement.java	2018-06-21 23:34:44.374144487 -0300
+@@ -24,6 +24,7 @@
+ import java.util.ArrayList;
+ import java.util.Enumeration;
+ import java.util.List;
++import org.eclipse.collections.impl.list.mutable.FastList;
+ 
+ import javax.xml.transform.SourceLocator;
+ import javax.xml.transform.TransformerException;
+@@ -860,7 +861,7 @@
+       String prefix = (String) decls.nextElement();
+ 
+       if (null == m_declaredPrefixes)
+-        m_declaredPrefixes = new ArrayList();
++        m_declaredPrefixes = new FastList();
+ 
+       String uri = nsSupport.getURI(prefix);
+ 
+diff -ur xalan-j_2_7_1/src/org/apache/xalan/templates/Stylesheet.java xalan-j_2_7_1-modified/src/org/apache/xalan/templates/Stylesheet.java
+--- xalan-j_2_7_1/src/org/apache/xalan/templates/Stylesheet.java	2007-11-22 18:43:52.000000000 -0300
++++ xalan-j_2_7_1-modified/src/org/apache/xalan/templates/Stylesheet.java	2018-06-22 00:16:51.869538608 -0300
+@@ -26,6 +26,7 @@
+ import java.util.Hashtable;
+ import java.util.Stack;
+ import java.util.Vector;
++import org.eclipse.collections.impl.map.mutable.ConcurrentHashMap;
+ 
+ import javax.xml.transform.SourceLocator;
+ import javax.xml.transform.TransformerException;
+@@ -1151,7 +1152,7 @@
+    * The "non-xsl-top-level" properties.
+    * @serial
+    */
+-  private Hashtable m_NonXslTopLevel;
++  private ConcurrentHashMap m_NonXslTopLevel;
+ 
+   /**
+    * Set found a non-xslt element.
+@@ -1164,7 +1165,7 @@
+   {
+ 
+     if (null == m_NonXslTopLevel)
+-      m_NonXslTopLevel = new Hashtable();
++      m_NonXslTopLevel = new ConcurrentHashMap();
+ 
+     m_NonXslTopLevel.put(name, obj);
+   }
+@@ -1486,7 +1487,7 @@
+       
+       if(null != m_NonXslTopLevel)
+       {
+-      	java.util.Enumeration elements = m_NonXslTopLevel.elements();
++      	java.util.Enumeration elements = java.util.Collections.enumeration(m_NonXslTopLevel.values());
+       	while(elements.hasMoreElements())
+       	{
+       	  ElemTemplateElement elem = (ElemTemplateElement)elements.nextElement();
+diff -ur xalan-j_2_7_1/src/org/apache/xalan/templates/StylesheetRoot.java xalan-j_2_7_1-modified/src/org/apache/xalan/templates/StylesheetRoot.java
+--- xalan-j_2_7_1/src/org/apache/xalan/templates/StylesheetRoot.java	2007-11-22 18:43:53.000000000 -0300
++++ xalan-j_2_7_1-modified/src/org/apache/xalan/templates/StylesheetRoot.java	2018-06-22 00:11:14.046385594 -0300
+@@ -26,6 +26,7 @@
+ import java.util.Hashtable;
+ import java.util.Properties;
+ import java.util.Vector;
++import org.eclipse.collections.impl.map.mutable.ConcurrentHashMap;
+ 
+ import javax.xml.transform.ErrorListener;
+ import javax.xml.transform.Templates;
+@@ -289,9 +290,9 @@
+ //  m_outputProperties = new OutputProperties(Method.XML);
+     
+     m_attrSets = new HashMap();
+-    m_decimalFormatSymbols = new Hashtable();
++    m_decimalFormatSymbols = new ConcurrentHashMap();
+     m_keyDecls = new Vector();
+-    m_namespaceAliasComposed = new Hashtable();
++    m_namespaceAliasComposed = new ConcurrentHashMap();
+     m_templateList = new TemplateList();
+     m_variables = new Vector();
+ 
+@@ -582,7 +583,7 @@
+    * Table of DecimalFormatSymbols, keyed by QName.
+    * @serial
+    */
+-  private Hashtable m_decimalFormatSymbols;
++  private ConcurrentHashMap m_decimalFormatSymbols;
+ 
+   /**
+    * Recompose the decimal-format declarations.
+@@ -672,7 +673,7 @@
+    * Composed set of all namespace aliases.
+    * @serial
+    */
+-  private Hashtable m_namespaceAliasComposed;
++  private ConcurrentHashMap m_namespaceAliasComposed;
+ 
+   /**
+    * Recompose the namespace-alias declarations.
+diff -ur xalan-j_2_7_1/src/org/apache/xalan/templates/TemplateList.java xalan-j_2_7_1-modified/src/org/apache/xalan/templates/TemplateList.java
+--- xalan-j_2_7_1/src/org/apache/xalan/templates/TemplateList.java	2007-11-22 18:43:54.000000000 -0300
++++ xalan-j_2_7_1-modified/src/org/apache/xalan/templates/TemplateList.java	2018-06-22 00:23:34.913246573 -0300
+@@ -20,9 +20,11 @@
+  */
+ package org.apache.xalan.templates;
+ 
++import java.util.Collections;
+ import java.util.Enumeration;
+ import java.util.Hashtable;
+ import java.util.Vector;
++import org.eclipse.collections.impl.map.mutable.ConcurrentHashMap;
+ 
+ import javax.xml.transform.TransformerException;
+ 
+@@ -133,7 +135,7 @@
+   void dumpAssociationTables()
+   {
+ 
+-    Enumeration associations = m_patternTable.elements();
++    Enumeration associations = Collections.enumeration(m_patternTable.values());
+ 
+     while (associations.hasMoreElements())
+     {
+@@ -181,7 +183,7 @@
+ 
+     if (null != m_wildCardPatterns)
+     {
+-      Enumeration associations = m_patternTable.elements();
++      Enumeration associations = Collections.enumeration(m_patternTable.values());
+ 
+       while (associations.hasMoreElements())
+       {
+@@ -774,7 +776,7 @@
+    * to some degree of specifity.
+    * @serial
+    */
+-  private Hashtable m_patternTable = new Hashtable(89);
++  private ConcurrentHashMap m_patternTable = new ConcurrentHashMap(89);
+ 
+   /** Wildcard patterns.
+    *  @serial          */
+@@ -863,11 +865,11 @@
+     private boolean inPatterns;
+     private TemplateSubPatternAssociation curPattern;
+ 
+-    private Hashtable m_compilerCache = new Hashtable();
++    private ConcurrentHashMap m_compilerCache = new ConcurrentHashMap();
+ 
+     private TemplateWalker()
+     {
+-      hashIterator = m_patternTable.elements();
++      hashIterator = Collections.enumeration(m_patternTable.values());
+       inPatterns = true;
+       curPattern = null;
+     }
+diff -ur xalan-j_2_7_1/src/org/apache/xalan/transformer/KeyTable.java xalan-j_2_7_1-modified/src/org/apache/xalan/transformer/KeyTable.java
+--- xalan-j_2_7_1/src/org/apache/xalan/transformer/KeyTable.java	2007-11-22 18:43:52.000000000 -0300
++++ xalan-j_2_7_1-modified/src/org/apache/xalan/transformer/KeyTable.java	2018-06-22 00:11:14.046385594 -0300
+@@ -22,6 +22,7 @@
+ 
+ import java.util.Hashtable;
+ import java.util.Vector;
++import org.eclipse.collections.impl.map.mutable.ConcurrentHashMap;
+ 
+ import javax.xml.transform.TransformerException;
+ 
+@@ -60,7 +61,7 @@
+    * Key is XMLString, the ref value
+    * Value is XNodeSet, the key() function result for the given ref value.
+    */
+-  private Hashtable m_refsTable = null;
++  private ConcurrentHashMap m_refsTable = null;
+ 
+   /**
+    * Get the document root matching this key.  
+@@ -180,11 +181,11 @@
+    * @return lazy initialized refs table associating evaluation of key function
+    *         with a XNodeSet
+    */
+-  private Hashtable getRefsTable()
++  private ConcurrentHashMap getRefsTable()
+   {
+     if (m_refsTable == null) {
+       // initial capacity set to a prime number to improve hash performance
+-      m_refsTable = new Hashtable(89);
++      m_refsTable = new ConcurrentHashMap(89);
+ 
+       KeyIterator ki = (KeyIterator) (m_keyNodes).getContainedIter();
+       XPathContext xctxt = ki.getXPathContext();
+diff -ur xalan-j_2_7_1/src/org/apache/xalan/transformer/TransformerIdentityImpl.java xalan-j_2_7_1-modified/src/org/apache/xalan/transformer/TransformerIdentityImpl.java
+--- xalan-j_2_7_1/src/org/apache/xalan/transformer/TransformerIdentityImpl.java	2007-11-22 18:43:52.000000000 -0300
++++ xalan-j_2_7_1-modified/src/org/apache/xalan/transformer/TransformerIdentityImpl.java	2018-06-22 00:11:14.046385594 -0300
+@@ -23,6 +23,7 @@
+ import java.io.IOException;
+ import java.util.Hashtable;
+ import java.util.Properties;
++import org.eclipse.collections.impl.map.mutable.ConcurrentHashMap;
+ 
+ import javax.xml.XMLConstants;
+ import javax.xml.parsers.DocumentBuilder;
+@@ -551,7 +552,7 @@
+     
+     if (null == m_params)
+     {
+-      m_params = new Hashtable();
++      m_params = new ConcurrentHashMap();
+     }
+ 
+     m_params.put(name, value);
+@@ -1455,7 +1456,7 @@
+    * The parameters, which is unused, but must be returned to fullfill the
+    *  Transformer interface.
+    */
+-  private Hashtable m_params;
++  private ConcurrentHashMap m_params;
+ 
+   /** The error listener for TrAX errors and warnings. */
+   private ErrorListener m_errorListener =
+diff -ur xalan-j_2_7_1/src/org/apache/xalan/xslt/EnvironmentCheck.java xalan-j_2_7_1-modified/src/org/apache/xalan/xslt/EnvironmentCheck.java
+--- xalan-j_2_7_1/src/org/apache/xalan/xslt/EnvironmentCheck.java	2007-11-22 18:43:53.000000000 -0300
++++ xalan-j_2_7_1-modified/src/org/apache/xalan/xslt/EnvironmentCheck.java	2018-06-23 23:30:39.723676473 -0300
+@@ -29,6 +29,7 @@
+ import java.util.Hashtable;
+ import java.util.StringTokenizer;
+ import java.util.Vector;
++import org.eclipse.collections.impl.map.mutable.ConcurrentHashMap;
+ 
+ import org.w3c.dom.Document;
+ import org.w3c.dom.Element;
+@@ -1181,7 +1182,7 @@
+    *
+    * @see #getApparentVersion(String, long)
+    */
+-  private static Hashtable jarVersions = new Hashtable();
++  private static ConcurrentHashMap jarVersions = new ConcurrentHashMap();
+ 
+   /** 
+    * Static initializer for jarVersions table.  
+diff -ur xalan-j_2_7_1/src/org/apache/xalan/xsltc/compiler/Choose.java xalan-j_2_7_1-modified/src/org/apache/xalan/xsltc/compiler/Choose.java
+--- xalan-j_2_7_1/src/org/apache/xalan/xsltc/compiler/Choose.java	2007-11-22 18:43:55.000000000 -0300
++++ xalan-j_2_7_1-modified/src/org/apache/xalan/xsltc/compiler/Choose.java	2018-06-23 23:34:01.008490642 -0300
+@@ -38,6 +38,7 @@
+ import org.apache.xalan.xsltc.compiler.util.Type;
+ import org.apache.xalan.xsltc.compiler.util.TypeCheckError;
+ import org.apache.xalan.xsltc.compiler.util.Util;
++import org.eclipse.collections.impl.list.mutable.FastList;
+ 
+ /**
+  * @author Jacek Ambroziak
+@@ -61,7 +62,7 @@
+      * <xsl:when> elements and default to the <xsl:otherwise> if present.
+      */
+     public void translate(ClassGenerator classGen, MethodGenerator methodGen) {
+-	final List whenElements = new ArrayList();
++	final List whenElements = new FastList();
+ 	Otherwise otherwise = null;
+ 	Enumeration elements = elements();
+ 
+@@ -108,7 +109,7 @@
+ 	// next element will hold a handle to the beginning of next
+ 	// When/Otherwise if test on current When fails
+ 	BranchHandle nextElement = null;
+-	List exitHandles = new ArrayList();
++	List exitHandles = new FastList();
+ 	InstructionHandle exit = null;
+ 
+ 	Iterator whens = whenElements.iterator();
+diff -ur xalan-j_2_7_1/src/org/apache/xalan/xsltc/compiler/FunctionCall.java xalan-j_2_7_1-modified/src/org/apache/xalan/xsltc/compiler/FunctionCall.java
+--- xalan-j_2_7_1/src/org/apache/xalan/xsltc/compiler/FunctionCall.java	2007-11-22 18:43:52.000000000 -0300
++++ xalan-j_2_7_1-modified/src/org/apache/xalan/xsltc/compiler/FunctionCall.java	2018-06-23 23:37:19.143734016 -0300
+@@ -28,6 +28,7 @@
+ import java.util.Hashtable;
+ import java.util.Vector;
+ 
++import org.eclipse.collections.impl.map.mutable.ConcurrentHashMap;
+ import org.apache.bcel.generic.ConstantPoolGen;
+ import org.apache.bcel.generic.IFEQ;
+ import org.apache.bcel.generic.INVOKEINTERFACE;
+@@ -133,13 +134,13 @@
+     private static final MultiHashtable _internal2Java = new MultiHashtable();
+ 
+     // Legal conversions between Java and internal types.
+-    private static final Hashtable _java2Internal = new Hashtable();
++    private static final ConcurrentHashMap _java2Internal = new ConcurrentHashMap();
+     
+     // The mappings between EXSLT extension namespaces and implementation classes
+-    private static final Hashtable _extensionNamespaceTable = new Hashtable();
++    private static final ConcurrentHashMap _extensionNamespaceTable = new ConcurrentHashMap();
+ 
+     // Extension functions that are implemented in BasisLibrary
+-    private static final Hashtable _extensionFunctionTable = new Hashtable();
++    private static final ConcurrentHashMap _extensionFunctionTable = new ConcurrentHashMap();
+     /**
+      * inner class to used in internal2Java mappings, contains
+      * the Java type and the distance between the internal type and
+diff -ur xalan-j_2_7_1/src/org/apache/xalan/xsltc/compiler/LiteralElement.java xalan-j_2_7_1-modified/src/org/apache/xalan/xsltc/compiler/LiteralElement.java
+--- xalan-j_2_7_1/src/org/apache/xalan/xsltc/compiler/LiteralElement.java	2007-11-22 18:43:52.000000000 -0300
++++ xalan-j_2_7_1-modified/src/org/apache/xalan/xsltc/compiler/LiteralElement.java	2018-06-24 00:46:56.246229300 -0300
+@@ -24,6 +24,7 @@
+ import java.util.Enumeration;
+ import java.util.Hashtable;
+ import java.util.Vector;
++import java.util.Collections;
+ 
+ import org.apache.bcel.generic.ConstantPoolGen;
+ import org.apache.bcel.generic.InstructionList;
+@@ -34,6 +35,7 @@
+ import org.apache.xalan.xsltc.compiler.util.Type;
+ import org.apache.xalan.xsltc.compiler.util.TypeCheckError;
+ import org.apache.xalan.xsltc.compiler.util.Util;
++import org.eclipse.collections.impl.map.mutable.ConcurrentHashMap;
+ 
+ import org.apache.xml.serializer.ElemDesc;
+ import org.apache.xml.serializer.ToHTMLStream;
+@@ -48,7 +50,7 @@
+     private String _name;
+     private LiteralElement _literalElemParent = null;
+     private Vector _attributeElements = null;
+-    private Hashtable _accessedPrefixes = null;
++    private ConcurrentHashMap _accessedPrefixes = null;
+     
+     // True if all attributes of this LRE are unique, i.e. they all have
+     // different names. This flag is set to false if some attribute
+@@ -105,7 +107,7 @@
+ 
+ 	// Check if we have any declared namesaces
+ 	if (_accessedPrefixes == null) {
+-	    _accessedPrefixes = new Hashtable();
++	    _accessedPrefixes = new ConcurrentHashMap();
+ 	}
+ 	else {
+ 	    if (!declared) {
+@@ -354,7 +356,7 @@
+ 	// Compile code to emit namespace attributes
+ 	if (_accessedPrefixes != null) {
+ 	    boolean declaresDefaultNS = false;
+-	    Enumeration e = _accessedPrefixes.keys();
++	    Enumeration e = Collections.enumeration(_accessedPrefixes.values());
+ 
+ 	    while (e.hasMoreElements()) {
+ 		final String prefix = (String)e.nextElement();
+@@ -443,7 +445,7 @@
+     	 
+     	 if (_attributeElements != null) {
+     	     int numAttrs = _attributeElements.size();
+-    	     Hashtable attrsTable = null;
++    	     ConcurrentHashMap attrsTable = null;
+     	     for (int i = 0; i < numAttrs; i++) {
+     	         SyntaxTreeNode node = (SyntaxTreeNode)_attributeElements.elementAt(i);
+     	         
+@@ -452,7 +454,7 @@
+     	         }
+     	         else if (node instanceof XslAttribute) {   	             
+     	             if (attrsTable == null) {
+-    	             	attrsTable = new Hashtable();
++    	             	attrsTable = new ConcurrentHashMap();
+     	                 for (int k = 0; k < i; k++) {
+     	                     SyntaxTreeNode n = (SyntaxTreeNode)_attributeElements.elementAt(k);
+     	                     if (n instanceof LiteralAttribute) {
+diff -ur xalan-j_2_7_1/src/org/apache/xalan/xsltc/compiler/Mode.java xalan-j_2_7_1-modified/src/org/apache/xalan/xsltc/compiler/Mode.java
+--- xalan-j_2_7_1/src/org/apache/xalan/xsltc/compiler/Mode.java	2007-11-22 18:43:52.000000000 -0300
++++ xalan-j_2_7_1-modified/src/org/apache/xalan/xsltc/compiler/Mode.java	2018-06-24 00:52:11.623163617 -0300
+@@ -24,7 +24,9 @@
+ import java.util.Enumeration;
+ import java.util.Hashtable;
+ import java.util.Iterator;
++import java.util.Collections;
+ import java.util.Vector;
++import org.eclipse.collections.impl.map.mutable.ConcurrentHashMap;
+ 
+ import org.apache.bcel.generic.Instruction;
+ import org.apache.bcel.generic.BranchHandle;
+@@ -131,17 +133,17 @@
+     /**
+      * A mapping between named templates and Mode objects.
+      */
+-    private Hashtable _namedTemplates = new Hashtable();
++    private ConcurrentHashMap _namedTemplates = new ConcurrentHashMap();
+ 
+     /**
+      * A mapping between templates and instruction handles.
+      */
+-    private Hashtable _templateIHs = new Hashtable();
++    private ConcurrentHashMap _templateIHs = new ConcurrentHashMap();
+ 
+     /**
+      * A mapping between templates and instruction lists.
+      */
+-    private Hashtable _templateILs = new Hashtable();
++    private ConcurrentHashMap _templateILs = new ConcurrentHashMap();
+ 
+     /**
+      * A reference to the pattern matching the root node.
+@@ -152,7 +154,7 @@
+      * Stores ranges of template precendences for the compilation 
+      * of apply-imports (a Hashtable for historical reasons).
+      */
+-    private Hashtable _importLevels = null;
++    private ConcurrentHashMap _importLevels = null;
+ 
+     /**
+      * A mapping between key names and keys.
+@@ -193,7 +195,7 @@
+ 
+     public String functionName(int min, int max) {
+ 	if (_importLevels == null) {
+-	    _importLevels = new Hashtable();
++	    _importLevels = new ConcurrentHashMap();
+ 	}
+ 	_importLevels.put(new Integer(max), new Integer(min));
+ 	return _methodName + '_' + max;
+@@ -558,7 +560,7 @@
+ 				  MethodGenerator methodGen,
+ 				  InstructionHandle next) 
+     {
+-        Enumeration templates = _namedTemplates.keys();
++        Enumeration templates = Collections.enumeration(_namedTemplates.values());
+         while (templates.hasMoreElements()) {
+             final Template template = (Template)templates.nextElement();
+             compileNamedTemplate(template, classGen);
+@@ -1043,7 +1045,7 @@
+ 
+ 	// Compile method(s) for <xsl:apply-imports/> for this mode
+ 	if (_importLevels != null) {
+-	    Enumeration levels = _importLevels.keys();
++	    Enumeration levels = Collections.enumeration(_importLevels.values());
+ 	    while (levels.hasMoreElements()) {
+ 		Integer max = (Integer)levels.nextElement();
+ 		Integer min = (Integer)_importLevels.get(max);
+@@ -1081,10 +1083,10 @@
+ 	final Vector names      = xsltc.getNamesIndex();
+ 
+ 	// Clear some datastructures
+-	_namedTemplates = new Hashtable();
++	_namedTemplates = new ConcurrentHashMap();
+ 	_neededTemplates = new Hashtable();
+-	_templateIHs = new Hashtable();
+-	_templateILs = new Hashtable();
++	_templateIHs = new ConcurrentHashMap();
++	_templateILs = new ConcurrentHashMap();
+ 	_patternGroups = new Vector[32];
+ 	_rootPattern = null;
+ 
+diff -ur xalan-j_2_7_1/src/org/apache/xalan/xsltc/compiler/Number.java xalan-j_2_7_1-modified/src/org/apache/xalan/xsltc/compiler/Number.java
+--- xalan-j_2_7_1/src/org/apache/xalan/xsltc/compiler/Number.java	2007-11-22 18:43:54.000000000 -0300
++++ xalan-j_2_7_1-modified/src/org/apache/xalan/xsltc/compiler/Number.java	2018-06-23 23:55:16.597145792 -0300
+@@ -49,6 +49,7 @@
+ import org.apache.xalan.xsltc.compiler.util.Type;
+ import org.apache.xalan.xsltc.compiler.util.TypeCheckError;
+ import org.apache.xalan.xsltc.compiler.util.Util;
++import org.eclipse.collections.impl.list.mutable.FastList;
+ 
+ /**
+  * @author Jacek Ambroziak
+@@ -85,7 +86,7 @@
+     private boolean _formatNeeded = false;
+ 
+     private String _className = null;
+-    private ArrayList _closureVars = null;
++    private FastList _closureVars = null;
+ 
+      // -- Begin Closure interface --------------------
+ 
+@@ -117,7 +118,7 @@
+      */
+     public void addVariable(VariableRefBase variableRef) {
+ 	if (_closureVars == null) {
+-	    _closureVars = new ArrayList();
++	    _closureVars = new FastList();
+ 	}
+ 
+ 	// Only one reference per variable
+diff -ur xalan-j_2_7_1/src/org/apache/xalan/xsltc/compiler/Parser.java xalan-j_2_7_1-modified/src/org/apache/xalan/xsltc/compiler/Parser.java
+--- xalan-j_2_7_1/src/org/apache/xalan/xsltc/compiler/Parser.java	2007-11-22 18:43:54.000000000 -0300
++++ xalan-j_2_7_1-modified/src/org/apache/xalan/xsltc/compiler/Parser.java	2018-06-24 00:01:01.844216422 -0300
+@@ -51,6 +51,8 @@
+ import org.xml.sax.SAXParseException;
+ import org.xml.sax.XMLReader;
+ 
++import org.eclipse.collections.impl.map.mutable.ConcurrentHashMap;
++
+ /**
+  * @author Jacek Ambroziak
+  * @author Santiago Pericas-Geertsen
+@@ -70,14 +72,14 @@
+     private Vector _errors;           // Contains all compilation errors
+     private Vector _warnings;         // Contains all compilation errors
+ 
+-    private Hashtable   _instructionClasses; // Maps instructions to classes
+-    private Hashtable   _instructionAttrs;;  // reqd and opt attrs 
+-    private Hashtable   _qNames;
+-    private Hashtable   _namespaces;
++    private ConcurrentHashMap   _instructionClasses; // Maps instructions to classes
++    private ConcurrentHashMap   _instructionAttrs;;  // reqd and opt attrs 
++    private ConcurrentHashMap   _qNames;
++    private ConcurrentHashMap   _namespaces;
+     private QName       _useAttributeSets;
+     private QName       _excludeResultPrefixes;
+     private QName       _extensionElementPrefixes;
+-    private Hashtable   _variableScope;
++    private ConcurrentHashMap   _variableScope;
+     private Stylesheet  _currentStylesheet;
+     private SymbolTable _symbolTable; // Maps QNames to syntax-tree nodes
+     private Output      _output;
+@@ -96,11 +98,11 @@
+     }
+ 
+     public void init() {
+-	_qNames              = new Hashtable(512);
+-	_namespaces          = new Hashtable();
+-	_instructionClasses  = new Hashtable();
+-	_instructionAttrs    = new Hashtable();
+-	_variableScope       = new Hashtable();
++	_qNames              = new ConcurrentHashMap(512);
++	_namespaces          = new ConcurrentHashMap();
++	_instructionClasses  = new ConcurrentHashMap();
++	_instructionAttrs    = new ConcurrentHashMap();
++	_variableScope       = new ConcurrentHashMap();
+ 	_template            = null;
+ 	_errors              = new Vector();
+ 	_warnings            = new Vector();
+diff -ur xalan-j_2_7_1/src/org/apache/xalan/xsltc/compiler/Predicate.java xalan-j_2_7_1-modified/src/org/apache/xalan/xsltc/compiler/Predicate.java
+--- xalan-j_2_7_1/src/org/apache/xalan/xsltc/compiler/Predicate.java	2007-11-22 18:43:53.000000000 -0300
++++ xalan-j_2_7_1-modified/src/org/apache/xalan/xsltc/compiler/Predicate.java	2018-06-24 00:02:23.011503403 -0300
+@@ -22,6 +22,7 @@
+ package org.apache.xalan.xsltc.compiler;
+ 
+ import java.util.ArrayList;
++import org.eclipse.collections.impl.list.mutable.FastList;
+ 
+ import org.apache.bcel.classfile.Field;
+ import org.apache.bcel.generic.ASTORE;
+@@ -92,7 +93,7 @@
+     /**
+      * List of variables in closure.
+      */
+-    private ArrayList _closureVars = null;
++    private FastList _closureVars = null;
+     
+     /**
+      * Reference to parent closure.
+@@ -208,7 +209,7 @@
+      */
+     public void addVariable(VariableRefBase variableRef) {
+ 	if (_closureVars == null) {
+-	    _closureVars = new ArrayList();
++	    _closureVars = new FastList();
+ 	}
+ 
+ 	// Only one reference per variable
+diff -ur xalan-j_2_7_1/src/org/apache/xalan/xsltc/compiler/Sort.java xalan-j_2_7_1-modified/src/org/apache/xalan/xsltc/compiler/Sort.java
+--- xalan-j_2_7_1/src/org/apache/xalan/xsltc/compiler/Sort.java	2007-11-22 18:43:55.000000000 -0300
++++ xalan-j_2_7_1-modified/src/org/apache/xalan/xsltc/compiler/Sort.java	2018-06-24 00:05:29.679797361 -0300
+@@ -61,6 +61,7 @@
+ import org.apache.xalan.xsltc.compiler.util.TypeCheckError;
+ import org.apache.xalan.xsltc.compiler.util.Util;
+ import org.apache.xml.dtm.Axis;
++import org.eclipse.collections.impl.list.mutable.FastList;
+ 
+ 
+ /**
+@@ -80,7 +81,7 @@
+ 
+ 
+     private String _className = null;
+-    private ArrayList _closureVars = null;
++    private FastList _closureVars = null;
+     private boolean _needsSortRecordFactory = false;
+ 
+     // -- Begin Closure interface --------------------
+@@ -113,7 +114,7 @@
+      */
+     public void addVariable(VariableRefBase variableRef) {
+ 	if (_closureVars == null) {
+-	    _closureVars = new ArrayList();
++	    _closureVars = new FastList();
+ 	}
+ 
+ 	// Only one reference per variable
+@@ -617,7 +618,7 @@
+ 
+ 	// Add a new instance variable for each var in closure
+ 	final int nsorts = sortObjects.size();
+-	final ArrayList dups = new ArrayList();
++	final FastList dups = new FastList();
+ 
+ 	for (int j = 0; j < nsorts; j++) {
+ 	    final Sort sort = (Sort) sortObjects.get(j);
+diff -ur xalan-j_2_7_1/src/org/apache/xalan/xsltc/compiler/Stylesheet.java xalan-j_2_7_1-modified/src/org/apache/xalan/xsltc/compiler/Stylesheet.java
+--- xalan-j_2_7_1/src/org/apache/xalan/xsltc/compiler/Stylesheet.java	2007-11-22 18:43:55.000000000 -0300
++++ xalan-j_2_7_1-modified/src/org/apache/xalan/xsltc/compiler/Stylesheet.java	2018-06-24 00:52:48.984090171 -0300
+@@ -27,6 +27,8 @@
+ import java.util.Iterator;
+ import java.util.Properties;
+ import java.util.StringTokenizer;
++import org.eclipse.collections.impl.map.mutable.ConcurrentHashMap;
++import java.util.Collections;
+ 
+ import org.apache.xml.utils.SystemIDResolver;
+ import org.apache.bcel.generic.ANEWARRAY;
+@@ -116,7 +118,7 @@
+     /**
+      * Mapping between mode names and Mode instances.
+      */
+-    private final Hashtable _modes = new Hashtable();
++    private final ConcurrentHashMap _modes = new ConcurrentHashMap();
+     
+     /**
+      * A reference to the default Mode object.
+@@ -126,7 +128,7 @@
+     /**
+      * Mapping between extension URIs and their prefixes.
+      */
+-    private final Hashtable _extensions = new Hashtable();
++    private final ConcurrentHashMap _extensions = new ConcurrentHashMap();
+ 
+     /**
+      * Reference to the stylesheet from which this stylesheet was
+@@ -601,7 +603,7 @@
+ 	if (_defaultMode == null)
+ 	    _defaultMode = new Mode(null, this, Constants.EMPTYSTRING);
+ 	_defaultMode.processPatterns(_keys);
+-	final Enumeration modes = _modes.elements();
++	final Enumeration modes = Collections.enumeration(_modes.values());
+ 	while (modes.hasMoreElements()) {
+ 	    final Mode mode = (Mode)modes.nextElement();
+ 	    mode.processPatterns(_keys);
+@@ -610,7 +612,7 @@
+ 	
+     private void compileModes(ClassGenerator classGen) {
+ 	_defaultMode.compileApplyTemplates(classGen);
+-	final Enumeration modes = _modes.elements();
++	final Enumeration modes = Collections.enumeration(_modes.values());
+ 	while (modes.hasMoreElements()) {
+ 	    final Mode mode = (Mode)modes.nextElement();
+ 	    mode.compileApplyTemplates(classGen);
+diff -ur xalan-j_2_7_1/src/org/apache/xalan/xsltc/compiler/SymbolTable.java xalan-j_2_7_1-modified/src/org/apache/xalan/xsltc/compiler/SymbolTable.java
+--- xalan-j_2_7_1/src/org/apache/xalan/xsltc/compiler/SymbolTable.java	2007-11-22 18:43:53.000000000 -0300
++++ xalan-j_2_7_1-modified/src/org/apache/xalan/xsltc/compiler/SymbolTable.java	2018-06-24 00:16:42.713484425 -0300
+@@ -24,6 +24,7 @@
+ import java.util.Hashtable;
+ import java.util.StringTokenizer;
+ import java.util.Vector;
++import org.eclipse.collections.impl.map.mutable.ConcurrentHashMap;
+ 
+ import org.apache.xalan.xsltc.compiler.util.MethodType;
+ 
+@@ -35,17 +36,17 @@
+ final class SymbolTable {
+ 
+     // These hashtables are used for all stylesheets
+-    private final Hashtable _stylesheets = new Hashtable();
+-    private final Hashtable _primops     = new Hashtable();
++    private final ConcurrentHashMap _stylesheets = new ConcurrentHashMap();
++    private final ConcurrentHashMap _primops     = new ConcurrentHashMap();
+ 
+     // These hashtables are used for some stylesheets
+-    private Hashtable _variables = null;
+-    private Hashtable _templates = null;
+-    private Hashtable _attributeSets = null;
+-    private Hashtable _aliases = null;
+-    private Hashtable _excludedURI = null;
+-    private Hashtable _decimalFormats = null;
+-    private Hashtable _keys = null;
++    private ConcurrentHashMap _variables = null;
++    private ConcurrentHashMap _templates = null;
++    private ConcurrentHashMap _attributeSets = null;
++    private ConcurrentHashMap _aliases = null;
++    private ConcurrentHashMap _excludedURI = null;
++    private ConcurrentHashMap _decimalFormats = null;
++    private ConcurrentHashMap _keys = null;
+ 
+     public DecimalFormatting getDecimalFormatting(QName name) {
+ 	if (_decimalFormats == null) return null;
+@@ -53,7 +54,7 @@
+     }
+ 
+     public void addDecimalFormatting(QName name, DecimalFormatting symbols) {
+-	if (_decimalFormats == null) _decimalFormats = new Hashtable();
++	if (_decimalFormats == null) _decimalFormats = new ConcurrentHashMap();
+ 	_decimalFormats.put(name, symbols);
+     }
+ 
+@@ -63,7 +64,7 @@
+     }
+ 
+     public void addKey(QName name, Key key) {
+-	if (_keys == null) _keys = new Hashtable();
++	if (_keys == null) _keys = new ConcurrentHashMap();
+ 	_keys.put(name, key);
+     }
+     
+@@ -77,7 +78,7 @@
+ 
+     public Template addTemplate(Template template) {
+ 	final QName name = template.getName();
+-	if (_templates == null) _templates = new Hashtable();
++	if (_templates == null) _templates = new ConcurrentHashMap();
+ 	return (Template)_templates.put(name, template);
+     }
+ 	
+@@ -87,13 +88,13 @@
+     }
+ 
+     public Variable addVariable(Variable variable) {
+-	if (_variables == null) _variables = new Hashtable();
++	if (_variables == null) _variables = new ConcurrentHashMap();
+ 	final String name = variable.getName().getStringRep();
+ 	return (Variable)_variables.put(name, variable);
+     }
+ 	
+     public Param addParam(Param parameter) {
+-	if (_variables == null) _variables = new Hashtable();
++	if (_variables == null) _variables = new ConcurrentHashMap();
+ 	final String name = parameter.getName().getStringRep();
+ 	return (Param)_variables.put(name, parameter);
+     }
+@@ -119,7 +120,7 @@
+     }
+ 
+     public AttributeSet addAttributeSet(AttributeSet atts) {
+-	if (_attributeSets == null) _attributeSets = new Hashtable();
++	if (_attributeSets == null) _attributeSets = new ConcurrentHashMap();
+ 	return (AttributeSet)_attributeSets.put(atts.getName(), atts);
+     }
+ 
+@@ -177,7 +178,7 @@
+      * Adds an alias for a namespace prefix
+      */ 
+     public void addPrefixAlias(String prefix, String alias) {
+-	if (_aliases == null) _aliases = new Hashtable();
++	if (_aliases == null) _aliases = new ConcurrentHashMap();
+ 	_aliases.put(prefix,alias);
+     }
+ 
+@@ -198,7 +199,7 @@
+ 	if (uri == null) return;
+ 
+ 	// Create new hashtable of exlcuded URIs if none exists
+-	if (_excludedURI == null) _excludedURI = new Hashtable();
++	if (_excludedURI == null) _excludedURI = new ConcurrentHashMap();
+ 
+ 	// Register the namespace URI
+ 	Integer refcnt = (Integer)_excludedURI.get(uri);
+diff -ur xalan-j_2_7_1/src/org/apache/xalan/xsltc/compiler/UseAttributeSets.java xalan-j_2_7_1-modified/src/org/apache/xalan/xsltc/compiler/UseAttributeSets.java
+--- xalan-j_2_7_1/src/org/apache/xalan/xsltc/compiler/UseAttributeSets.java	2007-11-22 18:43:53.000000000 -0300
++++ xalan-j_2_7_1-modified/src/org/apache/xalan/xsltc/compiler/UseAttributeSets.java	2018-06-24 00:54:15.454155052 -0300
+@@ -23,6 +23,8 @@
+ 
+ import java.util.StringTokenizer;
+ import java.util.Vector;
++import org.eclipse.collections.impl.list.mutable.FastList;
++import java.util.List;
+ 
+ import org.apache.bcel.generic.ConstantPoolGen;
+ import org.apache.bcel.generic.INVOKESPECIAL;
+@@ -45,7 +47,7 @@
+ 	"";
+ 
+     // Contains the names of all references attribute sets
+-    private final Vector _sets = new Vector(2);
++    private final List _sets = (new FastList(2)).asSynchronized();
+ 
+     /**
+      * Constructur - define initial attribute sets to use
+@@ -90,7 +92,7 @@
+ 	// Go through each attribute set and generate a method call
+ 	for (int i=0; i<_sets.size(); i++) {
+ 	    // Get the attribute set name
+-	    final QName name = (QName)_sets.elementAt(i);
++	    final QName name = (QName)_sets.get(i);
+ 	    // Get the AttributeSet reference from the symbol table
+ 	    final AttributeSet attrs = symbolTable.lookupAttributeSet(name);
+ 	    // Compile the call to the set's method if the set exists
+diff -ur xalan-j_2_7_1/src/org/apache/xalan/xsltc/compiler/XSLTC.java xalan-j_2_7_1-modified/src/org/apache/xalan/xsltc/compiler/XSLTC.java
+--- xalan-j_2_7_1/src/org/apache/xalan/xsltc/compiler/XSLTC.java	2007-11-22 18:43:52.000000000 -0300
++++ xalan-j_2_7_1-modified/src/org/apache/xalan/xsltc/compiler/XSLTC.java	2018-06-24 00:24:40.577149459 -0300
+@@ -21,6 +21,7 @@
+ 
+ package org.apache.xalan.xsltc.compiler;
+ 
++import org.eclipse.collections.impl.map.mutable.ConcurrentHashMap;
+ import java.io.BufferedOutputStream;
+ import java.io.ByteArrayOutputStream;
+ import java.io.File;
+@@ -81,14 +82,14 @@
+     // Name index tables
+     private int       _nextGType;  // Next available element type
+     private Vector    _namesIndex; // Index of all registered QNames
+-    private Hashtable _elements;   // Hashtable of all registered elements
+-    private Hashtable _attributes; // Hashtable of all registered attributes
++    private ConcurrentHashMap _elements;   // Hashtable of all registered elements
++    private ConcurrentHashMap _attributes; // Hashtable of all registered attributes
+ 
+     // Namespace index tables
+     private int       _nextNSType; // Next available namespace type
+     private Vector    _namespaceIndex; // Index of all registered namespaces
+-    private Hashtable _namespaces; // Hashtable of all registered namespaces
+-    private Hashtable _namespacePrefixes;// Hashtable of all registered namespace prefixes
++    private ConcurrentHashMap _namespaces; // Hashtable of all registered namespaces
++    private ConcurrentHashMap _namespacePrefixes;// Hashtable of all registered namespace prefixes
+ 
+ 
+     // All literal text in the stylesheet
+@@ -191,13 +192,13 @@
+      */
+     private void reset() {
+ 	_nextGType      = DTM.NTYPES;
+-	_elements       = new Hashtable();
+-	_attributes     = new Hashtable();
+-	_namespaces     = new Hashtable();
++	_elements       = new ConcurrentHashMap();
++	_attributes     = new ConcurrentHashMap();
++	_namespaces     = new ConcurrentHashMap();
+ 	_namespaces.put("",new Integer(_nextNSType));
+ 	_namesIndex     = new Vector(128);
+ 	_namespaceIndex = new Vector(32);
+-	_namespacePrefixes = new Hashtable();
++	_namespacePrefixes = new ConcurrentHashMap();
+         _stylesheet     = null;
+ 	_parser.init();
+ 	//_variableSerial     = 1;
+diff -ur xalan-j_2_7_1/src/org/apache/xalan/xsltc/dom/DocumentCache.java xalan-j_2_7_1-modified/src/org/apache/xalan/xsltc/dom/DocumentCache.java
+--- xalan-j_2_7_1/src/org/apache/xalan/xsltc/dom/DocumentCache.java	2007-11-22 18:43:54.000000000 -0300
++++ xalan-j_2_7_1-modified/src/org/apache/xalan/xsltc/dom/DocumentCache.java	2018-06-24 00:28:13.282203319 -0300
+@@ -43,6 +43,7 @@
+ import org.apache.xalan.xsltc.runtime.BasisLibrary;
+ import org.apache.xalan.xsltc.runtime.Constants;
+ import org.apache.xml.utils.SystemIDResolver;
++import org.eclipse.collections.impl.map.mutable.ConcurrentHashMap;
+ 
+ import org.xml.sax.InputSource;
+ import org.xml.sax.SAXException;
+@@ -54,7 +55,7 @@
+ public final class DocumentCache implements DOMCache {
+ 
+     private int       _size;
+-    private Hashtable _references;
++    private ConcurrentHashMap _references;
+     private String[]  _URIs;
+     private int       _count;
+     private int       _current;
+@@ -169,7 +170,7 @@
+ 	_count = 0;
+ 	_current = 0;
+ 	_size  = size;
+-	_references = new Hashtable(_size+2);
++	_references = new ConcurrentHashMap(_size+2);
+ 	_URIs = new String[_size];
+ 
+ 	try {
+diff -ur xalan-j_2_7_1/src/org/apache/xalan/xsltc/trax/DOM2SAX.java xalan-j_2_7_1-modified/src/org/apache/xalan/xsltc/trax/DOM2SAX.java
+--- xalan-j_2_7_1/src/org/apache/xalan/xsltc/trax/DOM2SAX.java	2007-11-22 18:43:55.000000000 -0300
++++ xalan-j_2_7_1-modified/src/org/apache/xalan/xsltc/trax/DOM2SAX.java	2018-06-24 00:33:07.496447800 -0300
+@@ -27,6 +27,8 @@
+ import java.util.Hashtable;
+ import java.util.List;
+ import java.util.Stack;
++import org.eclipse.collections.impl.map.mutable.ConcurrentHashMap;
++import org.eclipse.collections.impl.list.mutable.FastList;
+ 
+ import org.apache.xalan.xsltc.dom.SAXImpl;
+ import org.w3c.dom.NamedNodeMap;
+@@ -56,7 +58,7 @@
+     private ContentHandler _sax = null;
+     private LexicalHandler _lex = null;
+     private SAXImpl _saxImpl = null;
+-    private Hashtable _nsPrefixes = new Hashtable();
++    private ConcurrentHashMap _nsPrefixes = new ConcurrentHashMap();
+ 
+     public DOM2SAX(Node root) {
+ 	_dom = root;
+@@ -217,7 +219,7 @@
+ 
+ 	case Node.ELEMENT_NODE:
+ 	    String prefix;
+-	    List pushedPrefixes = new ArrayList();
++	    List pushedPrefixes = new FastList();
+ 	    final AttributesImpl attrs = new AttributesImpl();
+ 	    final NamedNodeMap map = node.getAttributes();
+ 	    final int length = map.getLength();
+diff -ur xalan-j_2_7_1/src/org/apache/xalan/xsltc/trax/TransformerFactoryImpl.java xalan-j_2_7_1-modified/src/org/apache/xalan/xsltc/trax/TransformerFactoryImpl.java
+--- xalan-j_2_7_1/src/org/apache/xalan/xsltc/trax/TransformerFactoryImpl.java	2007-11-22 18:43:54.000000000 -0300
++++ xalan-j_2_7_1-modified/src/org/apache/xalan/xsltc/trax/TransformerFactoryImpl.java	2018-06-24 00:35:04.540246979 -0300
+@@ -37,6 +37,8 @@
+ import java.util.Vector;
+ import java.util.zip.ZipEntry;
+ import java.util.zip.ZipFile;
++import org.eclipse.collections.impl.map.mutable.ConcurrentHashMap;
++import org.eclipse.collections.impl.list.mutable.FastList;
+ 
+ import javax.xml.XMLConstants;
+ import javax.xml.parsers.SAXParser;
+@@ -137,7 +139,7 @@
+      * This Hashtable is used to store parameters for locating
+      * <?xml-stylesheet ...?> processing instructions in XML docs.
+      */
+-    private Hashtable _piParams = null;
++    private ConcurrentHashMap _piParams = null;
+ 
+     /**
+      * The above hashtable stores objects of this class.
+@@ -1280,7 +1282,7 @@
+       	String transletAuxPrefix = transletPath + "$";
+       	String transletFullName = transletPath + ".class";
+       
+-      	List bytecodes = new ArrayList();      
++      	List bytecodes = new FastList();      
+       
+       	// Iterate through all entries in the jar file to find the 
+       	// translet and auxiliary classes.
+diff -ur xalan-j_2_7_1/src/org/apache/xml/utils/XMLReaderManager.java xalan-j_2_7_1-modified/src/org/apache/xml/utils/XMLReaderManager.java
+--- xalan-j_2_7_1/src/org/apache/xml/utils/XMLReaderManager.java	2007-11-22 18:43:53.000000000 -0300
++++ xalan-j_2_7_1-modified/src/org/apache/xml/utils/XMLReaderManager.java	2018-06-24 00:37:26.712750850 -0300
+@@ -26,6 +26,7 @@
+ import javax.xml.parsers.ParserConfigurationException;
+ import javax.xml.parsers.SAXParserFactory;
+ 
++import org.eclipse.collections.impl.map.mutable.ConcurrentHashMap;
+ import org.xml.sax.XMLReader;
+ import org.xml.sax.helpers.XMLReaderFactory;
+ import org.xml.sax.SAXException;
+@@ -56,7 +57,7 @@
+     /**
+      * Keeps track of whether an XMLReader object is in use.
+      */
+-    private Hashtable m_inUse;
++    private ConcurrentHashMap m_inUse;
+ 
+     /**
+      * Hidden constructor
+@@ -88,7 +89,7 @@
+         }
+ 
+         if (m_inUse == null) {
+-            m_inUse = new Hashtable();
++            m_inUse = new ConcurrentHashMap();
+         }
+ 
+         // If the cached reader for this thread is in use, construct a new
