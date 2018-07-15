@@ -169,7 +169,7 @@ diff -ur xalan-j_2_7_1/src/MANIFEST.MF xalan-j_2_7_1-modified/src/MANIFEST.MF
  Comment: Main Xalan engine implementing TrAX/JAXP
 diff -ur xalan-j_2_7_1/src/org/apache/xalan/extensions/ExtensionHandlerGeneral.java xalan-j_2_7_1-modified/src/org/apache/xalan/extensions/ExtensionHandlerGeneral.java
 --- xalan-j_2_7_1/src/org/apache/xalan/extensions/ExtensionHandlerGeneral.java	2007-11-22 18:43:54.000000000 -0300
-+++ xalan-j_2_7_1-modified/src/org/apache/xalan/extensions/ExtensionHandlerGeneral.java	2018-07-15 04:29:52.031474899 -0300
++++ xalan-j_2_7_1-modified/src/org/apache/xalan/extensions/ExtensionHandlerGeneral.java	2018-07-15 14:28:01.649682186 -0300
 @@ -27,6 +27,7 @@
  import java.net.URLConnection;
  import java.util.Hashtable;
@@ -183,17 +183,17 @@ diff -ur xalan-j_2_7_1/src/org/apache/xalan/extensions/ExtensionHandlerGeneral.j
  
    /** functions of namespace        */
 -  private Hashtable m_functions = new Hashtable();  
-+  private ConcurrentHashMap m_functions = new ConcurrentHashMap();  
++  private org.eclipse.collections.impl.map.mutable.ConcurrentHashMap m_functions = new org.eclipse.collections.impl.map.mutable.ConcurrentHashMap();  
  
    /** elements of namespace         */
 -  private Hashtable m_elements = new Hashtable();   
-+  private ConcurrentHashMap m_elements = new ConcurrentHashMap();   
++  private org.eclipse.collections.impl.map.mutable.ConcurrentHashMap m_elements = new org.eclipse.collections.impl.map.mutable.ConcurrentHashMap();   
  
    // BSF objects used to invoke BSF by reflection.  Do not import the BSF classes
    // since we don't want a compile dependency on BSF.
 diff -ur xalan-j_2_7_1/src/org/apache/xalan/extensions/ExtensionHandlerJava.java xalan-j_2_7_1-modified/src/org/apache/xalan/extensions/ExtensionHandlerJava.java
 --- xalan-j_2_7_1/src/org/apache/xalan/extensions/ExtensionHandlerJava.java	2007-11-22 18:43:52.000000000 -0300
-+++ xalan-j_2_7_1-modified/src/org/apache/xalan/extensions/ExtensionHandlerJava.java	2018-07-15 04:29:52.031474899 -0300
++++ xalan-j_2_7_1-modified/src/org/apache/xalan/extensions/ExtensionHandlerJava.java	2018-07-15 14:29:09.000385717 -0300
 @@ -21,6 +21,7 @@
  package org.apache.xalan.extensions;
  
@@ -207,7 +207,7 @@ diff -ur xalan-j_2_7_1/src/org/apache/xalan/extensions/ExtensionHandlerJava.java
  
    /** Table of cached methods          */
 -  private Hashtable m_cachedMethods = new Hashtable();
-+  private ConcurrentHashMap m_cachedMethods = new ConcurrentHashMap();
++  private org.eclipse.collections.impl.map.mutable.ConcurrentHashMap m_cachedMethods = new org.eclipse.collections.impl.map.mutable.ConcurrentHashMap();
  
    /**
     * Construct a new extension handler given all the information
@@ -251,7 +251,7 @@ diff -ur xalan-j_2_7_1/src/org/apache/xalan/extensions/ExtensionNamespacesManage
      {
 diff -ur xalan-j_2_7_1/src/org/apache/xalan/extensions/ExtensionsTable.java xalan-j_2_7_1-modified/src/org/apache/xalan/extensions/ExtensionsTable.java
 --- xalan-j_2_7_1/src/org/apache/xalan/extensions/ExtensionsTable.java	2007-11-22 18:43:54.000000000 -0300
-+++ xalan-j_2_7_1-modified/src/org/apache/xalan/extensions/ExtensionsTable.java	2018-07-15 04:29:52.031474899 -0300
++++ xalan-j_2_7_1-modified/src/org/apache/xalan/extensions/ExtensionsTable.java	2018-07-15 14:30:46.085828374 -0300
 @@ -22,6 +22,7 @@
  
  import java.util.Hashtable;
@@ -265,7 +265,7 @@ diff -ur xalan-j_2_7_1/src/org/apache/xalan/extensions/ExtensionsTable.java xala
     * @xsl.usage internal
     */
 -  public Hashtable m_extensionFunctionNamespaces = new Hashtable();
-+  public ConcurrentHashMap m_extensionFunctionNamespaces = new ConcurrentHashMap();
++  public org.eclipse.collections.impl.map.mutable.ConcurrentHashMap m_extensionFunctionNamespaces = new org.eclipse.collections.impl.map.mutable.ConcurrentHashMap();
    
    /**
     * The StylesheetRoot associated with this extensions table.
@@ -291,7 +291,7 @@ diff -ur xalan-j_2_7_1/src/org/apache/xalan/lib/ExsltSets.java xalan-j_2_7_1-mod
      {
 diff -ur xalan-j_2_7_1/src/org/apache/xalan/lib/Extensions.java xalan-j_2_7_1-modified/src/org/apache/xalan/lib/Extensions.java
 --- xalan-j_2_7_1/src/org/apache/xalan/lib/Extensions.java	2007-11-22 18:43:54.000000000 -0300
-+++ xalan-j_2_7_1-modified/src/org/apache/xalan/lib/Extensions.java	2018-07-15 04:47:28.106740920 -0300
++++ xalan-j_2_7_1-modified/src/org/apache/xalan/lib/Extensions.java	2018-07-15 15:33:29.001366506 -0300
 @@ -22,6 +22,7 @@
  
  import java.util.Hashtable;
@@ -305,7 +305,7 @@ diff -ur xalan-j_2_7_1/src/org/apache/xalan/lib/Extensions.java xalan-j_2_7_1-mo
        // If reflection failed, fallback to our internal EnvironmentCheck
        EnvironmentCheck envChecker = new EnvironmentCheck();
 -      Hashtable h = envChecker.getEnvironmentHash();
-+      ConcurrentHashMap h = envChecker.getEnvironmentHash();
++      org.eclipse.collections.impl.map.mutable.ConcurrentHashMap h = envChecker.getEnvironmentHash();
        resultNode = factoryDocument.createElement("checkEnvironmentExtension");
        envChecker.appendEnvironmentReport(resultNode, factoryDocument, h);
        envChecker = null;
@@ -337,7 +337,7 @@ diff -ur xalan-j_2_7_1/src/org/apache/xalan/lib/Redirect.java xalan-j_2_7_1-modi
     * Default append mode for bare open calls.  
 diff -ur xalan-j_2_7_1/src/org/apache/xalan/lib/sql/ConnectionPoolManager.java xalan-j_2_7_1-modified/src/org/apache/xalan/lib/sql/ConnectionPoolManager.java
 --- xalan-j_2_7_1/src/org/apache/xalan/lib/sql/ConnectionPoolManager.java	2007-11-22 18:43:54.000000000 -0300
-+++ xalan-j_2_7_1-modified/src/org/apache/xalan/lib/sql/ConnectionPoolManager.java	2018-07-15 04:29:52.031474899 -0300
++++ xalan-j_2_7_1-modified/src/org/apache/xalan/lib/sql/ConnectionPoolManager.java	2018-07-15 14:31:15.588955102 -0300
 @@ -23,6 +23,7 @@
   package org.apache.xalan.lib.sql;
  
@@ -351,7 +351,7 @@ diff -ur xalan-j_2_7_1/src/org/apache/xalan/lib/sql/ConnectionPoolManager.java x
    /**
     */
 -  private static Hashtable m_poolTable = null;
-+  private static ConcurrentHashMap m_poolTable = null;
++  private static org.eclipse.collections.impl.map.mutable.ConcurrentHashMap m_poolTable = null;
  
    /**
     */
@@ -360,13 +360,13 @@ diff -ur xalan-j_2_7_1/src/org/apache/xalan/lib/sql/ConnectionPoolManager.java x
       */   
      if (m_poolTable == null)
 -            m_poolTable = new Hashtable();
-+            m_poolTable = new ConcurrentHashMap();
++            m_poolTable = new org.eclipse.collections.impl.map.mutable.ConcurrentHashMap();
    }
  
    /**
 diff -ur xalan-j_2_7_1/src/org/apache/xalan/lib/sql/QueryParameter.java xalan-j_2_7_1-modified/src/org/apache/xalan/lib/sql/QueryParameter.java
 --- xalan-j_2_7_1/src/org/apache/xalan/lib/sql/QueryParameter.java	2007-11-22 18:43:54.000000000 -0300
-+++ xalan-j_2_7_1-modified/src/org/apache/xalan/lib/sql/QueryParameter.java	2018-07-15 04:29:52.031474899 -0300
++++ xalan-j_2_7_1-modified/src/org/apache/xalan/lib/sql/QueryParameter.java	2018-07-15 14:31:48.703940516 -0300
 @@ -24,6 +24,7 @@
  package org.apache.xalan.lib.sql;
  
@@ -380,7 +380,7 @@ diff -ur xalan-j_2_7_1/src/org/apache/xalan/lib/sql/QueryParameter.java xalan-j_
    private boolean m_output;
    private String  m_typeName;
 -  private static  Hashtable m_Typetable = null;
-+  private static  ConcurrentHashMap m_Typetable = null;
++  private static  org.eclipse.collections.impl.map.mutable.ConcurrentHashMap m_Typetable = null;
  
    public QueryParameter()
    {
@@ -389,42 +389,54 @@ diff -ur xalan-j_2_7_1/src/org/apache/xalan/lib/sql/QueryParameter.java xalan-j_
      {
        // Load up the type mapping table.
 -      m_Typetable = new Hashtable();
-+      m_Typetable = new ConcurrentHashMap();
++      m_Typetable = new org.eclipse.collections.impl.map.mutable.ConcurrentHashMap();
        m_Typetable.put("BIGINT", new Integer(java.sql.Types.BIGINT));
        m_Typetable.put("BINARY", new Integer(java.sql.Types.BINARY));
        m_Typetable.put("BIT", new Integer(java.sql.Types.BIT));
 diff -ur xalan-j_2_7_1/src/org/apache/xalan/processor/XSLTElementDef.java xalan-j_2_7_1-modified/src/org/apache/xalan/processor/XSLTElementDef.java
 --- xalan-j_2_7_1/src/org/apache/xalan/processor/XSLTElementDef.java	2007-11-22 18:43:53.000000000 -0300
-+++ xalan-j_2_7_1-modified/src/org/apache/xalan/processor/XSLTElementDef.java	2018-07-15 04:29:52.031474899 -0300
-@@ -22,6 +22,7 @@
++++ xalan-j_2_7_1-modified/src/org/apache/xalan/processor/XSLTElementDef.java	2018-07-15 15:31:59.030816418 -0300
+@@ -20,8 +20,10 @@
+  */
+ package org.apache.xalan.processor;
  
++import java.util.Collections;
  import java.util.Enumeration;
  import java.util.Hashtable;
 +import java.util.concurrent.ConcurrentHashMap;
  
  import org.apache.xalan.templates.Constants;
  import org.apache.xml.utils.QName;
-@@ -285,7 +286,7 @@
+@@ -285,7 +287,7 @@
  				if (def != null && def.getRequired())
  				{
  					if (m_requiredFound == null)			
 -						m_requiredFound = new Hashtable();
-+						m_requiredFound = new ConcurrentHashMap();
++						m_requiredFound = new org.eclipse.collections.impl.map.mutable.ConcurrentHashMap();
  					m_requiredFound.put(def.getName(), "xsl:" +def.getName()); 
  				}
  			}
-@@ -696,7 +697,7 @@
+@@ -696,7 +698,7 @@
      return m_required;
    }
  	
 -	Hashtable m_requiredFound;
-+	ConcurrentHashMap m_requiredFound;
++	org.eclipse.collections.impl.map.mutable.ConcurrentHashMap m_requiredFound;
  	
  	/**
     * Set this required element found.
+@@ -729,7 +731,7 @@
+   {
+ 		if (m_requiredFound == null)
+ 			return null;
+-		Enumeration elems = m_requiredFound.elements();
++		Enumeration elems = Collections.enumeration(m_requiredFound.values());
+ 		String s = "";
+ 		boolean first = true;
+ 		while (elems.hasMoreElements())
 diff -ur xalan-j_2_7_1/src/org/apache/xalan/templates/Stylesheet.java xalan-j_2_7_1-modified/src/org/apache/xalan/templates/Stylesheet.java
 --- xalan-j_2_7_1/src/org/apache/xalan/templates/Stylesheet.java	2007-11-22 18:43:52.000000000 -0300
-+++ xalan-j_2_7_1-modified/src/org/apache/xalan/templates/Stylesheet.java	2018-07-15 04:29:52.035475049 -0300
++++ xalan-j_2_7_1-modified/src/org/apache/xalan/templates/Stylesheet.java	2018-07-15 14:40:31.447762611 -0300
 @@ -26,6 +26,7 @@
  import java.util.Hashtable;
  import java.util.Stack;
@@ -438,7 +450,7 @@ diff -ur xalan-j_2_7_1/src/org/apache/xalan/templates/Stylesheet.java xalan-j_2_
     * @serial
     */
 -  private Hashtable m_NonXslTopLevel;
-+  private ConcurrentHashMap m_NonXslTopLevel;
++  private org.eclipse.collections.impl.map.mutable.ConcurrentHashMap m_NonXslTopLevel;
  
    /**
     * Set found a non-xslt element.
@@ -447,13 +459,22 @@ diff -ur xalan-j_2_7_1/src/org/apache/xalan/templates/Stylesheet.java xalan-j_2_
  
      if (null == m_NonXslTopLevel)
 -      m_NonXslTopLevel = new Hashtable();
-+      m_NonXslTopLevel = new ConcurrentHashMap();
++      m_NonXslTopLevel = new org.eclipse.collections.impl.map.mutable.ConcurrentHashMap();
  
      m_NonXslTopLevel.put(name, obj);
    }
+@@ -1486,7 +1487,7 @@
+       
+       if(null != m_NonXslTopLevel)
+       {
+-      	java.util.Enumeration elements = m_NonXslTopLevel.elements();
++      	java.util.Enumeration elements = java.util.Collections.enumeration(m_NonXslTopLevel.values());
+       	while(elements.hasMoreElements())
+       	{
+       	  ElemTemplateElement elem = (ElemTemplateElement)elements.nextElement();
 diff -ur xalan-j_2_7_1/src/org/apache/xalan/templates/StylesheetRoot.java xalan-j_2_7_1-modified/src/org/apache/xalan/templates/StylesheetRoot.java
 --- xalan-j_2_7_1/src/org/apache/xalan/templates/StylesheetRoot.java	2007-11-22 18:43:53.000000000 -0300
-+++ xalan-j_2_7_1-modified/src/org/apache/xalan/templates/StylesheetRoot.java	2018-07-15 04:40:04.905276342 -0300
++++ xalan-j_2_7_1-modified/src/org/apache/xalan/templates/StylesheetRoot.java	2018-07-15 14:46:05.421857897 -0300
 @@ -26,6 +26,8 @@
  import java.util.Hashtable;
  import java.util.Properties;
@@ -470,7 +491,7 @@ diff -ur xalan-j_2_7_1/src/org/apache/xalan/templates/StylesheetRoot.java xalan-
 -    m_attrSets = new HashMap();
 -    m_decimalFormatSymbols = new Hashtable();
 +    m_attrSets = new UnifiedMap();
-+    m_decimalFormatSymbols = new java.util.concurrent.ConcurrentHashMap();
++    m_decimalFormatSymbols = new ConcurrentHashMap();
      m_keyDecls = new Vector();
 -    m_namespaceAliasComposed = new Hashtable();
 +    m_namespaceAliasComposed = new ConcurrentHashMap();
@@ -491,7 +512,7 @@ diff -ur xalan-j_2_7_1/src/org/apache/xalan/templates/StylesheetRoot.java xalan-
     * @serial
     */
 -  private Hashtable m_decimalFormatSymbols;
-+  private java.util.concurrent.ConcurrentHashMap m_decimalFormatSymbols;
++  private ConcurrentHashMap m_decimalFormatSymbols;
  
    /**
     * Recompose the decimal-format declarations.
@@ -562,7 +583,7 @@ diff -ur xalan-j_2_7_1/src/org/apache/xalan/templates/TemplateList.java xalan-j_
      }
 diff -ur xalan-j_2_7_1/src/org/apache/xalan/transformer/TransformerIdentityImpl.java xalan-j_2_7_1-modified/src/org/apache/xalan/transformer/TransformerIdentityImpl.java
 --- xalan-j_2_7_1/src/org/apache/xalan/transformer/TransformerIdentityImpl.java	2007-11-22 18:43:52.000000000 -0300
-+++ xalan-j_2_7_1-modified/src/org/apache/xalan/transformer/TransformerIdentityImpl.java	2018-07-15 04:29:52.035475049 -0300
++++ xalan-j_2_7_1-modified/src/org/apache/xalan/transformer/TransformerIdentityImpl.java	2018-07-15 14:47:16.384321995 -0300
 @@ -23,6 +23,7 @@
  import java.io.IOException;
  import java.util.Hashtable;
@@ -576,7 +597,7 @@ diff -ur xalan-j_2_7_1/src/org/apache/xalan/transformer/TransformerIdentityImpl.
      if (null == m_params)
      {
 -      m_params = new Hashtable();
-+      m_params = new ConcurrentHashMap();
++      m_params = new org.eclipse.collections.impl.map.mutable.ConcurrentHashMap();
      }
  
      m_params.put(name, value);
@@ -585,171 +606,206 @@ diff -ur xalan-j_2_7_1/src/org/apache/xalan/transformer/TransformerIdentityImpl.
     *  Transformer interface.
     */
 -  private Hashtable m_params;
-+  private ConcurrentHashMap m_params;
++  private org.eclipse.collections.impl.map.mutable.ConcurrentHashMap m_params;
  
    /** The error listener for TrAX errors and warnings. */
    private ErrorListener m_errorListener =
 diff -ur xalan-j_2_7_1/src/org/apache/xalan/xslt/EnvironmentCheck.java xalan-j_2_7_1-modified/src/org/apache/xalan/xslt/EnvironmentCheck.java
 --- xalan-j_2_7_1/src/org/apache/xalan/xslt/EnvironmentCheck.java	2007-11-22 18:43:53.000000000 -0300
-+++ xalan-j_2_7_1-modified/src/org/apache/xalan/xslt/EnvironmentCheck.java	2018-07-15 04:47:45.131077990 -0300
-@@ -29,6 +29,7 @@
++++ xalan-j_2_7_1-modified/src/org/apache/xalan/xslt/EnvironmentCheck.java	2018-07-15 15:34:30.870848887 -0300
+@@ -27,8 +27,10 @@
+ import java.lang.reflect.Method;
+ import java.util.Enumeration;
  import java.util.Hashtable;
++import java.util.Iterator;
  import java.util.StringTokenizer;
  import java.util.Vector;
 +import java.util.concurrent.ConcurrentHashMap;
  
  import org.w3c.dom.Document;
  import org.w3c.dom.Element;
-@@ -166,7 +167,7 @@
+@@ -166,7 +168,7 @@
        outWriter = pw;
  
      // Setup a hash to store various environment information in
 -    Hashtable hash = getEnvironmentHash();
-+    ConcurrentHashMap hash = getEnvironmentHash();
++    org.eclipse.collections.impl.map.mutable.ConcurrentHashMap hash = getEnvironmentHash();
  
      // Check for ERROR keys in the hashtable, and print report
      boolean environmentHasErrors = writeEnvironmentReport(hash);
-@@ -212,10 +213,10 @@
+@@ -212,10 +214,10 @@
     * @return Hashtable full of useful environment info about Xalan 
     * and related system properties, etc.
     */
 -  public Hashtable getEnvironmentHash()
-+  public ConcurrentHashMap getEnvironmentHash()
++  public org.eclipse.collections.impl.map.mutable.ConcurrentHashMap getEnvironmentHash()
    {
      // Setup a hash to store various environment information in
 -    Hashtable hash = new Hashtable();
-+    ConcurrentHashMap hash = new ConcurrentHashMap();
++    org.eclipse.collections.impl.map.mutable.ConcurrentHashMap hash = new org.eclipse.collections.impl.map.mutable.ConcurrentHashMap();
  
      // Call various worker methods to fill in the hash
      //  These are explicitly separate for maintenance and so 
-@@ -245,7 +246,7 @@
+@@ -245,7 +247,7 @@
     * @see #appendEnvironmentReport(Node, Document, Hashtable)
     * for an equivalent that appends to a Node instead
     */
 -  protected boolean writeEnvironmentReport(Hashtable h)
-+  protected boolean writeEnvironmentReport(ConcurrentHashMap h)
++  protected boolean writeEnvironmentReport(org.eclipse.collections.impl.map.mutable.ConcurrentHashMap h)
    {
  
      if (null == h)
-@@ -406,7 +407,7 @@
+@@ -260,12 +262,12 @@
+       "#---- BEGIN writeEnvironmentReport($Revision$): Useful stuff found: ----");
+ 
+     // Fake the Properties-like output
+-    for (Enumeration keys = h.keys(); 
+-         keys.hasMoreElements();
++    for (Iterator keys = h.keySet().iterator(); 
++         keys.hasNext();
+         /* no increment portion */
+         )
+     {
+-      Object key = keys.nextElement();
++      Object key = keys.next();
+       String keyStr = (String) key;
+       try
+       {
+@@ -406,7 +408,7 @@
     * @see #writeEnvironmentReport(Hashtable)
     * for an equivalent that writes to a PrintWriter instead
     */
 -  public void appendEnvironmentReport(Node container, Document factory, Hashtable h)
-+  public void appendEnvironmentReport(Node container, Document factory, ConcurrentHashMap h)
++  public void appendEnvironmentReport(Node container, Document factory, org.eclipse.collections.impl.map.mutable.ConcurrentHashMap h)
    {
      if ((null == container) || (null == factory))
      {
-@@ -559,11 +560,11 @@
+@@ -433,12 +435,12 @@
+       Element hashNode = factory.createElement("environment");
+       envCheckNode.appendChild(hashNode);
+       
+-      for (Enumeration keys = h.keys(); 
+-           keys.hasMoreElements();
++      for (Iterator keys = h.iterator(); 
++           keys.hasNext();
+           /* no increment portion */
+           )
+       {
+-        Object key = keys.nextElement();
++        Object key = keys.next();
+         String keyStr = (String) key;
+         try
+         {
+@@ -559,11 +561,11 @@
     * @see #jarNames
     * @see #checkPathForJars(String, String[])
     */
 -  protected void checkSystemProperties(Hashtable h)
-+  protected void checkSystemProperties(ConcurrentHashMap h)
++  protected void checkSystemProperties(org.eclipse.collections.impl.map.mutable.ConcurrentHashMap h)
    {
  
      if (null == h)
 -      h = new Hashtable();
-+      h = new ConcurrentHashMap();
++      h = new org.eclipse.collections.impl.map.mutable.ConcurrentHashMap();
  
      // Grab java version for later use
      try
-@@ -778,11 +779,11 @@
+@@ -778,11 +780,11 @@
     *
     * @param h Hashtable to put information in
     */
 -  protected void checkJAXPVersion(Hashtable h)
-+  protected void checkJAXPVersion(ConcurrentHashMap h)
++  protected void checkJAXPVersion(org.eclipse.collections.impl.map.mutable.ConcurrentHashMap h)
    {
  
      if (null == h)
 -      h = new Hashtable();
-+      h = new ConcurrentHashMap();
++      h = new org.eclipse.collections.impl.map.mutable.ConcurrentHashMap();
  
      final Class noArgs[] = new Class[0];
      Class clazz = null;
-@@ -828,11 +829,11 @@
+@@ -828,11 +830,11 @@
     *
     * @param h Hashtable to put information in
     */
 -  protected void checkProcessorVersion(Hashtable h)
-+  protected void checkProcessorVersion(ConcurrentHashMap h)
++  protected void checkProcessorVersion(org.eclipse.collections.impl.map.mutable.ConcurrentHashMap h)
    {
  
      if (null == h)
 -      h = new Hashtable();
-+      h = new ConcurrentHashMap();
++      h = new org.eclipse.collections.impl.map.mutable.ConcurrentHashMap();
  
      try
      {
-@@ -917,11 +918,11 @@
+@@ -917,11 +919,11 @@
     *
     * @param h Hashtable to put information in
     */
 -  protected void checkParserVersion(Hashtable h)
-+  protected void checkParserVersion(ConcurrentHashMap h)
++  protected void checkParserVersion(org.eclipse.collections.impl.map.mutable.ConcurrentHashMap h)
    {
  
      if (null == h)
 -      h = new Hashtable();
-+      h = new ConcurrentHashMap();
++      h = new org.eclipse.collections.impl.map.mutable.ConcurrentHashMap();
  
      try
      {
-@@ -981,11 +982,11 @@
+@@ -981,11 +983,11 @@
     *
     * @param h Hashtable to put information in
     */
 -  protected void checkAntVersion(Hashtable h)
-+  protected void checkAntVersion(ConcurrentHashMap h)
++  protected void checkAntVersion(org.eclipse.collections.impl.map.mutable.ConcurrentHashMap h)
    {
  
      if (null == h)
 -      h = new Hashtable();
-+      h = new ConcurrentHashMap();
++      h = new org.eclipse.collections.impl.map.mutable.ConcurrentHashMap();
  
      try
      {
-@@ -1016,11 +1017,11 @@
+@@ -1016,11 +1018,11 @@
     *
     * @param h Hashtable to put information in
     */
 -  protected void checkDOMVersion(Hashtable h)
-+  protected void checkDOMVersion(ConcurrentHashMap h)
++  protected void checkDOMVersion(org.eclipse.collections.impl.map.mutable.ConcurrentHashMap h)
    {
  
      if (null == h)
 -      h = new Hashtable();
-+      h = new ConcurrentHashMap();
++      h = new org.eclipse.collections.impl.map.mutable.ConcurrentHashMap();
  
      final String DOM_LEVEL2_CLASS = "org.w3c.dom.Document";
      final String DOM_LEVEL2_METHOD = "createElementNS";  // String, String
-@@ -1094,11 +1095,11 @@
+@@ -1094,11 +1096,11 @@
     *
     * @param h Hashtable to put information in
     */
 -  protected void checkSAXVersion(Hashtable h)
-+  protected void checkSAXVersion(ConcurrentHashMap h)
++  protected void checkSAXVersion(org.eclipse.collections.impl.map.mutable.ConcurrentHashMap h)
    {
  
      if (null == h)
 -      h = new Hashtable();
-+      h = new ConcurrentHashMap();
++      h = new org.eclipse.collections.impl.map.mutable.ConcurrentHashMap();
  
      final String SAX_VERSION1_CLASS = "org.xml.sax.Parser";
      final String SAX_VERSION1_METHOD = "parse";  // String
-@@ -1181,7 +1182,7 @@
+@@ -1181,7 +1183,7 @@
     *
     * @see #getApparentVersion(String, long)
     */
 -  private static Hashtable jarVersions = new Hashtable();
-+  private static ConcurrentHashMap jarVersions = new ConcurrentHashMap();
++  private static org.eclipse.collections.impl.map.mutable.ConcurrentHashMap jarVersions = new org.eclipse.collections.impl.map.mutable.ConcurrentHashMap();
  
    /** 
     * Static initializer for jarVersions table.  
 diff -ur xalan-j_2_7_1/src/org/apache/xalan/xsltc/compiler/FunctionCall.java xalan-j_2_7_1-modified/src/org/apache/xalan/xsltc/compiler/FunctionCall.java
 --- xalan-j_2_7_1/src/org/apache/xalan/xsltc/compiler/FunctionCall.java	2007-11-22 18:43:52.000000000 -0300
-+++ xalan-j_2_7_1-modified/src/org/apache/xalan/xsltc/compiler/FunctionCall.java	2018-07-15 04:29:52.039475199 -0300
++++ xalan-j_2_7_1-modified/src/org/apache/xalan/xsltc/compiler/FunctionCall.java	2018-07-15 14:52:37.130526519 -0300
 @@ -27,6 +27,7 @@
  import java.util.Enumeration;
  import java.util.Hashtable;
@@ -763,21 +819,21 @@ diff -ur xalan-j_2_7_1/src/org/apache/xalan/xsltc/compiler/FunctionCall.java xal
  
      // Legal conversions between Java and internal types.
 -    private static final Hashtable _java2Internal = new Hashtable();
-+    private static final ConcurrentHashMap _java2Internal = new ConcurrentHashMap();
++    private static final org.eclipse.collections.impl.map.mutable.ConcurrentHashMap _java2Internal = new org.eclipse.collections.impl.map.mutable.ConcurrentHashMap();
      
      // The mappings between EXSLT extension namespaces and implementation classes
 -    private static final Hashtable _extensionNamespaceTable = new Hashtable();
-+    private static final ConcurrentHashMap _extensionNamespaceTable = new ConcurrentHashMap();
++    private static final org.eclipse.collections.impl.map.mutable.ConcurrentHashMap _extensionNamespaceTable = new org.eclipse.collections.impl.map.mutable.ConcurrentHashMap();
  
      // Extension functions that are implemented in BasisLibrary
 -    private static final Hashtable _extensionFunctionTable = new Hashtable();
-+    private static final ConcurrentHashMap _extensionFunctionTable = new ConcurrentHashMap();
++    private static final org.eclipse.collections.impl.map.mutable.ConcurrentHashMap _extensionFunctionTable = new org.eclipse.collections.impl.map.mutable.ConcurrentHashMap();
      /**
       * inner class to used in internal2Java mappings, contains
       * the Java type and the distance between the internal type and
 diff -ur xalan-j_2_7_1/src/org/apache/xalan/xsltc/compiler/LiteralElement.java xalan-j_2_7_1-modified/src/org/apache/xalan/xsltc/compiler/LiteralElement.java
 --- xalan-j_2_7_1/src/org/apache/xalan/xsltc/compiler/LiteralElement.java	2007-11-22 18:43:52.000000000 -0300
-+++ xalan-j_2_7_1-modified/src/org/apache/xalan/xsltc/compiler/LiteralElement.java	2018-07-15 04:52:17.518033628 -0300
++++ xalan-j_2_7_1-modified/src/org/apache/xalan/xsltc/compiler/LiteralElement.java	2018-07-15 14:53:29.740644888 -0300
 @@ -24,6 +24,8 @@
  import java.util.Enumeration;
  import java.util.Hashtable;
@@ -824,7 +880,7 @@ diff -ur xalan-j_2_7_1/src/org/apache/xalan/xsltc/compiler/LiteralElement.java x
      	 if (_attributeElements != null) {
      	     int numAttrs = _attributeElements.size();
 -    	     Hashtable attrsTable = null;
-+    	     ConcurrentHashMap attrsTable = null;
++    	     org.eclipse.collections.impl.map.mutable.ConcurrentHashMap attrsTable = null;
      	     for (int i = 0; i < numAttrs; i++) {
      	         SyntaxTreeNode node = (SyntaxTreeNode)_attributeElements.elementAt(i);
      	         
@@ -833,13 +889,13 @@ diff -ur xalan-j_2_7_1/src/org/apache/xalan/xsltc/compiler/LiteralElement.java x
      	         else if (node instanceof XslAttribute) {   	             
      	             if (attrsTable == null) {
 -    	             	attrsTable = new Hashtable();
-+    	             	attrsTable = new ConcurrentHashMap();
++    	             	attrsTable = new org.eclipse.collections.impl.map.mutable.ConcurrentHashMap();
      	                 for (int k = 0; k < i; k++) {
      	                     SyntaxTreeNode n = (SyntaxTreeNode)_attributeElements.elementAt(k);
      	                     if (n instanceof LiteralAttribute) {
 diff -ur xalan-j_2_7_1/src/org/apache/xalan/xsltc/compiler/Mode.java xalan-j_2_7_1-modified/src/org/apache/xalan/xsltc/compiler/Mode.java
 --- xalan-j_2_7_1/src/org/apache/xalan/xsltc/compiler/Mode.java	2007-11-22 18:43:52.000000000 -0300
-+++ xalan-j_2_7_1-modified/src/org/apache/xalan/xsltc/compiler/Mode.java	2018-07-15 04:50:36.130392990 -0300
++++ xalan-j_2_7_1-modified/src/org/apache/xalan/xsltc/compiler/Mode.java	2018-07-15 15:36:22.485052031 -0300
 @@ -25,6 +25,7 @@
  import java.util.Hashtable;
  import java.util.Iterator;
@@ -853,19 +909,19 @@ diff -ur xalan-j_2_7_1/src/org/apache/xalan/xsltc/compiler/Mode.java xalan-j_2_7
       * A mapping between named templates and Mode objects.
       */
 -    private Hashtable _namedTemplates = new Hashtable();
-+    private ConcurrentHashMap _namedTemplates = new ConcurrentHashMap();
++    private org.eclipse.collections.impl.map.mutable.ConcurrentHashMap _namedTemplates = new org.eclipse.collections.impl.map.mutable.ConcurrentHashMap();
  
      /**
       * A mapping between templates and instruction handles.
       */
 -    private Hashtable _templateIHs = new Hashtable();
-+    private ConcurrentHashMap _templateIHs = new ConcurrentHashMap();
++    private org.eclipse.collections.impl.map.mutable.ConcurrentHashMap _templateIHs = new org.eclipse.collections.impl.map.mutable.ConcurrentHashMap();
  
      /**
       * A mapping between templates and instruction lists.
       */
 -    private Hashtable _templateILs = new Hashtable();
-+    private ConcurrentHashMap _templateILs = new ConcurrentHashMap();
++    private org.eclipse.collections.impl.map.mutable.ConcurrentHashMap _templateILs = new org.eclipse.collections.impl.map.mutable.ConcurrentHashMap();
  
      /**
       * A reference to the pattern matching the root node.
@@ -887,6 +943,28 @@ diff -ur xalan-j_2_7_1/src/org/apache/xalan/xsltc/compiler/Mode.java xalan-j_2_7
  	}
  	_importLevels.put(new Integer(max), new Integer(min));
  	return _methodName + '_' + max;
+@@ -558,15 +559,15 @@
+ 				  MethodGenerator methodGen,
+ 				  InstructionHandle next) 
+     {
+-        Enumeration templates = _namedTemplates.keys();
+-        while (templates.hasMoreElements()) {
+-            final Template template = (Template)templates.nextElement();
++        Iterator templates = _namedTemplates.keySet().iterator();
++        while (templates.hasNext()) {
++            final Template template = (Template)templates.next();
+             compileNamedTemplate(template, classGen);
+         }
+ 
+-	templates = _neededTemplates.keys();
+-	while (templates.hasMoreElements()) {
+-	    final Template template = (Template)templates.nextElement();
++	templates = _neededTemplates.keySet().iterator();
++	while (templates.hasNext()) {
++	    final Template template = (Template)templates.next();
+ 	    if (template.hasContents()) {
+ 		// !!! TODO templates both named and matched
+ 		InstructionList til = template.compile(classGen, methodGen);
 @@ -1043,9 +1044,9 @@
  
  	// Compile method(s) for <xsl:apply-imports/> for this mode
@@ -905,18 +983,18 @@ diff -ur xalan-j_2_7_1/src/org/apache/xalan/xsltc/compiler/Mode.java xalan-j_2_7
  
  	// Clear some datastructures
 -	_namedTemplates = new Hashtable();
-+	_namedTemplates = new ConcurrentHashMap();
++	_namedTemplates = new org.eclipse.collections.impl.map.mutable.ConcurrentHashMap();
  	_neededTemplates = new Hashtable();
 -	_templateIHs = new Hashtable();
 -	_templateILs = new Hashtable();
-+	_templateIHs = new ConcurrentHashMap();
-+	_templateILs = new ConcurrentHashMap();
++	_templateIHs = new org.eclipse.collections.impl.map.mutable.ConcurrentHashMap();
++	_templateILs = new org.eclipse.collections.impl.map.mutable.ConcurrentHashMap();
  	_patternGroups = new Vector[32];
  	_rootPattern = null;
  
 diff -ur xalan-j_2_7_1/src/org/apache/xalan/xsltc/compiler/Parser.java xalan-j_2_7_1-modified/src/org/apache/xalan/xsltc/compiler/Parser.java
 --- xalan-j_2_7_1/src/org/apache/xalan/xsltc/compiler/Parser.java	2007-11-22 18:43:54.000000000 -0300
-+++ xalan-j_2_7_1-modified/src/org/apache/xalan/xsltc/compiler/Parser.java	2018-07-15 04:58:28.988158972 -0300
++++ xalan-j_2_7_1-modified/src/org/apache/xalan/xsltc/compiler/Parser.java	2018-07-15 14:58:46.604338159 -0300
 @@ -31,6 +31,7 @@
  import java.util.Stack;
  import java.util.StringTokenizer;
@@ -933,10 +1011,10 @@ diff -ur xalan-j_2_7_1/src/org/apache/xalan/xsltc/compiler/Parser.java xalan-j_2
 -    private Hashtable   _instructionAttrs;;  // reqd and opt attrs 
 -    private Hashtable   _qNames;
 -    private Hashtable   _namespaces;
-+    private ConcurrentHashMap   _instructionClasses; // Maps instructions to classes
-+    private ConcurrentHashMap   _instructionAttrs;;  // reqd and opt attrs 
-+    private ConcurrentHashMap   _qNames;
-+    private ConcurrentHashMap   _namespaces;
++    private org.eclipse.collections.impl.map.mutable.ConcurrentHashMap   _instructionClasses; // Maps instructions to classes
++    private org.eclipse.collections.impl.map.mutable.ConcurrentHashMap   _instructionAttrs;;  // reqd and opt attrs 
++    private org.eclipse.collections.impl.map.mutable.ConcurrentHashMap   _qNames;
++    private org.eclipse.collections.impl.map.mutable.ConcurrentHashMap   _namespaces;
      private QName       _useAttributeSets;
      private QName       _excludeResultPrefixes;
      private QName       _extensionElementPrefixes;
@@ -954,17 +1032,17 @@ diff -ur xalan-j_2_7_1/src/org/apache/xalan/xsltc/compiler/Parser.java xalan-j_2
 -	_instructionClasses  = new Hashtable();
 -	_instructionAttrs    = new Hashtable();
 -	_variableScope       = new Hashtable();
-+	_qNames              = new ConcurrentHashMap(512);
-+	_namespaces          = new ConcurrentHashMap();
-+	_instructionClasses  = new ConcurrentHashMap();
-+	_instructionAttrs    = new ConcurrentHashMap();
++	_qNames              = new org.eclipse.collections.impl.map.mutable.ConcurrentHashMap(512);
++	_namespaces          = new org.eclipse.collections.impl.map.mutable.ConcurrentHashMap();
++	_instructionClasses  = new org.eclipse.collections.impl.map.mutable.ConcurrentHashMap();
++	_instructionAttrs    = new org.eclipse.collections.impl.map.mutable.ConcurrentHashMap();
 +	_variableScope       = new org.eclipse.collections.impl.map.mutable.ConcurrentHashMap();
  	_template            = null;
  	_errors              = new Vector();
  	_warnings            = new Vector();
 diff -ur xalan-j_2_7_1/src/org/apache/xalan/xsltc/compiler/Stylesheet.java xalan-j_2_7_1-modified/src/org/apache/xalan/xsltc/compiler/Stylesheet.java
 --- xalan-j_2_7_1/src/org/apache/xalan/xsltc/compiler/Stylesheet.java	2007-11-22 18:43:55.000000000 -0300
-+++ xalan-j_2_7_1-modified/src/org/apache/xalan/xsltc/compiler/Stylesheet.java	2018-07-15 04:29:52.039475199 -0300
++++ xalan-j_2_7_1-modified/src/org/apache/xalan/xsltc/compiler/Stylesheet.java	2018-07-15 15:03:43.106348577 -0300
 @@ -22,6 +22,7 @@
  package org.apache.xalan.xsltc.compiler;
  
@@ -978,7 +1056,7 @@ diff -ur xalan-j_2_7_1/src/org/apache/xalan/xsltc/compiler/Stylesheet.java xalan
       * Mapping between mode names and Mode instances.
       */
 -    private final Hashtable _modes = new Hashtable();
-+    private final ConcurrentHashMap _modes = new ConcurrentHashMap();
++    private final org.eclipse.collections.impl.map.mutable.ConcurrentHashMap _modes = new org.eclipse.collections.impl.map.mutable.ConcurrentHashMap();
      
      /**
       * A reference to the default Mode object.
@@ -987,13 +1065,38 @@ diff -ur xalan-j_2_7_1/src/org/apache/xalan/xsltc/compiler/Stylesheet.java xalan
       * Mapping between extension URIs and their prefixes.
       */
 -    private final Hashtable _extensions = new Hashtable();
-+    private final ConcurrentHashMap _extensions = new ConcurrentHashMap();
++    private final org.eclipse.collections.impl.map.mutable.ConcurrentHashMap _extensions = new org.eclipse.collections.impl.map.mutable.ConcurrentHashMap();
  
      /**
       * Reference to the stylesheet from which this stylesheet was
+@@ -601,18 +602,18 @@
+ 	if (_defaultMode == null)
+ 	    _defaultMode = new Mode(null, this, Constants.EMPTYSTRING);
+ 	_defaultMode.processPatterns(_keys);
+-	final Enumeration modes = _modes.elements();
+-	while (modes.hasMoreElements()) {
+-	    final Mode mode = (Mode)modes.nextElement();
++	final Iterator modes = _modes.iterator();
++	while (modes.hasNext()) {
++	    final Mode mode = (Mode)modes.next();
+ 	    mode.processPatterns(_keys);
+ 	}
+     }
+ 	
+     private void compileModes(ClassGenerator classGen) {
+ 	_defaultMode.compileApplyTemplates(classGen);
+-	final Enumeration modes = _modes.elements();
+-	while (modes.hasMoreElements()) {
+-	    final Mode mode = (Mode)modes.nextElement();
++	final Iterator modes = _modes.iterator();
++	while (modes.hasNext()) {
++	    final Mode mode = (Mode)modes.next();
+ 	    mode.compileApplyTemplates(classGen);
+ 	}
+     }
 diff -ur xalan-j_2_7_1/src/org/apache/xalan/xsltc/compiler/SymbolTable.java xalan-j_2_7_1-modified/src/org/apache/xalan/xsltc/compiler/SymbolTable.java
 --- xalan-j_2_7_1/src/org/apache/xalan/xsltc/compiler/SymbolTable.java	2007-11-22 18:43:53.000000000 -0300
-+++ xalan-j_2_7_1-modified/src/org/apache/xalan/xsltc/compiler/SymbolTable.java	2018-07-15 04:29:52.043475349 -0300
++++ xalan-j_2_7_1-modified/src/org/apache/xalan/xsltc/compiler/SymbolTable.java	2018-07-15 15:05:12.046343032 -0300
 @@ -24,6 +24,7 @@
  import java.util.Hashtable;
  import java.util.StringTokenizer;
@@ -1008,8 +1111,8 @@ diff -ur xalan-j_2_7_1/src/org/apache/xalan/xsltc/compiler/SymbolTable.java xala
      // These hashtables are used for all stylesheets
 -    private final Hashtable _stylesheets = new Hashtable();
 -    private final Hashtable _primops     = new Hashtable();
-+    private final ConcurrentHashMap _stylesheets = new ConcurrentHashMap();
-+    private final ConcurrentHashMap _primops     = new ConcurrentHashMap();
++    private final org.eclipse.collections.impl.map.mutable.ConcurrentHashMap _stylesheets = new org.eclipse.collections.impl.map.mutable.ConcurrentHashMap();
++    private final org.eclipse.collections.impl.map.mutable.ConcurrentHashMap _primops     = new org.eclipse.collections.impl.map.mutable.ConcurrentHashMap();
  
      // These hashtables are used for some stylesheets
 -    private Hashtable _variables = null;
@@ -1020,12 +1123,12 @@ diff -ur xalan-j_2_7_1/src/org/apache/xalan/xsltc/compiler/SymbolTable.java xala
 -    private Hashtable _decimalFormats = null;
 -    private Hashtable _keys = null;
 +    private org.eclipse.collections.impl.map.mutable.ConcurrentHashMap _variables = null;
-+    private ConcurrentHashMap _templates = null;
++    private org.eclipse.collections.impl.map.mutable.ConcurrentHashMap _templates = null;
 +    private org.eclipse.collections.impl.map.mutable.ConcurrentHashMap _attributeSets = null;
-+    private ConcurrentHashMap _aliases = null;
-+    private ConcurrentHashMap _excludedURI = null;
-+    private ConcurrentHashMap _decimalFormats = null;
-+    private ConcurrentHashMap _keys = null;
++    private org.eclipse.collections.impl.map.mutable.ConcurrentHashMap _aliases = null;
++    private org.eclipse.collections.impl.map.mutable.ConcurrentHashMap _excludedURI = null;
++    private org.eclipse.collections.impl.map.mutable.ConcurrentHashMap _decimalFormats = null;
++    private org.eclipse.collections.impl.map.mutable.ConcurrentHashMap _keys = null;
  
      public DecimalFormatting getDecimalFormatting(QName name) {
  	if (_decimalFormats == null) return null;
@@ -1034,7 +1137,7 @@ diff -ur xalan-j_2_7_1/src/org/apache/xalan/xsltc/compiler/SymbolTable.java xala
  
      public void addDecimalFormatting(QName name, DecimalFormatting symbols) {
 -	if (_decimalFormats == null) _decimalFormats = new Hashtable();
-+	if (_decimalFormats == null) _decimalFormats = new ConcurrentHashMap();
++	if (_decimalFormats == null) _decimalFormats = new org.eclipse.collections.impl.map.mutable.ConcurrentHashMap();
  	_decimalFormats.put(name, symbols);
      }
  
@@ -1043,7 +1146,7 @@ diff -ur xalan-j_2_7_1/src/org/apache/xalan/xsltc/compiler/SymbolTable.java xala
  
      public void addKey(QName name, Key key) {
 -	if (_keys == null) _keys = new Hashtable();
-+	if (_keys == null) _keys = new ConcurrentHashMap();
++	if (_keys == null) _keys = new org.eclipse.collections.impl.map.mutable.ConcurrentHashMap();
  	_keys.put(name, key);
      }
      
@@ -1052,7 +1155,7 @@ diff -ur xalan-j_2_7_1/src/org/apache/xalan/xsltc/compiler/SymbolTable.java xala
      public Template addTemplate(Template template) {
  	final QName name = template.getName();
 -	if (_templates == null) _templates = new Hashtable();
-+	if (_templates == null) _templates = new ConcurrentHashMap();
++	if (_templates == null) _templates = new org.eclipse.collections.impl.map.mutable.ConcurrentHashMap();
  	return (Template)_templates.put(name, template);
      }
  	
@@ -1086,7 +1189,7 @@ diff -ur xalan-j_2_7_1/src/org/apache/xalan/xsltc/compiler/SymbolTable.java xala
       */ 
      public void addPrefixAlias(String prefix, String alias) {
 -	if (_aliases == null) _aliases = new Hashtable();
-+	if (_aliases == null) _aliases = new ConcurrentHashMap();
++	if (_aliases == null) _aliases = new org.eclipse.collections.impl.map.mutable.ConcurrentHashMap();
  	_aliases.put(prefix,alias);
      }
  
@@ -1095,7 +1198,7 @@ diff -ur xalan-j_2_7_1/src/org/apache/xalan/xsltc/compiler/SymbolTable.java xala
  
  	// Create new hashtable of exlcuded URIs if none exists
 -	if (_excludedURI == null) _excludedURI = new Hashtable();
-+	if (_excludedURI == null) _excludedURI = new ConcurrentHashMap();
++	if (_excludedURI == null) _excludedURI = new org.eclipse.collections.impl.map.mutable.ConcurrentHashMap();
  
  	// Register the namespace URI
  	Integer refcnt = (Integer)_excludedURI.get(uri);
@@ -1145,7 +1248,7 @@ diff -ur xalan-j_2_7_1/src/org/apache/xalan/xsltc/compiler/UseAttributeSets.java
  	    // Compile the call to the set's method if the set exists
 diff -ur xalan-j_2_7_1/src/org/apache/xalan/xsltc/compiler/XSLTC.java xalan-j_2_7_1-modified/src/org/apache/xalan/xsltc/compiler/XSLTC.java
 --- xalan-j_2_7_1/src/org/apache/xalan/xsltc/compiler/XSLTC.java	2007-11-22 18:43:52.000000000 -0300
-+++ xalan-j_2_7_1-modified/src/org/apache/xalan/xsltc/compiler/XSLTC.java	2018-07-15 04:29:52.043475349 -0300
++++ xalan-j_2_7_1-modified/src/org/apache/xalan/xsltc/compiler/XSLTC.java	2018-07-15 15:06:57.366075389 -0300
 @@ -35,6 +35,7 @@
  import java.util.Map;
  import java.util.Properties;
@@ -1160,16 +1263,16 @@ diff -ur xalan-j_2_7_1/src/org/apache/xalan/xsltc/compiler/XSLTC.java xalan-j_2_
      private Vector    _namesIndex; // Index of all registered QNames
 -    private Hashtable _elements;   // Hashtable of all registered elements
 -    private Hashtable _attributes; // Hashtable of all registered attributes
-+    private ConcurrentHashMap _elements;   // Hashtable of all registered elements
-+    private ConcurrentHashMap _attributes; // Hashtable of all registered attributes
++    private org.eclipse.collections.impl.map.mutable.ConcurrentHashMap _elements;   // Hashtable of all registered elements
++    private org.eclipse.collections.impl.map.mutable.ConcurrentHashMap _attributes; // Hashtable of all registered attributes
  
      // Namespace index tables
      private int       _nextNSType; // Next available namespace type
      private Vector    _namespaceIndex; // Index of all registered namespaces
 -    private Hashtable _namespaces; // Hashtable of all registered namespaces
 -    private Hashtable _namespacePrefixes;// Hashtable of all registered namespace prefixes
-+    private ConcurrentHashMap _namespaces; // Hashtable of all registered namespaces
-+    private ConcurrentHashMap _namespacePrefixes;// Hashtable of all registered namespace prefixes
++    private org.eclipse.collections.impl.map.mutable.ConcurrentHashMap _namespaces; // Hashtable of all registered namespaces
++    private org.eclipse.collections.impl.map.mutable.ConcurrentHashMap _namespacePrefixes;// Hashtable of all registered namespace prefixes
  
  
      // All literal text in the stylesheet
@@ -1180,20 +1283,20 @@ diff -ur xalan-j_2_7_1/src/org/apache/xalan/xsltc/compiler/XSLTC.java xalan-j_2_
 -	_elements       = new Hashtable();
 -	_attributes     = new Hashtable();
 -	_namespaces     = new Hashtable();
-+	_elements       = new ConcurrentHashMap();
-+	_attributes     = new ConcurrentHashMap();
-+	_namespaces     = new ConcurrentHashMap();
++	_elements       = new org.eclipse.collections.impl.map.mutable.ConcurrentHashMap();
++	_attributes     = new org.eclipse.collections.impl.map.mutable.ConcurrentHashMap();
++	_namespaces     = new org.eclipse.collections.impl.map.mutable.ConcurrentHashMap();
  	_namespaces.put("",new Integer(_nextNSType));
  	_namesIndex     = new Vector(128);
  	_namespaceIndex = new Vector(32);
 -	_namespacePrefixes = new Hashtable();
-+	_namespacePrefixes = new ConcurrentHashMap();
++	_namespacePrefixes = new org.eclipse.collections.impl.map.mutable.ConcurrentHashMap();
          _stylesheet     = null;
  	_parser.init();
  	//_variableSerial     = 1;
 diff -ur xalan-j_2_7_1/src/org/apache/xalan/xsltc/dom/DocumentCache.java xalan-j_2_7_1-modified/src/org/apache/xalan/xsltc/dom/DocumentCache.java
 --- xalan-j_2_7_1/src/org/apache/xalan/xsltc/dom/DocumentCache.java	2007-11-22 18:43:54.000000000 -0300
-+++ xalan-j_2_7_1-modified/src/org/apache/xalan/xsltc/dom/DocumentCache.java	2018-07-15 04:29:52.043475349 -0300
++++ xalan-j_2_7_1-modified/src/org/apache/xalan/xsltc/dom/DocumentCache.java	2018-07-15 15:08:11.257746081 -0300
 @@ -28,6 +28,7 @@
  import java.net.URLDecoder;
  import java.util.Date;
@@ -1207,7 +1310,7 @@ diff -ur xalan-j_2_7_1/src/org/apache/xalan/xsltc/dom/DocumentCache.java xalan-j
  
      private int       _size;
 -    private Hashtable _references;
-+    private ConcurrentHashMap _references;
++    private org.eclipse.collections.impl.map.mutable.ConcurrentHashMap _references;
      private String[]  _URIs;
      private int       _count;
      private int       _current;
@@ -1216,7 +1319,7 @@ diff -ur xalan-j_2_7_1/src/org/apache/xalan/xsltc/dom/DocumentCache.java xalan-j
  	_current = 0;
  	_size  = size;
 -	_references = new Hashtable(_size+2);
-+	_references = new ConcurrentHashMap(_size+2);
++	_references = new org.eclipse.collections.impl.map.mutable.ConcurrentHashMap(_size+2);
  	_URIs = new String[_size];
  
  	try {
@@ -1310,7 +1413,7 @@ diff -ur xalan-j_2_7_1/src/org/apache/xml/utils/ObjectPool.java xalan-j_2_7_1-mo
    /**
 diff -ur xalan-j_2_7_1/src/org/apache/xml/utils/XMLReaderManager.java xalan-j_2_7_1-modified/src/org/apache/xml/utils/XMLReaderManager.java
 --- xalan-j_2_7_1/src/org/apache/xml/utils/XMLReaderManager.java	2007-11-22 18:43:53.000000000 -0300
-+++ xalan-j_2_7_1-modified/src/org/apache/xml/utils/XMLReaderManager.java	2018-07-15 04:29:52.043475349 -0300
++++ xalan-j_2_7_1-modified/src/org/apache/xml/utils/XMLReaderManager.java	2018-07-15 15:08:46.785551422 -0300
 @@ -21,6 +21,7 @@
  package org.apache.xml.utils;
  
@@ -1324,7 +1427,7 @@ diff -ur xalan-j_2_7_1/src/org/apache/xml/utils/XMLReaderManager.java xalan-j_2_
       * Keeps track of whether an XMLReader object is in use.
       */
 -    private Hashtable m_inUse;
-+    private ConcurrentHashMap m_inUse;
++    private org.eclipse.collections.impl.map.mutable.ConcurrentHashMap m_inUse;
  
      /**
       * Hidden constructor
@@ -1333,7 +1436,7 @@ diff -ur xalan-j_2_7_1/src/org/apache/xml/utils/XMLReaderManager.java xalan-j_2_
  
          if (m_inUse == null) {
 -            m_inUse = new Hashtable();
-+            m_inUse = new ConcurrentHashMap();
++            m_inUse = new org.eclipse.collections.impl.map.mutable.ConcurrentHashMap();
          }
  
          // If the cached reader for this thread is in use, construct a new
