@@ -1,0 +1,915 @@
+diff -ur apache-tomcat-6.0.20-src/build.properties.default apache-tomcat-6.0.20-src-modified-including-apachecommons/build.properties.default
+--- apache-tomcat-6.0.20-src/build.properties.default	2009-05-13 20:15:15.000000000 -0300
++++ apache-tomcat-6.0.20-src-modified-including-apachecommons/build.properties.default	2018-06-21 21:22:53.601979000 -0300
+@@ -45,7 +45,7 @@
+ 
+ base-commons.loc=http://archive.apache.org/dist/commons
+ base-tomcat.loc=http://archive.apache.org/dist/tomcat
+-base-sf.loc=http://downloads.sourceforge.net
++base-sf.loc=http://master.dl.sourceforge.net
+ 
+ # ----- Commons Logging, version 1.1 or later -----
+ commons-logging-version=1.1.1
+@@ -59,7 +59,7 @@
+ jdt.home=${base.path}/eclipse/plugins
+ jdt.lib=${jdt.home}
+ jdt.jar=${jdt.lib}/org.eclipse.jdt.core_3.3.1.v_780_R33x.jar
+-jdt.loc=http://www.eclipse.org/downloads/download.php?file=/eclipse/downloads/drops/R-3.3.1-200709211145/eclipse-JDT-3.3.1.zip
++jdt.loc=http://archive.eclipse.org/eclipse/downloads/drops/R-3.3.1-200709211145/eclipse-JDT-3.3.1.zip
+ 
+ # ----- Tomcat native library -----
+ tomcat-native.version=1.1.16
+@@ -90,7 +90,7 @@
+ nsis.installoptions.dll=${nsis.home}/Plugins/InstallOptions.dll
+ nsis.nsexec.dll=${nsis.home}/Plugins/nsExec.dll
+ nsis.nsisdl.dll=${nsis.home}/Plugins/NSISdl.dll
+-nsis.loc=${base-sf.loc}/nsis/nsis-2.37.zip
++nsis.loc=${base-sf.loc}/project/nsis/NSIS%202/2.37/nsis-2.37.zip
+ 
+ # ----- Commons Daemon, version 1.0-Alpha or later -----
+ commons-daemon.home=${base.path}/commons-daemon-1.0.1
+diff -ur apache-tomcat-6.0.20-src/build.xml apache-tomcat-6.0.20-src-modified-including-apachecommons/build.xml
+--- apache-tomcat-6.0.20-src/build.xml	2009-05-13 20:15:28.000000000 -0300
++++ apache-tomcat-6.0.20-src-modified-including-apachecommons/build.xml	2018-06-22 10:26:27.673625000 -0300
+@@ -78,11 +78,17 @@
+   <property name="jasper-jdt.home" value="${base.path}/tomcat6-deps/jdt" />
+   <property name="tomcat-dbcp.jar" value="${tomcat-dbcp.home}/tomcat-dbcp.jar"/>
+   <property name="jasper-jdt.jar" value="${jasper-jdt.home}/jasper-jdt.jar"/>
++
++  <property name="external-lib-path" value="${basedir}/external-libs" />
++  <property name="apache-commons-collections-jar" value="${external-lib-path}/commons-collections4-4.1.jar" />
++
+   <available property="tomcat-dbcp.present" file="${tomcat-dbcp.jar}" />
+   <available property="jdk16.present" classname="javax.sql.StatementEvent" />
++  
+ 
+   <!-- Classpath -->
+   <path id="tomcat.classpath">
++    <pathelement location="${apache-commons-collections-jar}"/>
+     <pathelement location="${ant.jar}"/>
+     <pathelement location="${jdt.jar}"/>
+   </path>
+@@ -243,6 +249,22 @@
+         </jar>
+     </sequential>
+   </macrodef>
++
++  <macrodef name="jarItWithManifest" description="utility macro for standard JAR packaging">
++    <attribute name="jarfile" description="the name of the JAR file to create"/>
++    <attribute name="filesId" description="the patternset id of the files to use"/>
++    <attribute name="manifestFile" description="the manifest file to use"/>
++    <sequential>
++        <jar  jarfile="@{jarfile}" manifest="@{manifestFile}">
++          <fileset dir="${tomcat.classes}">
++            <patternset refid="@{filesId}"/>
++            <!-- Javadoc and i18n exclusions -->
++            <exclude name="**/package.html" />
++            <exclude name="**/LocalStrings_*" />
++          </fileset>
++        </jar>
++    </sequential>
++  </macrodef>
+   
+   <target name="package" >
+     <!-- Common filtering tokens for JAR manifests-->
+@@ -309,8 +331,12 @@
+     <!-- Tomcat-juli JAR File -->
+     <jarIt jarfile="${tomcat-juli.jar}" filesId="files.tomcat-juli"/>
+ 
++    <copy tofile="${tomcat.build}/lib/commons-collections4-4.1.jar"
++          file="${apache-commons-collections-jar}"
++          overwrite="yes"/>
++
+     <!-- Catalina Main JAR File -->
+-    <jarIt jarfile="${catalina.jar}" filesId="files.catalina"/>
++    <jarItWithManifest jarfile="${catalina.jar}" filesId="files.catalina" manifestFile="res/CATALINA-MANIFEST.MF"/>
+ 
+     <!-- Catalina GroupCom/Tribes JAR File -->
+     <jarIt jarfile="${catalina-tribes.jar}" filesId="files.catalina-tribes"/>
+Only in apache-tomcat-6.0.20-src-modified-including-apachecommons: .git
+diff -ur apache-tomcat-6.0.20-src/java/org/apache/catalina/authenticator/SavedRequest.java apache-tomcat-6.0.20-src-modified-including-apachecommons/java/org/apache/catalina/authenticator/SavedRequest.java
+--- apache-tomcat-6.0.20-src/java/org/apache/catalina/authenticator/SavedRequest.java	2009-05-13 20:15:14.000000000 -0300
++++ apache-tomcat-6.0.20-src-modified-including-apachecommons/java/org/apache/catalina/authenticator/SavedRequest.java	2018-07-15 00:21:52.482432621 -0300
+@@ -27,6 +27,7 @@
+ import javax.servlet.http.Cookie;
+ 
+ import org.apache.tomcat.util.buf.ByteChunk;
++import org.apache.commons.collections4.map.HashedMap;
+ 
+ 
+ /**
+@@ -124,8 +125,8 @@
+      * entry is keyed by the parameter name, pointing at a String array of
+      * the corresponding values.
+      */
+-    private HashMap<String,String[]> parameters =
+-        new HashMap<String,String[]>();
++    private HashedMap<String,String[]> parameters =
++        new HashedMap<String,String[]>();
+ 
+     public void addParameter(String name, String values[]) {
+         parameters.put(name, values);
+diff -ur apache-tomcat-6.0.20-src/java/org/apache/catalina/authenticator/SingleSignOn.java apache-tomcat-6.0.20-src-modified-including-apachecommons/java/org/apache/catalina/authenticator/SingleSignOn.java
+--- apache-tomcat-6.0.20-src/java/org/apache/catalina/authenticator/SingleSignOn.java	2009-05-13 20:15:14.000000000 -0300
++++ apache-tomcat-6.0.20-src-modified-including-apachecommons/java/org/apache/catalina/authenticator/SingleSignOn.java	2018-07-15 00:23:27.254448388 -0300
+@@ -23,6 +23,7 @@
+ import java.security.Principal;
+ import java.util.HashMap;
+ import java.util.Map;
++import org.apache.commons.collections4.map.HashedMap;
+ 
+ import javax.servlet.ServletException;
+ import javax.servlet.http.Cookie;
+@@ -75,7 +76,7 @@
+      * keyed by the cookie value that is used to select them.
+      */
+     protected Map<String,SingleSignOnEntry> cache =
+-        new HashMap<String,SingleSignOnEntry>();
++        new HashedMap<String,SingleSignOnEntry>();
+ 
+ 
+     /**
+@@ -101,7 +102,7 @@
+      * The cache of single sign on identifiers, keyed by the Session that is
+      * associated with them.
+      */
+-    protected Map<Session,String> reverse = new HashMap<Session,String>();
++    protected Map<Session,String> reverse = new HashedMap<Session,String>();
+ 
+ 
+     /**
+diff -ur apache-tomcat-6.0.20-src/java/org/apache/catalina/connector/InputBuffer.java apache-tomcat-6.0.20-src-modified-including-apachecommons/java/org/apache/catalina/connector/InputBuffer.java
+--- apache-tomcat-6.0.20-src/java/org/apache/catalina/connector/InputBuffer.java	2009-05-13 20:15:14.000000000 -0300
++++ apache-tomcat-6.0.20-src-modified-including-apachecommons/java/org/apache/catalina/connector/InputBuffer.java	2018-07-15 00:24:58.826646903 -0300
+@@ -23,6 +23,7 @@
+ import java.security.PrivilegedActionException;
+ import java.security.PrivilegedExceptionAction;
+ import java.util.HashMap;
++import org.apache.commons.collections4.map.HashedMap;
+ 
+ import org.apache.catalina.security.SecurityUtil;
+ import org.apache.catalina.util.StringManager;
+@@ -125,7 +126,7 @@
+     /**
+      * List of encoders.
+      */
+-    protected HashMap encoders = new HashMap();
++    protected HashedMap encoders = new HashedMap();
+ 
+ 
+     /**
+diff -ur apache-tomcat-6.0.20-src/java/org/apache/catalina/connector/OutputBuffer.java apache-tomcat-6.0.20-src-modified-including-apachecommons/java/org/apache/catalina/connector/OutputBuffer.java
+--- apache-tomcat-6.0.20-src/java/org/apache/catalina/connector/OutputBuffer.java	2009-05-13 20:15:14.000000000 -0300
++++ apache-tomcat-6.0.20-src-modified-including-apachecommons/java/org/apache/catalina/connector/OutputBuffer.java	2018-07-15 00:29:40.070967972 -0300
+@@ -24,6 +24,7 @@
+ import java.security.PrivilegedActionException;
+ import java.security.PrivilegedExceptionAction;
+ import java.util.HashMap;
++import org.apache.commons.collections4.map.HashedMap;
+ 
+ import org.apache.coyote.ActionCode;
+ import org.apache.coyote.Response;
+@@ -112,7 +113,7 @@
+     /**
+      * List of encoders.
+      */
+-    protected HashMap encoders = new HashMap();
++    protected HashedMap encoders = new HashedMap();
+ 
+ 
+     /**
+diff -ur apache-tomcat-6.0.20-src/java/org/apache/catalina/connector/Request.java apache-tomcat-6.0.20-src-modified-including-apachecommons/java/org/apache/catalina/connector/Request.java
+--- apache-tomcat-6.0.20-src/java/org/apache/catalina/connector/Request.java	2009-05-13 20:15:15.000000000 -0300
++++ apache-tomcat-6.0.20-src-modified-including-apachecommons/java/org/apache/catalina/connector/Request.java	2018-07-15 00:32:02.136619122 -0300
+@@ -33,6 +33,7 @@
+ import java.util.Map;
+ import java.util.TimeZone;
+ import java.util.TreeMap;
++import org.apache.commons.collections4.map.HashedMap;
+ 
+ import javax.security.auth.Subject;
+ import javax.servlet.FilterChain;
+@@ -169,7 +170,7 @@
+     /**
+      * The attributes associated with this Request, keyed by attribute name.
+      */
+-    protected HashMap attributes = new HashMap();
++    protected HashedMap attributes = new HashedMap();
+ 
+ 
+     /**
+@@ -188,7 +189,7 @@
+      * Internal notes associated with this request by Catalina components
+      * and event listeners.
+      */
+-    private transient HashMap notes = new HashMap();
++    private transient HashedMap notes = new HashedMap();
+ 
+ 
+     /**
+diff -ur apache-tomcat-6.0.20-src/java/org/apache/catalina/core/ApplicationContextFacade.java apache-tomcat-6.0.20-src-modified-including-apachecommons/java/org/apache/catalina/core/ApplicationContextFacade.java
+--- apache-tomcat-6.0.20-src/java/org/apache/catalina/core/ApplicationContextFacade.java	2009-05-13 20:15:15.000000000 -0300
++++ apache-tomcat-6.0.20-src-modified-including-apachecommons/java/org/apache/catalina/core/ApplicationContextFacade.java	2018-07-15 00:39:53.421768498 -0300
+@@ -30,6 +30,7 @@
+ import java.util.Enumeration;
+ import java.util.HashMap;
+ import java.util.Set;
++import org.apache.commons.collections4.map.HashedMap;
+ 
+ import javax.servlet.RequestDispatcher;
+ import javax.servlet.Servlet;
+@@ -78,8 +79,8 @@
+         super();
+         this.context = context;
+         
+-        classCache = new HashMap();
+-        objectCache = new HashMap();
++        classCache = new HashedMap();
++        objectCache = new HashedMap();
+         initClassCache();
+     }
+     
+diff -ur apache-tomcat-6.0.20-src/java/org/apache/catalina/core/ContainerBase.java apache-tomcat-6.0.20-src-modified-including-apachecommons/java/org/apache/catalina/core/ContainerBase.java
+--- apache-tomcat-6.0.20-src/java/org/apache/catalina/core/ContainerBase.java	2009-05-13 20:15:15.000000000 -0300
++++ apache-tomcat-6.0.20-src-modified-including-apachecommons/java/org/apache/catalina/core/ContainerBase.java	2018-07-15 00:54:12.803440110 -0300
+@@ -29,6 +29,7 @@
+ import java.util.HashMap;
+ import java.util.Hashtable;
+ import java.util.Iterator;
++import org.apache.commons.collections4.map.HashedMap;
+ 
+ import javax.management.MBeanRegistration;
+ import javax.management.MBeanServer;
+@@ -155,7 +156,7 @@
+     /**
+      * The child Containers belonging to this Container, keyed by name.
+      */
+-    protected HashMap children = new HashMap();
++    protected HashedMap children = new HashedMap();
+ 
+ 
+     /**
+diff -ur apache-tomcat-6.0.20-src/java/org/apache/catalina/core/NamingContextListener.java apache-tomcat-6.0.20-src-modified-including-apachecommons/java/org/apache/catalina/core/NamingContextListener.java
+--- apache-tomcat-6.0.20-src/java/org/apache/catalina/core/NamingContextListener.java	2009-05-13 20:15:15.000000000 -0300
++++ apache-tomcat-6.0.20-src-modified-including-apachecommons/java/org/apache/catalina/core/NamingContextListener.java	2018-07-15 00:54:55.329165632 -0300
+@@ -34,6 +34,7 @@
+ import javax.naming.NamingException;
+ import javax.naming.Reference;
+ import javax.naming.StringRefAddr;
++import org.apache.commons.collections4.map.HashedMap;
+ 
+ import org.apache.catalina.Container;
+ import org.apache.catalina.ContainerEvent;
+@@ -137,7 +138,7 @@
+     /**
+      * Objectnames hashtable.
+      */
+-    protected HashMap objectNames = new HashMap();
++    protected HashedMap objectNames = new HashedMap();
+     
+ 
+     /**
+diff -ur apache-tomcat-6.0.20-src/java/org/apache/catalina/core/StandardContext.java apache-tomcat-6.0.20-src-modified-including-apachecommons/java/org/apache/catalina/core/StandardContext.java
+--- apache-tomcat-6.0.20-src/java/org/apache/catalina/core/StandardContext.java	2009-05-13 20:15:14.000000000 -0300
++++ apache-tomcat-6.0.20-src-modified-including-apachecommons/java/org/apache/catalina/core/StandardContext.java	2018-07-15 00:59:36.571642679 -0300
+@@ -33,6 +33,7 @@
+ import java.util.Iterator;
+ import java.util.Stack;
+ import java.util.TreeMap;
++import org.apache.commons.collections4.map.HashedMap;
+ 
+ import javax.management.AttributeNotFoundException;
+ import javax.management.ListenerNotFoundException;
+@@ -344,7 +345,7 @@
+      * The exception pages for this web application, keyed by fully qualified
+      * class name of the Java exception.
+      */
+-    private HashMap exceptionPages = new HashMap();
++    private HashedMap exceptionPages = new HashedMap();
+ 
+ 
+     /**
+@@ -413,13 +414,13 @@
+     /**
+      * The message destinations for this web application.
+      */
+-    private HashMap messageDestinations = new HashMap();
++    private HashedMap messageDestinations = new HashedMap();
+ 
+ 
+     /**
+      * The MIME mappings for this web application, keyed by extension.
+      */
+-    private HashMap mimeMappings = new HashMap();
++    private HashedMap mimeMappings = new HashedMap();
+ 
+ 
+      /**
+@@ -493,7 +494,7 @@
+      * The security role mappings for this application, keyed by role
+      * name (as used within the application).
+      */
+-    private HashMap roleMappings = new HashMap();
++    private HashedMap roleMappings = new HashedMap();
+ 
+ 
+     /**
+@@ -508,7 +509,7 @@
+      * The servlet mappings for this web application, keyed by
+      * matching pattern.
+      */
+-    private HashMap servletMappings = new HashMap();
++    private HashMap servletMappings = new HashedMap();
+     
+     private final Object servletMappingsLock = new Object();
+ 
+@@ -527,7 +528,7 @@
+      * The status code error pages for this web application, keyed by
+      * HTTP status code (as an Integer).
+      */
+-    private HashMap statusPages = new HashMap();
++    private HashedMap statusPages = new HashedMap();
+ 
+ 
+     /**
+@@ -540,7 +541,7 @@
+     /**
+      * The JSP tag libraries for this web application, keyed by URI
+      */
+-    private HashMap taglibs = new HashMap();
++    private HashedMap taglibs = new HashedMap();
+ 
+ 
+     /**
+diff -ur apache-tomcat-6.0.20-src/java/org/apache/catalina/core/StandardWrapper.java apache-tomcat-6.0.20-src-modified-including-apachecommons/java/org/apache/catalina/core/StandardWrapper.java
+--- apache-tomcat-6.0.20-src/java/org/apache/catalina/core/StandardWrapper.java	2009-05-13 20:15:15.000000000 -0300
++++ apache-tomcat-6.0.20-src-modified-including-apachecommons/java/org/apache/catalina/core/StandardWrapper.java	2018-07-15 01:02:42.669929734 -0300
+@@ -25,6 +25,7 @@
+ import java.util.ArrayList;
+ import java.util.Enumeration;
+ import java.util.HashMap;
++import org.apache.commons.collections4.map.HashedMap;
+ import java.util.HashSet;
+ import java.util.Properties;
+ import java.util.Stack;
+@@ -188,7 +189,7 @@
+      * The initialization parameters for this servlet, keyed by
+      * parameter name.
+      */
+-    protected HashMap parameters = new HashMap();
++    protected HashedMap parameters = new HashedMap();
+ 
+ 
+     /**
+@@ -196,7 +197,7 @@
+      * used in the servlet.  The corresponding value is the role name of
+      * the web application itself.
+      */
+-    protected HashMap references = new HashMap();
++    protected HashedMap references = new HashedMap();
+ 
+ 
+     /**
+diff -ur apache-tomcat-6.0.20-src/java/org/apache/catalina/deploy/NamingResources.java apache-tomcat-6.0.20-src-modified-including-apachecommons/java/org/apache/catalina/deploy/NamingResources.java
+--- apache-tomcat-6.0.20-src/java/org/apache/catalina/deploy/NamingResources.java	2009-05-13 20:15:15.000000000 -0300
++++ apache-tomcat-6.0.20-src-modified-including-apachecommons/java/org/apache/catalina/deploy/NamingResources.java	2018-07-15 01:08:48.593414875 -0300
+@@ -23,7 +23,9 @@
+ import java.beans.PropertyChangeSupport;
+ import java.util.HashMap;
+ import java.util.Hashtable;
++import java.util.concurrent.ConcurrentHashMap;
+ import java.io.Serializable;
++import org.apache.commons.collections4.map.HashedMap;
+ 
+ import org.apache.catalina.ServerFactory;
+ 
+@@ -62,58 +64,58 @@
+      * List of naming entries, keyed by name. The value is the entry type, as
+      * declared by the user.
+      */
+-    private Hashtable entries = new Hashtable();
++    private ConcurrentHashMap entries = new ConcurrentHashMap();
+ 
+ 
+     /**
+      * The EJB resource references for this web application, keyed by name.
+      */
+-    private HashMap ejbs = new HashMap();
++    private HashedMap ejbs = new HashedMap();
+ 
+ 
+     /**
+      * The environment entries for this web application, keyed by name.
+      */
+-    private HashMap envs = new HashMap();
++    private HashedMap envs = new HashedMap();
+ 
+ 
+     /**
+      * The local  EJB resource references for this web application, keyed by
+      * name.
+      */
+-    private HashMap localEjbs = new HashMap();
++    private HashedMap localEjbs = new HashedMap();
+ 
+ 
+     /**
+      * The message destination referencess for this web application,
+      * keyed by name.
+      */
+-    private HashMap mdrs = new HashMap();
++    private HashedMap mdrs = new HashedMap();
+ 
+ 
+     /**
+      * The resource environment references for this web application,
+      * keyed by name.
+      */
+-    private HashMap resourceEnvRefs = new HashMap();
++    private HashedMap resourceEnvRefs = new HashedMap();
+ 
+ 
+     /**
+      * The resource references for this web application, keyed by name.
+      */
+-    private HashMap resources = new HashMap();
++    private HashedMap resources = new HashedMap();
+ 
+ 
+     /**
+      * The resource links for this web application, keyed by name.
+      */
+-    private HashMap resourceLinks = new HashMap();
++    private HashedMap resourceLinks = new HashedMap();
+ 
+ 
+     /**
+      * The web service references for this web application, keyed by name.
+      */
+-    private HashMap services = new HashMap();
++    private HashedMap services = new HashedMap();
+ 
+ 
+     /**
+diff -ur apache-tomcat-6.0.20-src/java/org/apache/catalina/loader/WebappClassLoader.java apache-tomcat-6.0.20-src-modified-including-apachecommons/java/org/apache/catalina/loader/WebappClassLoader.java
+--- apache-tomcat-6.0.20-src/java/org/apache/catalina/loader/WebappClassLoader.java	2009-05-13 20:15:14.000000000 -0300
++++ apache-tomcat-6.0.20-src-modified-including-apachecommons/java/org/apache/catalina/loader/WebappClassLoader.java	2018-07-15 01:12:53.344708407 -0300
+@@ -49,6 +49,7 @@
+ import java.util.jar.JarFile;
+ import java.util.jar.Manifest;
+ import java.util.jar.Attributes.Name;
++import org.apache.commons.collections4.map.HashedMap;
+ 
+ import javax.naming.NameClassPair;
+ import javax.naming.NamingEnumeration;
+@@ -246,7 +247,7 @@
+     /**
+      * The list of not found resources.
+      */
+-    protected HashMap notFoundResources = new HashMap();
++    protected HashedMap notFoundResources = new HashedMap();
+ 
+ 
+     /**
+@@ -345,7 +346,7 @@
+      * The PermissionCollection for each CodeSource for a web
+      * application context.
+      */
+-    protected HashMap loaderPC = new HashMap();
++    protected HashedMap loaderPC = new HashedMap();
+ 
+ 
+     /**
+diff -ur apache-tomcat-6.0.20-src/java/org/apache/catalina/mbeans/MBeanUtils.java apache-tomcat-6.0.20-src-modified-including-apachecommons/java/org/apache/catalina/mbeans/MBeanUtils.java
+--- apache-tomcat-6.0.20-src/java/org/apache/catalina/mbeans/MBeanUtils.java	2009-05-13 20:15:14.000000000 -0300
++++ apache-tomcat-6.0.20-src-modified-including-apachecommons/java/org/apache/catalina/mbeans/MBeanUtils.java	2018-07-15 01:14:51.512161791 -0300
+@@ -1333,7 +1333,7 @@
+ 
+     }
+ 
+-    static Hashtable seq=new Hashtable();
++    static ConcurrentHashMap seq=new ConcurrentHashMap();
+     static int getSeq( String key ) {
+         int i[]=(int [])seq.get( key );
+         if (i == null ) {
+diff -ur apache-tomcat-6.0.20-src/java/org/apache/catalina/realm/CombinedRealm.java apache-tomcat-6.0.20-src-modified-including-apachecommons/java/org/apache/catalina/realm/CombinedRealm.java
+--- apache-tomcat-6.0.20-src/java/org/apache/catalina/realm/CombinedRealm.java	2009-05-13 20:15:15.000000000 -0300
++++ apache-tomcat-6.0.20-src-modified-including-apachecommons/java/org/apache/catalina/realm/CombinedRealm.java	2018-07-15 01:16:14.618570862 -0300
+@@ -20,6 +20,7 @@
+ import java.security.Principal;
+ 
+ import java.security.cert.X509Certificate;
++import java.util.ArrayList;
+ import java.util.LinkedList;
+ import java.util.List;
+ 
+@@ -52,7 +53,7 @@
+     /**
+      * The list of Realms contained by this Realm.
+      */
+-    protected List<Realm> realms = new LinkedList<Realm>();
++    protected List<Realm> realms = new ArrayList<Realm>();
+ 
+ 
+     /**
+diff -ur apache-tomcat-6.0.20-src/java/org/apache/catalina/security/SecurityUtil.java apache-tomcat-6.0.20-src-modified-including-apachecommons/java/org/apache/catalina/security/SecurityUtil.java
+--- apache-tomcat-6.0.20-src/java/org/apache/catalina/security/SecurityUtil.java	2009-05-13 20:15:15.000000000 -0300
++++ apache-tomcat-6.0.20-src-modified-including-apachecommons/java/org/apache/catalina/security/SecurityUtil.java	2018-07-15 01:19:20.447911848 -0300
+@@ -24,6 +24,7 @@
+ import java.security.PrivilegedActionException;
+ import java.security.PrivilegedExceptionAction;
+ import java.util.HashMap;
++import org.apache.commons.collections4.map.HashedMap;
+ 
+ import javax.security.auth.Subject;
+ import javax.servlet.Filter;
+@@ -62,7 +63,7 @@
+     /**
+      * Cache every object for which we are creating method on it.
+      */
+-    private static HashMap objectCache = new HashMap();
++    private static HashedMap objectCache = new HashedMap();
+         
+     private static org.apache.juli.logging.Log log=
+         org.apache.juli.logging.LogFactory.getLog( SecurityUtil.class );
+diff -ur apache-tomcat-6.0.20-src/java/org/apache/catalina/session/StandardSession.java apache-tomcat-6.0.20-src-modified-including-apachecommons/java/org/apache/catalina/session/StandardSession.java
+--- apache-tomcat-6.0.20-src/java/org/apache/catalina/session/StandardSession.java	2009-05-13 20:15:15.000000000 -0300
++++ apache-tomcat-6.0.20-src-modified-including-apachecommons/java/org/apache/catalina/session/StandardSession.java	2018-07-15 01:28:05.654497242 -0300
+@@ -244,7 +244,7 @@
+      * and event listeners.  <b>IMPLEMENTATION NOTE:</b> This object is
+      * <em>not</em> saved and restored across session serializations!
+      */
+-    protected transient Map notes = new Hashtable();
++    protected transient Map notes = new ConcurrentHashMap();
+ 
+ 
+     /**
+@@ -1453,7 +1453,7 @@
+         }
+ 
+         if (notes == null) {
+-            notes = new Hashtable();
++            notes = new ConcurrentHashMap();
+         }
+     }
+ 
+diff -ur apache-tomcat-6.0.20-src/java/org/apache/catalina/ssi/ExpressionParseTree.java apache-tomcat-6.0.20-src-modified-including-apachecommons/java/org/apache/catalina/ssi/ExpressionParseTree.java
+--- apache-tomcat-6.0.20-src/java/org/apache/catalina/ssi/ExpressionParseTree.java	2009-05-13 20:15:29.000000000 -0300
++++ apache-tomcat-6.0.20-src-modified-including-apachecommons/java/org/apache/catalina/ssi/ExpressionParseTree.java	2018-07-15 01:33:17.645101327 -0300
+@@ -20,6 +20,7 @@
+ import java.text.ParseException;
+ import java.util.LinkedList;
+ import java.util.List;
++import org.apache.commons.collections4.list.TreeList;
+ /**
+  * Represents a parsed expression.
+  * 
+@@ -31,12 +32,12 @@
+      * Contains the current set of completed nodes. This is a workspace for the
+      * parser.
+      */
+-    private LinkedList nodeStack = new LinkedList();
++    private TreeList nodeStack = new TreeList();
+     /**
+      * Contains operator nodes that don't yet have values. This is a workspace
+      * for the parser.
+      */
+-    private LinkedList oppStack = new LinkedList();
++    private TreeList oppStack = new TreeList();
+     /**
+      * The root node after the expression has been parsed.
+      */
+diff -ur apache-tomcat-6.0.20-src/java/org/apache/catalina/startup/HomesUserDatabase.java apache-tomcat-6.0.20-src-modified-including-apachecommons/java/org/apache/catalina/startup/HomesUserDatabase.java
+--- apache-tomcat-6.0.20-src/java/org/apache/catalina/startup/HomesUserDatabase.java	2009-05-13 20:15:14.000000000 -0300
++++ apache-tomcat-6.0.20-src-modified-including-apachecommons/java/org/apache/catalina/startup/HomesUserDatabase.java	2018-07-15 01:36:22.179819143 -0300
+@@ -21,6 +21,7 @@
+ 
+ import java.io.File;
+ import java.util.Hashtable;
++import java.util.concurrent.ConcurrentHashMap;
+ import java.util.Enumeration;
+ 
+ 
+@@ -56,7 +57,7 @@
+     /**
+      * The set of home directories for all defined users, keyed by username.
+      */
+-    private Hashtable homes = new Hashtable();
++    private ConcurrentHashMap homes = new ConcurrentHashMap();
+ 
+ 
+     /**
+diff -ur apache-tomcat-6.0.20-src/java/org/apache/catalina/startup/HostConfig.java apache-tomcat-6.0.20-src-modified-including-apachecommons/java/org/apache/catalina/startup/HostConfig.java
+--- apache-tomcat-6.0.20-src/java/org/apache/catalina/startup/HostConfig.java	2009-05-13 20:15:29.000000000 -0300
++++ apache-tomcat-6.0.20-src-modified-including-apachecommons/java/org/apache/catalina/startup/HostConfig.java	2018-07-15 01:38:34.541533272 -0300
+@@ -31,6 +31,7 @@
+ import java.util.LinkedHashMap;
+ import java.util.jar.JarEntry;
+ import java.util.jar.JarFile;
++import org.apache.commons.collections4.map.HashedMap;
+ 
+ import javax.management.ObjectName;
+ 
+@@ -125,7 +126,7 @@
+     /**
+      * Map of deployed applications.
+      */
+-    protected HashMap deployed = new HashMap();
++    protected HashedMap deployed = new HashedMap();
+ 
+     
+     /**
+@@ -1388,7 +1389,7 @@
+     	 * additional descriptors.
+          * The value is the last modification time.
+     	 */
+-    	public HashMap reloadResources = new HashMap();
++    	public HashedMap reloadResources = new HashedMap();
+ 
+     	/**
+     	 * Instant where the application was last put in service.
+diff -ur apache-tomcat-6.0.20-src/java/org/apache/catalina/startup/PasswdUserDatabase.java apache-tomcat-6.0.20-src-modified-including-apachecommons/java/org/apache/catalina/startup/PasswdUserDatabase.java
+--- apache-tomcat-6.0.20-src/java/org/apache/catalina/startup/PasswdUserDatabase.java	2009-05-13 20:15:14.000000000 -0300
++++ apache-tomcat-6.0.20-src-modified-including-apachecommons/java/org/apache/catalina/startup/PasswdUserDatabase.java	2018-07-15 01:39:32.552839785 -0300
+@@ -23,6 +23,7 @@
+ import java.io.FileReader;
+ import java.io.IOException;
+ import java.util.Hashtable;
++import java.util.concurrent.ConcurrentHashMap;
+ import java.util.Enumeration;
+ 
+ 
+@@ -63,7 +64,7 @@
+     /**
+      * The set of home directories for all defined users, keyed by username.
+      */
+-    private Hashtable homes = new Hashtable();
++    private ConcurrentHashMap homes = new ConcurrentHashMap();
+ 
+ 
+     /**
+diff -ur apache-tomcat-6.0.20-src/java/org/apache/catalina/startup/TldConfig.java apache-tomcat-6.0.20-src-modified-including-apachecommons/java/org/apache/catalina/startup/TldConfig.java
+--- apache-tomcat-6.0.20-src/java/org/apache/catalina/startup/TldConfig.java	2009-05-13 20:15:15.000000000 -0300
++++ apache-tomcat-6.0.20-src-modified-including-apachecommons/java/org/apache/catalina/startup/TldConfig.java	2018-07-15 01:42:34.527622793 -0300
+@@ -34,11 +34,13 @@
+ import java.util.HashMap;
+ import java.util.HashSet;
+ import java.util.Iterator;
++import java.util.LinkedHashSet;
+ import java.util.Map;
+ import java.util.Set;
+ import java.util.StringTokenizer;
+ import java.util.jar.JarEntry;
+ import java.util.jar.JarFile;
++import org.apache.commons.collections4.map.HashedMap;
+ 
+ import javax.naming.NameClassPair;
+ import javax.naming.NamingEnumeration;
+@@ -77,7 +79,7 @@
+      * Initializes the set of JARs that are known not to contain any TLDs
+      */
+     static {
+-        noTldJars = new HashSet<String>();
++        noTldJars = new LinkedHashSet<String>();
+         // Bootstrap JARs
+         noTldJars.add("bootstrap.jar");
+         noTldJars.add("commons-daemon.jar");
+@@ -709,7 +711,7 @@
+                             || noTldJars == null
+                             || !noTldJars.contains(file.getName())) {
+                         if (jarPathMap == null) {
+-                            jarPathMap = new HashMap();
++                            jarPathMap = new HashedMap();
+                             jarPathMap.put(path, file);
+                         } else if (!jarPathMap.containsKey(path)) {
+                             jarPathMap.put(path, file);
+diff -ur apache-tomcat-6.0.20-src/java/org/apache/catalina/users/MemoryUserDatabase.java apache-tomcat-6.0.20-src-modified-including-apachecommons/java/org/apache/catalina/users/MemoryUserDatabase.java
+--- apache-tomcat-6.0.20-src/java/org/apache/catalina/users/MemoryUserDatabase.java	2009-05-13 20:15:14.000000000 -0300
++++ apache-tomcat-6.0.20-src-modified-including-apachecommons/java/org/apache/catalina/users/MemoryUserDatabase.java	2018-07-15 01:44:01.295456567 -0300
+@@ -37,6 +37,7 @@
+ import org.apache.tomcat.util.digester.Digester;
+ import org.apache.tomcat.util.digester.ObjectCreationFactory;
+ import org.xml.sax.Attributes;
++import org.apache.commons.collections4.map.HashedMap;
+ 
+ 
+ /**
+@@ -87,7 +88,7 @@
+      * The set of {@link Group}s defined in this database, keyed by
+      * group name.
+      */
+-    protected HashMap groups = new HashMap();
++    protected HashedMap groups = new HashedMap();
+ 
+ 
+     /**
+@@ -126,7 +127,7 @@
+      * The set of {@link Role}s defined in this database, keyed by
+      * role name.
+      */
+-    protected HashMap roles = new HashMap();
++    protected HashedMap roles = new HashedMap();
+ 
+ 
+     /**
+@@ -140,7 +141,7 @@
+      * The set of {@link User}s defined in this database, keyed by
+      * user name.
+      */
+-    protected HashMap users = new HashMap();
++    protected HashedMap users = new HashedMap();
+ 
+ 
+     // ------------------------------------------------------------- Properties
+diff -ur apache-tomcat-6.0.20-src/java/org/apache/catalina/util/MIME2Java.java apache-tomcat-6.0.20-src-modified-including-apachecommons/java/org/apache/catalina/util/MIME2Java.java
+--- apache-tomcat-6.0.20-src/java/org/apache/catalina/util/MIME2Java.java	2009-05-13 20:15:14.000000000 -0300
++++ apache-tomcat-6.0.20-src-modified-including-apachecommons/java/org/apache/catalina/util/MIME2Java.java	2018-07-15 01:44:33.579450544 -0300
+@@ -18,6 +18,7 @@
+ package org.apache.catalina.util;
+ 
+ import java.util.*;
++import java.util.concurrent.ConcurrentHashMap;
+ 
+ /**
+  * MIME2Java is a convenience class which handles conversions between MIME charset names
+@@ -471,11 +472,11 @@
+  */
+ public class MIME2Java {
+ 
+-    static private Hashtable s_enchash;
+-    static private Hashtable s_revhash;
++    static private ConcurrentHashMap s_enchash;
++    static private ConcurrentHashMap s_revhash;
+ 
+     static {
+-        s_enchash = new Hashtable();
++        s_enchash = new ConcurrentHashMap();
+         //    <preferred MIME name>, <Java encoding name>
+         s_enchash.put("UTF-8", "UTF8");
+         s_enchash.put("US-ASCII",        "8859_1");    // ?
+@@ -519,7 +520,7 @@
+                                                 // j:CNS11643 -> EUC-TW?
+                                                 // ISO-2022-CN? ISO-2022-CN-EXT?
+ 
+-        s_revhash = new Hashtable();
++        s_revhash = new ConcurrentHashMap();
+         //    <Java encoding name>, <preferred MIME name>
+         s_revhash.put("UTF8", "UTF-8");
+         //s_revhash.put("8859_1", "US-ASCII");    // ?
+diff -ur apache-tomcat-6.0.20-src/java/org/apache/catalina/util/SchemaResolver.java apache-tomcat-6.0.20-src-modified-including-apachecommons/java/org/apache/catalina/util/SchemaResolver.java
+--- apache-tomcat-6.0.20-src/java/org/apache/catalina/util/SchemaResolver.java	2009-05-13 20:15:14.000000000 -0300
++++ apache-tomcat-6.0.20-src-modified-including-apachecommons/java/org/apache/catalina/util/SchemaResolver.java	2018-07-15 01:45:16.315484436 -0300
+@@ -18,6 +18,7 @@
+ 
+ 
+ import java.util.HashMap;
++import org.apache.commons.collections4.map.HashedMap;
+ 
+ import org.apache.tomcat.util.digester.Digester;
+ import org.xml.sax.InputSource;
+@@ -43,7 +44,7 @@
+      * The URLs of dtds and schemas that have been registered, keyed by the
+      * public identifier that corresponds.
+      */
+-    protected HashMap entityValidator = new HashMap();
++    protected HashedMap entityValidator = new HashedMap();
+ 
+ 
+     /**
+diff -ur apache-tomcat-6.0.20-src/java/org/apache/catalina/util/StringManager.java apache-tomcat-6.0.20-src-modified-including-apachecommons/java/org/apache/catalina/util/StringManager.java
+--- apache-tomcat-6.0.20-src/java/org/apache/catalina/util/StringManager.java	2009-05-13 20:15:14.000000000 -0300
++++ apache-tomcat-6.0.20-src-modified-including-apachecommons/java/org/apache/catalina/util/StringManager.java	2018-07-15 01:45:46.311534832 -0300
+@@ -23,6 +23,7 @@
+ import java.util.Locale;
+ import java.util.MissingResourceException;
+ import java.util.ResourceBundle;
++import java.util.concurrent.ConcurrentHashMap;
+ import java.net.URLClassLoader;
+ 
+ /**
+@@ -231,7 +232,7 @@
+     // STATIC SUPPORT METHODS
+     // --------------------------------------------------------------
+ 
+-    private static Hashtable managers = new Hashtable();
++    private static ConcurrentHashMap managers = new ConcurrentHashMap();
+ 
+     /**
+      * Get the StringManager for a particular package. If a manager for
+diff -ur apache-tomcat-6.0.20-src/java/org/apache/naming/ContextAccessController.java apache-tomcat-6.0.20-src-modified-including-apachecommons/java/org/apache/naming/ContextAccessController.java
+--- apache-tomcat-6.0.20-src/java/org/apache/naming/ContextAccessController.java	2009-05-13 20:15:14.000000000 -0300
++++ apache-tomcat-6.0.20-src-modified-including-apachecommons/java/org/apache/naming/ContextAccessController.java	2018-07-15 01:46:55.535727531 -0300
+@@ -19,6 +19,7 @@
+ package org.apache.naming;
+ 
+ import java.util.Hashtable;
++import java.util.concurrent.ConcurrentHashMap;
+ 
+ /**
+  * Handles the access control on the JNDI contexts.
+@@ -36,13 +37,13 @@
+     /**
+      * Catalina context names on which writing is not allowed.
+      */
+-    private static Hashtable readOnlyContexts = new Hashtable();
++    private static ConcurrentHashMap readOnlyContexts = new ConcurrentHashMap();
+ 
+ 
+     /**
+      * Security tokens repository.
+      */
+-    private static Hashtable securityTokens = new Hashtable();
++    private static ConcurrentHashMap securityTokens = new ConcurrentHashMap();
+ 
+ 
+     // --------------------------------------------------------- Public Methods
+diff -ur apache-tomcat-6.0.20-src/java/org/apache/naming/ContextBindings.java apache-tomcat-6.0.20-src-modified-including-apachecommons/java/org/apache/naming/ContextBindings.java
+--- apache-tomcat-6.0.20-src/java/org/apache/naming/ContextBindings.java	2009-05-13 20:15:15.000000000 -0300
++++ apache-tomcat-6.0.20-src-modified-including-apachecommons/java/org/apache/naming/ContextBindings.java	2018-07-15 01:48:11.436048211 -0300
+@@ -19,6 +19,8 @@
+ package org.apache.naming;
+ 
+ import java.util.Hashtable;
++import java.util.concurrent.ConcurrentHashMap;
++
+ import javax.naming.NamingException;
+ import javax.naming.Context;
+ 
+@@ -42,31 +44,31 @@
+     /**
+      * Bindings name - naming context. Keyed by name.
+      */
+-    private static Hashtable contextNameBindings = new Hashtable();
++    private static ConcurrentHashMap contextNameBindings = new ConcurrentHashMap();
+ 
+ 
+     /**
+      * Bindings thread - naming context. Keyed by thread id.
+      */
+-    private static Hashtable threadBindings = new Hashtable();
++    private static ConcurrentHashMap threadBindings = new ConcurrentHashMap();
+ 
+ 
+     /**
+      * Bindings thread - name. Keyed by thread id.
+      */
+-    private static Hashtable threadNameBindings = new Hashtable();
++    private static ConcurrentHashMap threadNameBindings = new ConcurrentHashMap();
+ 
+ 
+     /**
+      * Bindings class loader - naming context. Keyed by CL id.
+      */
+-    private static Hashtable clBindings = new Hashtable();
++    private static ConcurrentHashMap clBindings = new ConcurrentHashMap();
+ 
+ 
+     /**
+      * Bindings class loader - name. Keyed by CL id.
+      */
+-    private static Hashtable clNameBindings = new Hashtable();
++    private static ConcurrentHashMap clNameBindings = new ConcurrentHashMap();
+ 
+ 
+     /**
+diff -ur apache-tomcat-6.0.20-src/java/org/apache/naming/resources/DirContextURLStreamHandler.java apache-tomcat-6.0.20-src-modified-including-apachecommons/java/org/apache/naming/resources/DirContextURLStreamHandler.java
+--- apache-tomcat-6.0.20-src/java/org/apache/naming/resources/DirContextURLStreamHandler.java	2009-05-13 20:15:15.000000000 -0300
++++ apache-tomcat-6.0.20-src-modified-including-apachecommons/java/org/apache/naming/resources/DirContextURLStreamHandler.java	2018-07-15 01:49:49.484607139 -0300
+@@ -22,6 +22,7 @@
+ import java.net.URLConnection;
+ import java.net.URLStreamHandler;
+ import java.util.Hashtable;
++import java.util.concurrent.ConcurrentHashMap;
+ 
+ import javax.naming.directory.DirContext;
+ 
+@@ -53,7 +54,7 @@
+     /**
+      * Bindings class loader - directory context. Keyed by CL id.
+      */
+-    private static Hashtable clBindings = new Hashtable();
++    private static ConcurrentHashMap clBindings = new ConcurrentHashMap();
+     
+     
+     /**
+diff -ur apache-tomcat-6.0.20-src/java/org/apache/naming/ServiceRef.java apache-tomcat-6.0.20-src-modified-including-apachecommons/java/org/apache/naming/ServiceRef.java
+--- apache-tomcat-6.0.20-src/java/org/apache/naming/ServiceRef.java	2009-05-13 20:15:15.000000000 -0300
++++ apache-tomcat-6.0.20-src-modified-including-apachecommons/java/org/apache/naming/ServiceRef.java	2018-07-15 01:49:27.528469163 -0300
+@@ -18,6 +18,7 @@
+ 
+ package org.apache.naming;
+ 
++import java.util.Collections;
+ import java.util.Enumeration;
+ import java.util.Vector;
+ 
+@@ -86,7 +87,7 @@
+     /**
+      * The vector to save the handler Reference objects, because they can't be saved in the addrs vector.
+      */
+-    private Vector<HandlerRef> handlers = new Vector<HandlerRef>();
++    private List<HandlerRef> handlers = Collections.synchronizedList(new ArrayList<HandlerRef>());
+ 
+ 
+     // ----------------------------------------------------------- Constructors
+Only in apache-tomcat-6.0.20-src-modified-including-apachecommons: new.patch
