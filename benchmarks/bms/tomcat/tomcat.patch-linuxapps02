@@ -209,7 +209,7 @@ diff -ur apache-tomcat-6.0.20-src/java/org/apache/catalina/connector/Request.jav
      /**
 diff -ur apache-tomcat-6.0.20-src/java/org/apache/catalina/core/ApplicationContextFacade.java apache-tomcat-6.0.20-src-modified-including-apachecommons/java/org/apache/catalina/core/ApplicationContextFacade.java
 --- apache-tomcat-6.0.20-src/java/org/apache/catalina/core/ApplicationContextFacade.java	2009-05-13 20:15:15.000000000 -0300
-+++ apache-tomcat-6.0.20-src-modified-including-apachecommons/java/org/apache/catalina/core/ApplicationContextFacade.java	2018-07-15 00:39:53.421768498 -0300
++++ apache-tomcat-6.0.20-src-modified-including-apachecommons/java/org/apache/catalina/core/ApplicationContextFacade.java	2018-07-15 21:53:55.160605472 -0300
 @@ -30,6 +30,7 @@
  import java.util.Enumeration;
  import java.util.HashMap;
@@ -218,6 +218,22 @@ diff -ur apache-tomcat-6.0.20-src/java/org/apache/catalina/core/ApplicationConte
  
  import javax.servlet.RequestDispatcher;
  import javax.servlet.Servlet;
+@@ -56,13 +57,13 @@
+     /**
+      * Cache Class object used for reflection.
+      */
+-    private HashMap classCache;
++    private HashedMap classCache;
+     
+     
+     /**
+      * Cache method object.
+      */
+-    private HashMap objectCache;
++    private HashedMap objectCache;
+     
+     
+     // ----------------------------------------------------------- Constructors
 @@ -78,8 +79,8 @@
          super();
          this.context = context;
@@ -271,7 +287,7 @@ diff -ur apache-tomcat-6.0.20-src/java/org/apache/catalina/core/NamingContextLis
      /**
 diff -ur apache-tomcat-6.0.20-src/java/org/apache/catalina/core/StandardContext.java apache-tomcat-6.0.20-src-modified-including-apachecommons/java/org/apache/catalina/core/StandardContext.java
 --- apache-tomcat-6.0.20-src/java/org/apache/catalina/core/StandardContext.java	2009-05-13 20:15:14.000000000 -0300
-+++ apache-tomcat-6.0.20-src-modified-including-apachecommons/java/org/apache/catalina/core/StandardContext.java	2018-07-15 00:59:36.571642679 -0300
++++ apache-tomcat-6.0.20-src-modified-including-apachecommons/java/org/apache/catalina/core/StandardContext.java	2018-07-15 21:52:47.354955722 -0300
 @@ -33,6 +33,7 @@
  import java.util.Iterator;
  import java.util.Stack;
@@ -319,7 +335,7 @@ diff -ur apache-tomcat-6.0.20-src/java/org/apache/catalina/core/StandardContext.
       * matching pattern.
       */
 -    private HashMap servletMappings = new HashMap();
-+    private HashMap servletMappings = new HashedMap();
++    private HashedMap servletMappings = new HashedMap();
      
      private final Object servletMappingsLock = new Object();
  
@@ -341,6 +357,15 @@ diff -ur apache-tomcat-6.0.20-src/java/org/apache/catalina/core/StandardContext.
  
  
      /**
+@@ -4678,7 +4679,7 @@
+     private void resetContext() throws Exception, MBeanRegistrationException {
+         // Restore the original state ( pre reading web.xml in start )
+         // If you extend this - override this method and make sure to clean up
+-        children=new HashMap();
++        children=new HashedMap();
+         startupTime = 0;
+         startTime = 0;
+         tldScanTime = 0;
 diff -ur apache-tomcat-6.0.20-src/java/org/apache/catalina/core/StandardWrapper.java apache-tomcat-6.0.20-src-modified-including-apachecommons/java/org/apache/catalina/core/StandardWrapper.java
 --- apache-tomcat-6.0.20-src/java/org/apache/catalina/core/StandardWrapper.java	2009-05-13 20:15:15.000000000 -0300
 +++ apache-tomcat-6.0.20-src-modified-including-apachecommons/java/org/apache/catalina/core/StandardWrapper.java	2018-07-15 01:02:42.669929734 -0300
@@ -482,8 +507,16 @@ diff -ur apache-tomcat-6.0.20-src/java/org/apache/catalina/loader/WebappClassLoa
      /**
 diff -ur apache-tomcat-6.0.20-src/java/org/apache/catalina/mbeans/MBeanUtils.java apache-tomcat-6.0.20-src-modified-including-apachecommons/java/org/apache/catalina/mbeans/MBeanUtils.java
 --- apache-tomcat-6.0.20-src/java/org/apache/catalina/mbeans/MBeanUtils.java	2009-05-13 20:15:14.000000000 -0300
-+++ apache-tomcat-6.0.20-src-modified-including-apachecommons/java/org/apache/catalina/mbeans/MBeanUtils.java	2018-07-15 01:14:51.512161791 -0300
-@@ -1333,7 +1333,7 @@
++++ apache-tomcat-6.0.20-src-modified-including-apachecommons/java/org/apache/catalina/mbeans/MBeanUtils.java	2018-07-15 21:50:19.888217478 -0300
+@@ -19,6 +19,7 @@
+ 
+ 
+ import java.util.Hashtable;
++import java.util.concurrent.ConcurrentHashMap;
+ 
+ import javax.management.DynamicMBean;
+ import javax.management.MBeanException;
+@@ -1333,7 +1334,7 @@
  
      }
  
@@ -650,7 +683,7 @@ diff -ur apache-tomcat-6.0.20-src/java/org/apache/catalina/startup/PasswdUserDat
      /**
 diff -ur apache-tomcat-6.0.20-src/java/org/apache/catalina/startup/TldConfig.java apache-tomcat-6.0.20-src-modified-including-apachecommons/java/org/apache/catalina/startup/TldConfig.java
 --- apache-tomcat-6.0.20-src/java/org/apache/catalina/startup/TldConfig.java	2009-05-13 20:15:15.000000000 -0300
-+++ apache-tomcat-6.0.20-src-modified-including-apachecommons/java/org/apache/catalina/startup/TldConfig.java	2018-07-15 01:42:34.527622793 -0300
++++ apache-tomcat-6.0.20-src-modified-including-apachecommons/java/org/apache/catalina/startup/TldConfig.java	2018-07-15 21:54:55.654631043 -0300
 @@ -34,11 +34,13 @@
  import java.util.HashMap;
  import java.util.HashSet;
@@ -674,6 +707,15 @@ diff -ur apache-tomcat-6.0.20-src/java/org/apache/catalina/startup/TldConfig.jav
          // Bootstrap JARs
          noTldJars.add("bootstrap.jar");
          noTldJars.add("commons-daemon.jar");
+@@ -663,7 +665,7 @@
+      */
+     private Map getJarPaths() {
+ 
+-        HashMap jarPathMap = null;
++        HashedMap jarPathMap = null;
+ 
+         ClassLoader webappLoader = Thread.currentThread().getContextClassLoader();
+         ClassLoader loader = webappLoader;
 @@ -709,7 +711,7 @@
                              || noTldJars == null
                              || !noTldJars.contains(file.getName())) {
@@ -894,16 +936,25 @@ diff -ur apache-tomcat-6.0.20-src/java/org/apache/naming/resources/DirContextURL
      /**
 diff -ur apache-tomcat-6.0.20-src/java/org/apache/naming/ServiceRef.java apache-tomcat-6.0.20-src-modified-including-apachecommons/java/org/apache/naming/ServiceRef.java
 --- apache-tomcat-6.0.20-src/java/org/apache/naming/ServiceRef.java	2009-05-13 20:15:15.000000000 -0300
-+++ apache-tomcat-6.0.20-src-modified-including-apachecommons/java/org/apache/naming/ServiceRef.java	2018-07-15 01:49:27.528469163 -0300
-@@ -18,6 +18,7 @@
++++ apache-tomcat-6.0.20-src-modified-including-apachecommons/java/org/apache/naming/ServiceRef.java	2018-07-15 21:55:17.260994693 -0300
+@@ -18,13 +18,15 @@
  
  package org.apache.naming;
  
 +import java.util.Collections;
  import java.util.Enumeration;
  import java.util.Vector;
+-
++import java.util.List;
+ import javax.naming.Context;
+ import javax.naming.RefAddr;
+ import javax.naming.Reference;
+ import javax.naming.StringRefAddr;
++import java.util.ArrayList;
  
-@@ -86,7 +87,7 @@
+ /**
+  * Represents a reference web service.
+@@ -86,7 +88,7 @@
      /**
       * The vector to save the handler Reference objects, because they can't be saved in the addrs vector.
       */
