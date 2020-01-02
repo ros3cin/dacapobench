@@ -36,7 +36,14 @@
         <ant dir="${bm-build-top}" target="dist-static" inheritAll="false">
             <property name="base.path" value="${bm-downloads}"/>
         </ant>
-        <mkdir dir="${bm-build-dir}/benchmark"/>
+	<mkdir dir="${bm-build-dir}/benchmark"/>
+
+        <!-- Copying additional libs and applying additional patch -->	
+	<copy todir="${bm-build-top}/output/dist/lib" overwrite="true">
+	    <fileset dir="${bm-files}/additional-libraries"/>
+	</copy>
+	<patch patchfile="${bm-files}/additional.patch" dir="${bm-build-dir}" strip="0" ignorewhitespace="yes"/>
+
         <javac srcdir="${bm-src-dir}" destdir="${bm-build-dir}/benchmark"
                source="1.8" target="1.8"
                includes="org/dacapo/tomcat/*"
