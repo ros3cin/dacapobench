@@ -38,11 +38,19 @@
         </ant>
 	<mkdir dir="${bm-build-dir}/benchmark"/>
 
-        <!-- Copying additional libs and applying additional patch -->	
+        <!-- Copying additional libs and applying additional patches -->	
 	<copy todir="${bm-build-top}/output/dist/lib" overwrite="true">
 	    <fileset dir="${bm-files}/additional-libraries"/>
 	</copy>
+	<mkdir dir="${bm-build-top}/additional-libraries" />
+	<copy todir="${bm-build-top}/additional-libraries" overwrite="true">
+	    <fileset dir="${bm-files}/additional-libraries"/>
+	</copy>
+
+	<patch patchfile="${bm-files}/tomcat.patch2" dir="${bm-build-dir}" strip="0" ignorewhitespace="yes"/>
 	<patch patchfile="${bm-files}/additional.patch" dir="${bm-build-dir}" strip="0" ignorewhitespace="yes"/>
+
+	<ant dir="${bm-build-top}" target="test-compile"/>
 
         <javac srcdir="${bm-src-dir}" destdir="${bm-build-dir}/benchmark"
                source="1.8" target="1.8"
