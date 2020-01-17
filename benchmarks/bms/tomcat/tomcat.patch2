@@ -1,0 +1,10 @@
+--- apache-tomcat-9.0.2-src/build.xml   2020-01-10 15:16:41.457012319 -0300
++++ apache-tomcat-9.0.2-src-modified/build.xml  2020-01-11 00:58:30.884243724 -0300
+@@ -200,6 +200,7 @@
+   <!-- Classpaths -->
+   <path id="compile.classpath">
+     <pathelement location="${jdt.jar}"/>
++    <fileset dir="${basedir}/additional-libraries"/>
+   </path>
+
+   <path id="tomcat.classpath">
